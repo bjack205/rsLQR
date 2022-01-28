@@ -80,7 +80,6 @@ int DiagonalCholesky() {
     mu_assert(*MatrixGetElement(&A, i, i) == 3);
   }
   FreeMatrix(&A);
-  mu_assert(1 == 2);
   return 1;
 }
 
