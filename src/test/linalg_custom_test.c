@@ -1,3 +1,4 @@
+#include "matrix.h"
 #include "test/minunit.h"
 #include "linalg.h"
 #include "linalg_custom.h"
@@ -44,6 +45,20 @@ int MatMul() {
   FreeMatrix(&Bans);
   FreeMatrix(&Dans);
   FreeMatrix(&b);
+  return 1;
+}
+
+int SymMatMulTest() {
+  double Adata[9] = {1,2,3, 4,5,6, 7,8,9};
+  double Bdata[6] = {2,4,6, 8,6,4};
+  double Cdata[6] = {3,6,9, 12,11,10};
+  double Ddata[6] = {34,72,102, 56,92,116};
+  Matrix A = {3, 3, Adata};
+  Matrix B = {3, 2, Bdata};
+  Matrix C = {3, 2, Cdata};
+  Matrix D = {3, 2, Ddata};
+  clap_SymmetricMatrixMultiply(&A, &B, &C, 1.0, 2.0);
+  mu_assert(MatrixNormedDifference(&C, &D) < 1e-6);
   return 1;
 }
 
@@ -183,6 +198,7 @@ void AllTests() {
   mu_run_test(CholeskyFactorizeTest);
   mu_run_test(TriBackSubTest);
   mu_run_test(CholeskySolveTest);
+  mu_run_test(SymMatMulTest);
 }
 
 mu_test_main

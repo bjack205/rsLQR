@@ -49,7 +49,7 @@ int SymMatMul() {
   Matrix bans = {n, 1, bdata};
   Matrix x = {n, 1, xdata};
   Matrix b = NewMatrix(n, 1);
-  MatrixSymmetricMultiply(&A, &x, &b, 'L', 1.0, 0.0);
+  MatrixSymmetricMultiply(&A, &x, &b, 1.0, 0.0);
   mu_assert(MatrixNormedDifference(&b, &bans) < 1e-6);
 
   // Matrix-matrix
@@ -58,7 +58,7 @@ int SymMatMul() {
   Matrix X = {n, 2, Xdata};
   Matrix Bans = {n, 2, Bdata};
   Matrix B = NewMatrix(n, 2);
-  MatrixSymmetricMultiply(&A, &X, &B, 'L', 1.0, 0.0);
+  MatrixSymmetricMultiply(&A, &X, &B, 1.0, 0.0);
   mu_assert(MatrixNormedDifference(&B, &Bans) < 1e-6);
 
   FreeMatrix(&b);
@@ -120,7 +120,6 @@ void AllTests() {
   mu_run_test(DiagonalCholesky);
   mu_run_test(DiagonalCholeskySolve);
   mu_run_test(CholeskySolve3x3);
-  // mu_run_test(CholeskyInverse);
   mu_run_test(MatMul);
   mu_run_test(SymMatMul);
   MatrixPrintLinearAlgebraLibrary();

@@ -92,7 +92,7 @@ int Cholesky4x4() {
   eigen_CholeskySolve(n, n, achol, B[1].data);
   mu_assert(MatrixNormedDifference(B + 0, B + 1) < 1e-10);
 
-  MatrixSymmetricMultiply(A0, B + 0, C + 0, 'L', 1.0, 0.0);
+  MatrixSymmetricMultiply(A0, B + 0, C + 0, 1.0, 0.0);
   mu_assert(MatrixNormedDifference(C + 0, B0) < 1e-10);
   mu_assert(MatrixNormedDifference(C + 0, B0) < 1e-10);
   eigen_SymmetricMatrixMultiply(n, n, A0->data, B[1].data, C[1].data);

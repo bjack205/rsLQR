@@ -163,13 +163,13 @@ void MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double al
   MATRIX_LATIME_STOP;
 }
 
-void MatrixSymmetricMultiply(Matrix* Asym, Matrix* B, Matrix* C, char side, double alpha, double beta) {
+void MatrixSymmetricMultiply(Matrix* Asym, Matrix* B, Matrix* C, double alpha, double beta) {
   MATRIX_LATIME_START;
   switch (MatrixGetLinearAlgebraLibrary()) {
-    // TODO: Add clap routine
+    clap_SymmetricMatrixMultiply(Asym, B, C, alpha, beta);
     default: {
 #ifdef USE_BLAS
-      CBLAS_SIDE blasside = side == 'R' ? CblasRight : CblasLeft;
+      CBLAS_SIDE blasside = CblasLeft;
       if (B->cols == 1) {
         cblas_dsymv(CblasColMajor, CblasLower, Asym->rows, alpha, Asym->data, Asym->rows, B->data, 1.0, beta, C->data, 1.0);
       } else {

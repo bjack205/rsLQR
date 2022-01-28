@@ -40,6 +40,39 @@ int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, doubl
   return 0;
 }
 
+int clap_SymmetricMatrixMultiply(Matrix* Asym, Matrix* B, Matrix* C, double alpha, double beta) {
+  int n, m;
+  bool tA = false;
+  bool tB = false;
+  if (tA) {
+    n = Asym->cols;
+    m = Asym->rows;
+  } else {
+    n = Asym->rows;
+    m = Asym->cols;
+  }
+  int p = tB ? B->rows :  B->cols;
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < p; ++j) {
+      double* Cij = MatrixGetElement(C, i, j);
+      *Cij *= beta; 
+      for (int k = 0; k < m; ++k) {
+        int row = i;
+        int col = k;
+        if (i < k) {
+          row = k; 
+          col = i;
+        }
+        double Aik = *MatrixGetElement(Asym, row, col);
+        double Bkj = *MatrixGetElement(B, k, j);
+        *Cij += alpha * Aik * Bkj;
+      }
+    }
+  }
+  return 0;
+  return 0;
+}
+
 int clap_AddDiagonal(Matrix* A, double alpha) {
   int n = A->rows;
   for (int i = 0; i < n; ++i) {
