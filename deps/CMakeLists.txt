@@ -1,11 +1,13 @@
 include(FetchContent)
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
 
-# Download LAPACK library
-FetchContent_Declare(lapackelib
-  GIT_REPOSITORY https://github.com/Reference-LAPACK/lapack.git
-  GIT_TAG c8cb980bb58d77738121d541acf063f89e5c5480 # version 3.10.0, commit with CMake fixes (by bjack205)
-)
+if (RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
+  # Download LAPACK library
+  FetchContent_Declare(lapackelib
+    GIT_REPOSITORY https://github.com/Reference-LAPACK/lapack.git
+    GIT_TAG c8cb980bb58d77738121d541acf063f89e5c5480 # version 3.10.0, commit with CMake fixes (by bjack205)
+  )
+endif()
 
 # Add the CJSON library
 set(CMAKE_POLICY_DEFAULT_CMP0048 NEW)

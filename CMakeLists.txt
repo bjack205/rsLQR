@@ -35,9 +35,11 @@ add_subdirectory(deps)
 # Find required packages
 find_package(OpenMP REQUIRED)
 
-if (RSLQR_USE_MKL)
+if (RSLQR_LINALG_LIBRARY STREQUAL "MKL")
   find_package(MKL CONFIG REQUIRED)
-else()
+endif()
+
+if (RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
   set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)  # supresses warning from LAPACK library
   set(CBLAS "ON")
   set(LAPACKE "ON")

@@ -25,15 +25,15 @@ target_link_libraries(matrix
   PRIVATE
   OpenMP::OpenMP_C
 )
-if (NDLQR_LINALG_LIBRARY STREQUAL "Eigen")
+if (RSLQR_LINALG_LIBRARY STREQUAL "Eigen")
   message(STATUS "Using C++ Eigen Library for linear algebra.")
   target_compile_definitions(matrix PUBLIC USE_EIGEN=1)
 
-elseif(NDLQR_LINALG_LIBRARY STREQUAL "InternalRoutines")
+elseif(RSLQR_LINALG_LIBRARY STREQUAL "InternalRoutines")
   message(STATUS "Using internal routines for linear algebra.")
   target_compile_definitions(matrix PUBLIC USE_CLAP=1)
 
-elseif(NDLQR_LINALG_LIBRARY STREQUAL "MKL")
+elseif(RSLQR_LINALG_LIBRARY STREQUAL "MKL")
   message(STATUS "Using Intel MKL library for linear algebra.")
   target_compile_options(matrix 
     PUBLIC 
@@ -51,11 +51,8 @@ elseif(NDLQR_LINALG_LIBRARY STREQUAL "MKL")
     PUBLIC
     USE_MKL=1
   )
-elseif(NDLQR_LINALG_LIBRARY STREQUAL "BLAS")
+elseif(RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
   message(STATUS "Using open-source BLAS for linear algebra.")
-endif()
-
-if (NOT USE_MKL)
   target_link_libraries(matrix
     PRIVATE
     LAPACK::LAPACKE
@@ -65,6 +62,9 @@ if (NOT USE_MKL)
     PUBLIC
     USE_BLAS=1
   )
+endif()
+
+if (NOT USE_MKL)
 endif()
 
 add_library(ndlqr 

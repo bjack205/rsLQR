@@ -1,3 +1,4 @@
+#include "matrix.h"
 #include "test/minunit.h"
 #include "linalg.h"
 
@@ -73,7 +74,8 @@ int DiagonalCholesky() {
   for (int i = 0; i < n; ++i) {
     MatrixSetElement(&A, i, i, 9);
   }
-  MatrixCholeskyFactorize(&A);
+  CholeskyInfo cholinfo = DefaultCholeskyInfo();
+  MatrixCholeskyFactorizeWithInfo(&A, &cholinfo);
   for (int i = 0; i < n; ++i) {
     mu_assert(*MatrixGetElement(&A, i, i) == 3);
   }
@@ -90,9 +92,10 @@ int DiagonalCholeskySolve() {
     MatrixSetElement(&A, i, i, 9);
     MatrixSetElement(&b, i, 0, 9 * (i + 1));
   }
-  int res = MatrixCholeskyFactorize(&A);
+  CholeskyInfo cholinfo = DefaultCholeskyInfo();
+  int res = MatrixCholeskyFactorizeWithInfo(&A, &cholinfo);
   mu_assert(res == 0);
-  MatrixCholeskySolve(&A, &b);
+  MatrixCholeskySolveWithInfo(&A, &b, &cholinfo);
   for (int i = 0; i < n; ++i) {
     mu_assert(*MatrixGetElement(&A, i, i) == 3);
     mu_assert(*MatrixGetElement(&b, i, 0) == (i + 1));
@@ -110,8 +113,9 @@ int CholeskySolve3x3() {
   Matrix A = {n, n, Adata};
   Matrix b = {n, 1, bdata};
   Matrix x = {n, 1, xdata};
-  MatrixCholeskyFactorize(&A);
-  MatrixCholeskySolve(&A, &b);
+  CholeskyInfo cholinfo = DefaultCholeskyInfo();
+  MatrixCholeskyFactorizeWithInfo(&A, &cholinfo);
+  MatrixCholeskySolveWithInfo(&A, &b, &cholinfo);
   mu_assert(MatrixNormedDifference(&b, &x) < 1e-6);
   return 1;
 }

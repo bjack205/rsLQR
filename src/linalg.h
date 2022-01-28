@@ -23,7 +23,7 @@ static const int kUseClap = 0;
 typedef struct {
   char uplo;    // 'L' or 'U' 
   int success;  // 0 if success, failure otherwise
-  char lib;     // 'B' for BLAS, 'E' for eigen
+  char lib;     // 'B' for BLAS, 'E' for eigen, 'I' for internal
   void* fact;   // pointer to Eigen data
   int is_freed;  // has the Eigen data been freed
 } CholeskyInfo;
@@ -35,6 +35,7 @@ enum MatrixLinearAlgebraLibrary {
   libInternal = 3,
 };
 
+CholeskyInfo DefaultCholeskyInfo();
 void FreeFactorization(CholeskyInfo* cholinfo);
 
 int MatrixAddition(Matrix* A, Matrix* B, double alpha);
