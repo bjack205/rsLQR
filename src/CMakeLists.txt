@@ -69,9 +69,6 @@ elseif(RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
   )
 endif()
 
-if (NOT USE_MKL)
-endif()
-
 add_library(ndlqr 
   ndlqr.h
 
@@ -121,9 +118,5 @@ target_link_libraries(ndlqr
   PRIVATE
   CJSON::CJSON
   OpenMP::OpenMP_C
-  # LAPACK::CBLAS
-  # LAPACK::LAPACKE
 )
 set_property(TARGET ndlqr PROPERTY C_STANDARD 11)
-
-add_subdirectory(test)

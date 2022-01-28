@@ -37,10 +37,17 @@ add_subdirectory(deps)
 find_package(OpenMP REQUIRED)
 include(FindLinearAlgebra)
 
-enable_testing()
 
 ##############################
 # Build
 ##############################
 include_directories(${rsLQR_SOURCE_DIR}/src)
 add_subdirectory(src)
+
+
+##############################
+# Testing
+##############################
+enable_testing()
+include_directories(${rsLQR_SOURCE_DIR})
+add_subdirectory(test)
