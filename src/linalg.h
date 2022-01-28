@@ -42,7 +42,6 @@ int MatrixCholeskyFactorize(Matrix* mat);
 int MatrixCholeskyFactorizeWithInfo(Matrix* mat, CholeskyInfo* cholinfo);
 int MatrixCholeskySolve(Matrix* A, Matrix* b);
 int MatrixCholeskySolveWithInfo(Matrix* A, Matrix* b, CholeskyInfo* cholinfo);
-int MatrixCholeskyInverse(Matrix* A);
 void MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double alpha, double beta);
 void MatrixSymmetricMultiply(Matrix* Asym, Matrix* B, Matrix* C, char side, double alpha, double beta);
 

@@ -116,44 +116,11 @@ int CholeskySolve3x3() {
   return 1;
 }
 
-int CholeskyInverse() {
-  int n = 3;  
-  double Adata[9] = {9,-3,-6,-3,17,-10,-6,-10,38};
-  Matrix A = {n, n, Adata};
-  Matrix Ainv = NewMatrix(n, n);
-  Matrix C = NewMatrix(n, n);
-  Matrix I = NewMatrix(n, n);
-
-  // Identity Matrix
-  MatrixSetConst(&I, 0.0);
-  for (int i = 0; i < n; ++i) {
-    MatrixSetElement(&I, i, i, 1.0);
-  }
-
-  // Copy A and factorize the copy
-  MatrixCopy(&Ainv, &A);
-  MatrixCholeskyFactorize(&Ainv);
-
-  // Compute the inverse using the cholesky factorization
-  MatrixCholeskyInverse(&Ainv);
-
-  // Check that it's an inverse
-  MatrixSymmetricMultiply(&Ainv, &A, &C, 'L', 1.0, 0.0);
-  mu_assert(MatrixNormedDifference(&C, &I) < 1e-6);
-  MatrixSymmetricMultiply(&Ainv, &A, &C, 'R', 1.0, 0.0);
-  mu_assert(MatrixNormedDifference(&C, &I) < 1e-6);
-
-  FreeMatrix(&Ainv);
-  FreeMatrix(&C);
-  FreeMatrix(&I);
-  return 1;
-}
-
 void AllTests() {
   mu_run_test(DiagonalCholesky);
   mu_run_test(DiagonalCholeskySolve);
   mu_run_test(CholeskySolve3x3);
-  mu_run_test(CholeskyInverse);
+  // mu_run_test(CholeskyInverse);
   mu_run_test(MatMul);
   mu_run_test(SymMatMul);
   MatrixPrintLinearAlgebraLibrary();

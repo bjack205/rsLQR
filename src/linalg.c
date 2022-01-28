@@ -128,16 +128,6 @@ int MatrixCholeskySolve(Matrix* A, Matrix* b) {
   return out;
 }
 
-int MatrixCholeskyInverse(Matrix* A) {
-  int out = 0;
-#ifdef USE_BLAS
-  MATRIX_LATIME_START;
-  out = LAPACKE_dpotri(LAPACK_COL_MAJOR, 'L', A->rows, A->data, A->rows);
-  MATRIX_LATIME_STOP;
-#endif
-  return out;
-}
-
 void MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double alpha, double beta) {
   MATRIX_LATIME_START;
   // printf("Multiplying matrices of size (%d, %d), (%d, %d), (%d, %d)\n", A->rows, A->cols, B->rows, B->cols, C->rows, C->cols);
