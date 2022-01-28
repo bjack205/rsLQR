@@ -17,6 +17,16 @@ function (add_ndlqr_test name)
     minunit
   )
   add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+  if (Eigen3_FOUND)
+    target_link_libraries(${TEST_NAME}
+      PRIVATE
+      eigen_c
+    )
+    target_compile_definitions(${TEST_NAME}
+      PRIVATE
+      USE_EIGEN=1
+    )
+  endif()
 
   target_compile_definitions(${TEST_NAME}
     PRIVATE
@@ -45,11 +55,13 @@ add_ndlqr_test(riccati_solver)
 #   OpenMP::OpenMP_C
 # )
 
-add_ndlqr_test(cholesky)
-target_link_libraries(cholesky_test
-  PRIVATE
-  OpenMP::OpenMP_C
-)
+if (Eigen3_FOUND)
+  add_ndlqr_test(cholesky)
+  target_link_libraries(cholesky_test
+    PRIVATE
+    OpenMP::OpenMP_C
+  )
+endif()
 
 add_ndlqr_test(parallel)
 target_link_libraries(parallel_test

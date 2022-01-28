@@ -4,6 +4,7 @@ list(APPEND CMAKE_MESSAGE_CONTEXT rsLQR)
 project(rsLQR VERSION 0.1 LANGUAGES C CXX)
 
 include(CMakePrintHelpers)
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ##############################
 # Options 
@@ -34,21 +35,7 @@ add_subdirectory(deps)
 
 # Find required packages
 find_package(OpenMP REQUIRED)
-
-if (RSLQR_LINALG_LIBRARY STREQUAL "MKL")
-  find_package(MKL CONFIG REQUIRED)
-endif()
-
-if (RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
-  set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)  # supresses warning from LAPACK library
-  set(CBLAS "ON")
-  set(LAPACKE "ON")
-  list(APPEND CMAKE_MESSAGE_CONTEXT LAPACK)
-  FetchContent_MakeAvailable(lapackelib)
-  list(POP_BACK CMAKE_MESSAGE_CONTEXT LAPACK)
-  add_library(LAPACK::CBLAS ALIAS cblas)
-  add_library(LAPACK::LAPACKE ALIAS lapacke)
-endif()
+include(FindLinearAlgebra)
 
 enable_testing()
 

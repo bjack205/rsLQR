@@ -98,8 +98,10 @@ int InnerProducts() {
 int MatMul() {
   int N = 16 * 1000;
   int n = 8;
+#ifdef USE_EIGEN
   eigen_SetNumThreads(1);
   eigen_InitParallel();
+#endif
   Matrix* A = (Matrix*) malloc(N * sizeof(Matrix));
   Matrix* B = (Matrix*) malloc(N * sizeof(Matrix));
   Matrix* C = (Matrix*) malloc(N * sizeof(Matrix));

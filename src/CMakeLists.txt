@@ -2,7 +2,9 @@
 add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-error=unknown-pragmas)
 add_compile_options(-fPIC -mavx2 -mfma)
 
-add_subdirectory(eigen_c)
+if (Eigen3_FOUND)
+  add_subdirectory(eigen_c)
+endif()
 
 # Matrix / Linear Algebra library
 add_library(matrix STATIC
@@ -28,7 +30,10 @@ target_link_libraries(matrix
 if (RSLQR_LINALG_LIBRARY STREQUAL "Eigen")
   message(STATUS "Using C++ Eigen Library for linear algebra.")
   target_compile_definitions(matrix PUBLIC USE_EIGEN=1)
-
+  target_link_libraries(matrix
+    PRIVATE
+    eigen_c
+  )
 elseif(RSLQR_LINALG_LIBRARY STREQUAL "InternalRoutines")
   message(STATUS "Using internal routines for linear algebra.")
   target_compile_definitions(matrix PUBLIC USE_CLAP=1)
@@ -112,7 +117,6 @@ add_library(ndlqr
 target_link_libraries(ndlqr
   PUBLIC
   matrix
-  eigen_c
 
   PRIVATE
   CJSON::CJSON

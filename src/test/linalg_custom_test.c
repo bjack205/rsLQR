@@ -2,7 +2,10 @@
 #include "test/minunit.h"
 #include "linalg.h"
 #include "linalg_custom.h"
+
+#ifdef USE_EIGEN
 #include "eigen_c/eigen_c.h"
+#endif
 
 int MatMul() {
   // Matrix-matrix
@@ -106,10 +109,12 @@ int CholeskyFactorizeTest() {
   int res = clap_CholeskyFactorize(&Achol);
   mu_assert(res == clap_kCholeskySuccess);
   
+#ifdef USE_EIGEN
   // Check answer with Eigen
   void* fact;
   eigen_CholeskyFactorize(n, A.data, &fact);
   mu_assert(MatrixNormedDifference(&A, &Achol) < 1e-6);
+#endif
 
   // Try to factorize an indefinite matrix
   clap_MatrixMultiply(&A1, &A2, &A, 1, 0, 1.0, 0.0);
@@ -174,11 +179,13 @@ int CholeskySolveTest() {
   clap_CholeskyFactorize(&Achol);
   clap_CholeskySolve(&Achol, &x);
   
+#ifdef USE_EIGEN
   // Check answer with Eigen
   void* fact = NULL;
   eigen_CholeskyFactorize(n, A.data, &fact);
   eigen_CholeskySolve(n, m, fact, x_eigen.data);
   mu_assert(MatrixNormedDifference(&x, &x_eigen) < 1e-6);
+#endif
 
   FreeMatrix(&A1);
   FreeMatrix(&A2);
@@ -187,7 +194,9 @@ int CholeskySolveTest() {
   FreeMatrix(&b);
   FreeMatrix(&x);
   FreeMatrix(&x_eigen);
+#ifdef USE_EIGEN
   eigen_FreeFactorization(fact);
+#endif
   return 1;
 }
 
@@ -199,6 +208,9 @@ void AllTests() {
   mu_run_test(TriBackSubTest);
   mu_run_test(CholeskySolveTest);
   mu_run_test(SymMatMulTest);
+#ifdef USE_EIGEN
+  printf("Using Eigen library for comparisons.\n");
+#endif
 }
 
 mu_test_main

@@ -1,4 +1,4 @@
-#include <eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 
 using MapMatrixXd = Eigen::Map<Eigen::MatrixXd>;
 

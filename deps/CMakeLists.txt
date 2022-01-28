@@ -26,3 +26,4 @@ target_include_directories(cjson
   $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 )
 add_library(CJSON::CJSON ALIAS cjson)
+

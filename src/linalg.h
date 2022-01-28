@@ -3,9 +3,9 @@
 #include "matrix.h"
 
 #ifdef USE_MKL
-static const int kUseIntelMKL = 1;
+static const int kUseMKL = 1;
 #else
-static const int kUseIntelMKL = 0;
+static const int kUseMKL = 0;
 #endif
 
 #ifdef USE_EIGEN
@@ -18,6 +18,12 @@ static const int kUseEigen = 0;
 static const int kUseClap = 1;
 #else
 static const int kUseClap = 0;
+#endif
+
+#ifdef USE_BLAS
+static const int kUseBLAS = 1;
+#else
+static const int kUseBLAS = 0;
 #endif
 
 typedef struct {

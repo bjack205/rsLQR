@@ -3,9 +3,6 @@
 #ifdef USE_MKL
 #include "mkl_lapacke.h"
 #include "mkl_cblas.h"
-static const int kUseMKL = 1;
-#else
-static const int kUseMKL = 0;
 #endif
 
 #ifdef USE_BLAS
@@ -15,7 +12,10 @@ static const int kUseMKL = 0;
 
 #include <stdio.h>
 
-#include "eigen_c/eigen_c.h"
+#ifdef USE_EIGEN
+  #include "eigen_c/eigen_c.h"
+#endif
+
 #include "linalg_utils.h"
 #include "linalg_custom.h"
 
@@ -25,19 +25,26 @@ CholeskyInfo DefaultCholeskyInfo() {
 }
 
 void FreeFactorization(CholeskyInfo* cholinfo) {
+#ifdef USE_EIGEN
   if (cholinfo->lib == 'E' && !cholinfo->is_freed) {  // Eigen
     eigen_FreeFactorization(cholinfo->fact);
     cholinfo->is_freed = true;
   }
+#else
+  (void) cholinfo;
+#endif
 }
 
 int MatrixAddition(Matrix* A, Matrix* B, double alpha) {
   if (!A || !B) return -1;
-  int n = MatrixNumElements(A);
   switch (MatrixGetLinearAlgebraLibrary()) {
-    case libEigen:
+
+#ifdef USE_EIGEN
+    case libEigen: {
+      int n = MatrixNumElements(A);
       eigen_MatrixAddition(n, A->data, B->data, alpha);
-      break;
+    } break;
+#endif
 
     default:
       clap_MatrixAddition(A, B, alpha);
@@ -50,12 +57,14 @@ int MatrixCholeskyFactorizeWithInfo(Matrix* mat, CholeskyInfo* cholinfo) {
   MATRIX_LATIME_START;
   int out = 0;
   switch (MatrixGetLinearAlgebraLibrary()) {
+#ifdef USE_EIGEN
     case libEigen:
       FreeFactorization(cholinfo);  // free the previous factorization since the code below allocates a new one
       out = eigen_CholeskyFactorize(mat->rows, mat->data, &cholinfo->fact);
       cholinfo->lib = 'E';
       cholinfo->is_freed = false;
       break;
+#endif
     
 #ifdef USE_BLAS
     case libBLAS:
@@ -81,9 +90,11 @@ int MatrixCholeskySolveWithInfo(Matrix* A, Matrix* b, CholeskyInfo* cholinfo) {
   MATRIX_LATIME_START;
   int out = 0;
   switch (MatrixGetLinearAlgebraLibrary()) {
+#ifdef USE_EIGEN
     case libEigen:
       eigen_CholeskySolve(A->rows, b->cols, cholinfo->fact, b->data);
       break;
+#endif
 
 #ifdef USE_BLAS
     case libBLAS: 
@@ -144,12 +155,15 @@ void MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double al
   MATRIX_LATIME_START;
   // printf("Multiplying matrices of size (%d, %d), (%d, %d), (%d, %d)\n", A->rows, A->cols, B->rows, B->cols, C->rows, C->cols);
   switch (MatrixGetLinearAlgebraLibrary()) {
+
+#ifdef USE_EIGEN
     case libEigen: {
       int m = tA ? A->cols : A->rows;
       int n = tA ? A->rows : A->cols;
       int k = tB ? B->rows : B->cols;
       eigen_MatrixMultiply(m, n, k, A->data, B->data, C->data, tA, tB, alpha, beta);
     } break;
+#endif
 
 #ifdef USE_BLAS
     case libBLAS: {
@@ -206,14 +220,16 @@ void MatrixCopyDiagonal(Matrix* dest, Matrix* src) {
 }
 
 enum MatrixLinearAlgebraLibrary MatrixGetLinearAlgebraLibrary() {
-  if (kUseEigen) {
-    return libEigen;
-  } else if (kUseClap) {
+  if (kUseClap) {
     return libInternal;
+  } else if (kUseEigen) {
+    return libEigen;
   } else if (kUseMKL) {
     return libMKL;
-  } else {
+  } else if (kUseBLAS) {
     return libBLAS;
+  } else {
+    return libInternal;
   }
 }
 

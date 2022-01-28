@@ -112,6 +112,7 @@ int Cholesky4x4() {
 
   void** achols = (void**) malloc(N * sizeof(void*));
   t_start = omp_get_wtime();
+
   for (int i = 0; i < N; ++i) {
     eigen_CholeskyFactorize(n, A[i].data, achols + i);
   }
@@ -213,6 +214,7 @@ int CholeskyFactors() {
   int N = 2;
   InitMatrices(N, n);
   MakePSD(N);
+  bool usingeigen = MatrixGetLinearAlgebraLibrary() == libEigen;
 
   NdLqrCholeskyFactors* cholfacts = ndlqr_NewCholeskyFactors(3, 8);
   CholeskyInfo* cholinfo = NULL;
@@ -220,17 +222,17 @@ int CholeskyFactors() {
   mu_assert(cholinfo == cholfacts->cholinfo);
   MatrixCholeskyFactorizeWithInfo(A, cholinfo);
   MatrixCholeskySolveWithInfo(A, B, cholinfo);
-  if (kUseEigen) {
+  if (usingeigen) {
     mu_assert(cholinfo->is_freed == false);
     mu_assert(cholinfo->lib == 'E');
   }
 
   ndlqr_GetRFactorizon(cholfacts, 0, &cholinfo);
-  if (kUseEigen) {
+  if (usingeigen) {
     mu_assert(cholinfo->is_freed == true);
   }
   MatrixCholeskyFactorizeWithInfo(A + 1, cholinfo);
-  if (kUseEigen) {
+  if (usingeigen) {
     mu_assert(cholinfo->is_freed == false);
   }
 
