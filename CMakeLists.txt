@@ -9,6 +9,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 ##############################
 # Options 
 ##############################
+
+# Handle default build type
 set(RSLQR_DEFAULT_BUILD_TYPE "Release")
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type specified. Setting CMAKE_BUILD_TYPE to ${RSLQR_DEFAULT_BUILD_TYPE}.")
@@ -16,17 +18,12 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
+# Pick the linear algebra library
 set(RSLQR_LINALG_LIBRARY "InternalRoutines" CACHE STRING "Linear algebra library.")
 set_property(CACHE RSLQR_LINALG_LIBRARY PROPERTY STRINGS BLAS MKL Eigen InternalRoutines)
-option(RSLQR_USE_INTERNAL_LINALG "Use the internal linear algebra routines. Takes precedence over BLAS (default)." "OFF")
-option(RSLQR_BUILD_TESTS "Build tests for ndLQR" "ON") 
 
-if (RSLQR_LINALG_LIBRARY STREQUAL "MKL")
-  set(RSLQR_USE_MKL ON) 
-  message(STATUS "Using the Intel MKL library")
-else()
-  set(RSLQR_USE_MKL OFF) 
-endif()
+# Enable testing
+option(RSLQR_BUILD_TESTS "Build tests for rsLQR" "ON") 
 
 ##############################
 # Dependencies
@@ -44,10 +41,11 @@ include(FindLinearAlgebra)
 include_directories(${rsLQR_SOURCE_DIR}/src)
 add_subdirectory(src)
 
-
 ##############################
 # Testing
 ##############################
-enable_testing()
-include_directories(${rsLQR_SOURCE_DIR})
-add_subdirectory(test)
+if (RSLQR_BUILD_TESTS)
+  enable_testing()
+  include_directories(${rsLQR_SOURCE_DIR})
+  add_subdirectory(test)
+endif()
