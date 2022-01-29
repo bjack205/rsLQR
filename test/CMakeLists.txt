@@ -34,6 +34,8 @@ function (add_ndlqr_test name)
     LQRPROBFILE="${rsLQR_SOURCE_DIR}/lqr_prob.json"
     LQRPROB256FILE="${rsLQR_SOURCE_DIR}/lqr_prob_256.json"
     SAMPLEPROBFILE="${rsLQR_SOURCE_DIR}/sample_problem.json"
+    NTHREADS=${RSLQR_NTHREADS_TEST}
+    FULLTEST=${RSLQR_RUN_FULL_TEST}
   )
 endfunction()
 

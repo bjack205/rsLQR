@@ -33,6 +33,12 @@ if(RSLQR_CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
   add_link_options(-fprofile-arcs -ftest-coverage)
 endif()
 
+# Test threads
+set(RSLQR_NTHREADS_TEST 2 CACHE STRING "Number of threads to use in tests.")
+set_property(CACHE RSLQR_NTHREADS_TEST PROPERTY STRINGS 1 2 4 6 16)
+
+# Run full test suite
+option(RSLQR_RUN_FULL_TEST "Run the full, computationally intensive test suite." ON)
 
 ##############################
 # Dependencies
