@@ -59,8 +59,5 @@ jobs:
     - name: Process code coverage results
       run: gcov **/*.o
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
-      with:
-        verbose: true
-        directory: ${{github.workspace}}/build
+      run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports."
 
