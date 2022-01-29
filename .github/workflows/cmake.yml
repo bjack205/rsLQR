@@ -57,6 +57,5 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest .
     - name: Process code coverage results
-      run: |
-        gcov **/*.o
-        bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports."
+      run: gcov **/*.o
+    - uses: codecov/codecov-action@v2
