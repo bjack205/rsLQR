@@ -50,7 +50,7 @@ jobs:
     - name: Configure CMake
       run: |
         mkdir ${{github.workspace}}/build && cd build
-        cmake -D CMAKE_BUILD_TYPE=Debug -D RSLQR_CODE_COVERAGE=ON -log-context ..
+        cmake -D CMAKE_BUILD_TYPE=Debug -D RSLQR_CODE_COVERAGE=ON --log-context ..
     - name: Build
       run: cmake --build ${{github.workspace}}/build
     - name: Run Tests
