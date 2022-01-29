@@ -58,8 +58,10 @@ jobs:
       run: ctest .
     - name: Process code coverage results
       run: gcov **/*.o
-    - uses: codecov/codecov-action@v2
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v2
       with:
         verbose: true
+        directory: ${{github.workspace}}/build
         files: "**/*.gcov"
 
