@@ -9,9 +9,6 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  
-  
-  
 
 jobs:
   build:
@@ -43,3 +40,22 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}} .
       
+  ccov:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: sudo apt-get install libeigen3-dev -y
+    - name: Configure CMake
+      run: |
+        mkdir ${{github.workspace}}/build && cd build
+        cmake -D CMAKE_BUILD_TYPE=Debug -D RSLQR_CODE_COVERAGE=ON -log-context ..
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build
+    - name: Run Tests
+      run: ctest .
+    - name: Process code coverage results
+      run: |
+        gcov **/*.o
+        bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports."

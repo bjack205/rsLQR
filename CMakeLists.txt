@@ -25,6 +25,15 @@ set_property(CACHE RSLQR_LINALG_LIBRARY PROPERTY STRINGS BLAS MKL Eigen Internal
 # Enable testing
 option(RSLQR_BUILD_TESTS "Build tests for rsLQR" "ON") 
 
+# Code Coverage
+option(RSLQR_CODE_COVERAGE "Compile rsLQR with Code Coverage." OFF)
+if(RSLQR_CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  message(STATUS "Compiling rsLQR with coverage info.")
+  add_compile_options(-O0 -g -fprofile-arcs -ftest-coverage)
+  add_link_options(-fprofile-arcs -ftest-coverage)
+endif()
+
+
 ##############################
 # Dependencies
 ##############################
@@ -38,6 +47,7 @@ include(FindLinearAlgebra)
 ##############################
 # Build
 ##############################
+
 include_directories(${rsLQR_SOURCE_DIR}/src)
 add_subdirectory(src)
 
