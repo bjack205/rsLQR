@@ -63,5 +63,4 @@ jobs:
       with:
         verbose: true
         directory: ${{github.workspace}}/build
-        files: "**/*.gcov"
 
