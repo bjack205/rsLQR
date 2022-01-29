@@ -37,9 +37,9 @@ jobs:
     - name: Configure CMake
       run: |
         mkdir ${{github.workspace}}/build && cd build
-        cmake -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
-              -D CMAKE_C_COMPILER=${{matrix.compiler}} 
-              -D RSLQR_LINALG_LIBRARY=${{matrix.linalg}} 
+        cmake -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+              -D CMAKE_C_COMPILER=${{matrix.compiler}} \
+              -D RSLQR_LINALG_LIBRARY=${{matrix.linalg}} \
               --log-context ..
 
     - name: Build
