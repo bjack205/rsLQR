@@ -306,11 +306,11 @@ int SolveTwice() {
 
 
 void AllTests() {
-  // mu_run_test(SolveLeaves);
+  mu_run_test(SolveLeaves);
   mu_run_test(RunSolve);
-  // mu_run_test(SolveTwice);
-  // mu_run_test(FactorInnerProduct);
-  // mu_run_test(ShurCompliment);
+  mu_run_test(SolveTwice);
+  mu_run_test(FactorInnerProduct);
+  mu_run_test(ShurCompliment);
 }
 
 mu_test_main

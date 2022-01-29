@@ -3,6 +3,12 @@ add_library(minunit
     minunit.c
 )
 
+if (RSLQR_RUN_FULL_TEST)
+  set(FULLTEST 1)
+else()
+  set(FULLTEST 0)
+endif()
+
 function (add_ndlqr_test name)
   set(TEST_NAME ${name}_test)
   add_executable(${TEST_NAME}
@@ -34,6 +40,8 @@ function (add_ndlqr_test name)
     LQRPROBFILE="${rsLQR_SOURCE_DIR}/lqr_prob.json"
     LQRPROB256FILE="${rsLQR_SOURCE_DIR}/lqr_prob_256.json"
     SAMPLEPROBFILE="${rsLQR_SOURCE_DIR}/sample_problem.json"
+    NTHREADS=${RSLQR_NTHREADS_TEST}
+    FULLTEST=${FULLTEST}
   )
 endfunction()
 

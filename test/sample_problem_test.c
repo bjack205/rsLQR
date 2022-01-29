@@ -9,7 +9,18 @@
 #include "test/test_problem.h"
 #include "riccati_solve.h"
 
-static const int kNruns = 1000;
+
+#ifdef FULLTEST
+  int kRunFullTest = FULLTEST;
+  #if FULLTEST
+    static const int kNruns = 1000;
+  #else
+    static const int kNruns = 10;
+  #endif
+#else
+  int kRunFullTest = 0;
+  static const int kNruns = 10;
+#endif
 
 int compare_doubles(const void* a, const void* b) {
   int arg1 = *(const double*)a;

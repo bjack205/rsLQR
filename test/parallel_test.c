@@ -1,5 +1,9 @@
 #include <time.h>
+#include <string.h>
 
+#include "omp.h"
+
+#include "minunit.h"
 #include "test/minunit.h"
 #include "ndlqr.h"
 #include "solve.h"
@@ -9,7 +13,17 @@
 #include "utils.h"
 #include "matmul.h"
 
-#include "omp.h"
+#ifdef NTHREADS
+  const int kNumThreads = NTHREADS;
+#else
+  const int kNumThreads = 2;
+#endif
+
+#ifdef FULLTEST
+  int kRunFullTest = FULLTEST;
+#else
+  int kRunFullTest = 0;
+#endif
 
 mu_test_init
 
@@ -35,6 +49,9 @@ void ParallelTiming(int (*func)(NdLqrSolver* solver, int i), NdLqrSolver* solver
   int num_threads[kNumTests] = {1, 2, 4, 8, 16};
   double times_ms[kNumTests];
   for (int i = 0; i < kNumTests; ++i) {
+    if (num_threads[i] > kNumThreads) {
+      break;
+    }
     omp_set_num_threads(num_threads[i]);
     int tasks_per_thread = len / num_threads[i];
     double t_start, t_parallel;
@@ -96,8 +113,11 @@ int InnerProducts() {
 }
 
 int MatMul() {
-  int N = 16 * 1000;
+  int N = 16 * 10;
   int n = 8;
+  if (kRunFullTest) {
+    N = 16 * 1000;
+  }
 #ifdef USE_EIGEN
   eigen_SetNumThreads(1);
   eigen_InitParallel();
@@ -187,8 +207,15 @@ int MatMul() {
 }
 
 int SolveComp() {
-  LQRProblem* lqrprob = ndlqr_ReadLongTestLQRProblem();
-  NdLqrSolver* solver = ndlqr_GenLongTestSolver();
+  LQRProblem* lqrprob;
+  NdLqrSolver* solver;
+  if (kRunFullTest) {
+    lqrprob = ndlqr_ReadLongTestLQRProblem();
+    solver = ndlqr_GenLongTestSolver();
+  } else {
+    lqrprob = ndlqr_ReadTestLQRProblem();
+    solver = ndlqr_GenTestSolver();
+  }
   solver->num_threads = 1;
 
   // Solve twice
@@ -201,7 +228,7 @@ int SolveComp() {
   ndlqr_CopyProfile(&serial, &solver->profile);
 
   // Switch to Parallel
-  solver->num_threads = 16;
+  solver->num_threads = kNumThreads;
   ndlqr_ResetSolver(solver);
   ndlqr_InitializeWithLQRProblem(lqrprob, solver);
   ndlqr_Solve(solver);
@@ -212,17 +239,24 @@ int SolveComp() {
   NdLqrProfile parallel;
   ndlqr_CopyProfile(&parallel, &solver->profile);
   ndlqr_CompareProfile(&serial, &parallel);
-
   ndlqr_FreeNdLqrSolver(solver);
   ndlqr_FreeLQRProblem(lqrprob);
   return 1;
 }
 
 void AllTests() {
-  // mu_run_test(SolveLeaves);
-  // mu_run_test(InnerProducts);
-  // mu_run_test(MatMul);
+  mu_run_test(SolveLeaves);
+  mu_run_test(InnerProducts);
+  mu_run_test(MatMul);
   mu_run_test(SolveComp);
 }
 
-mu_test_main
+int main(int argc, char* argv[]) {
+  if (argc > 1) {
+    kRunFullTest = strcmp(argv[1], "full") == 0;
+  }
+  ResetTests();
+  AllTests();
+  PrintTestResult();
+  return 0;
+}

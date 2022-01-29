@@ -6,6 +6,12 @@
 
 mu_test_init
 
+#ifdef FULLTEST
+  int kRunFullTest = FULLTEST;
+#else
+  int kRunFullTest = 0;
+#endif
+
 int RiccatiSolverTest() {
   LQRProblem* lqrprob = ndlqr_ReadTestLQRProblem();
   RiccatiSolver* solver = ndlqr_NewRiccatiSolver(lqrprob);
@@ -110,8 +116,8 @@ int RiccatiStepTest() {
     double d_data[3] = { -58.27664399092971, -182.72108843537413, -307.1655328798186 };
     Matrix d_ans = {3, 1, d_data};
 
-    mu_assert(MatrixNormedDifference(&K_ans, K));
-    mu_assert(MatrixNormedDifference(&d_ans, d));
+    mu_assert(MatrixNormedDifference(&K_ans, K) < 1e-6);
+    mu_assert(MatrixNormedDifference(&d_ans, d) < 1e-6);
 
     Matrix* P = solver->P + k; 
     Matrix* p = solver->p + k;
@@ -263,13 +269,23 @@ int SolveLongProblem() {
 }
 
 void AllTests() {
-  // mu_run_test(RiccatiSolverTest);
-  // mu_run_test(RiccatiStepTest);
-  // mu_run_test(BackwardPassTest);
-  // mu_run_test(ForwardPassTest);
-  // mu_run_test(RiccatiSolveTest);
-  // mu_run_test(RiccatiSolveTwiceTest);
-  mu_run_test(SolveLongProblem);
+  mu_run_test(RiccatiSolverTest);
+  mu_run_test(RiccatiStepTest);
+  mu_run_test(BackwardPassTest);
+  mu_run_test(ForwardPassTest);
+  mu_run_test(RiccatiSolveTest);
+  mu_run_test(RiccatiSolveTwiceTest);
+  if (kRunFullTest) {
+    mu_run_test(SolveLongProblem);
+  }
 }
  
-mu_test_main
+int main(int argc, char* argv[]) {
+  if (argc > 1) {
+    kRunFullTest = strcmp(argv[1], "full") == 0;
+  }
+  ResetTests();
+  AllTests();
+  PrintTestResult();
+  return 0;
+}
