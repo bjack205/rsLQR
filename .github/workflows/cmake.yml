@@ -59,3 +59,7 @@ jobs:
     - name: Process code coverage results
       run: gcov **/*.o
     - uses: codecov/codecov-action@v2
+      with:
+        verbose: true
+        files: "**/*.gcov"
+
