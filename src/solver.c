@@ -83,9 +83,9 @@ NdLqrSolver *ndlqr_NewNdLqrSolver(int nstates, int ninputs, int nhorizon) {
   solver->nvars = nvars;
   solver->tree = tree;
   solver->diagonals = diagonals;
-  solver->data = ndlqr_NewNdData(nstates, ninputs, nhorizon - 1, nstates);
-  solver->fact = ndlqr_NewNdData(nstates, ninputs, nhorizon - 1, nstates);
-  solver->soln = ndlqr_NewNdData(nstates, ninputs, nhorizon - 1, 1);
+  solver->data = ndlqr_NewNdData(nstates, ninputs, nhorizon, nstates);
+  solver->fact = ndlqr_NewNdData(nstates, ninputs, nhorizon, nstates);
+  solver->soln = ndlqr_NewNdData(nstates, ninputs, nhorizon, 1);
   solver->cholfacts = cholfacts;
   solver->solve_time_ms = 0.0;
   solver->linalg_time_ms = 0.0;
@@ -116,6 +116,7 @@ int ndlqr_FreeNdLqrSolver(NdLqrSolver *solver) {
   free(solver->diagonals[0].data);
   free(solver->diagonals);
   free(solver);
+  solver = NULL;
   return 0;
 }
 

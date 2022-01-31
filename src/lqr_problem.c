@@ -47,5 +47,6 @@ int ndlqr_FreeLQRProblem(LQRProblem* lqrprob) {
   }
   free(lqrprob->lqrdata);
   free(lqrprob);
+  lqrprob = NULL;
   return 0;
 }

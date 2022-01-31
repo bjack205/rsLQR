@@ -145,6 +145,7 @@ int ndlqr_FreeRiccatiSolver(RiccatiSolver* solver) {
   free(solver->Y);
   free(solver->Qx);
   free(solver);
+  solver = NULL;
   return 0;
 }
 

@@ -57,6 +57,7 @@ int ndlqr_FreeLQRData(LQRData* lqrdata) {
             ->Q);  // This points to the beginning of the allocated memory block
   }
   free(lqrdata);
+  lqrdata = NULL;
   return 0;
 }
 

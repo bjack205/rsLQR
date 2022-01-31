@@ -28,6 +28,7 @@ int FreeMatrix(Matrix* mat) {
   if (mat) {
     if (mat->data) {
       free(mat->data);
+      mat->data = NULL;
       return 0;
     }
   }
@@ -41,6 +42,7 @@ int MatrixNumElements(const Matrix* mat) {
 
 int MatrixGetLinearIndex(const Matrix* mat, int row, int col) {
   if (!mat) return -1;
+  if (row < 0 || col < 0) return -1;
   return row + mat->rows * col;
 }
 
