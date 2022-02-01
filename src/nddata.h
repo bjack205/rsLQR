@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup rsLQR rsLQR Solver
+ * @{
  */
 #pragma once
 
@@ -139,3 +141,5 @@ int ndlqr_GetNdFactor(NdData* nddata, int index, int level, NdFactor** factor);
  * @param nddata Initialized NdData structure
  */
 void ndlqr_ResetNdData(NdData* nddata);
+
+/**@} */

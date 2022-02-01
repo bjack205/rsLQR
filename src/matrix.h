@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup LinearAlgebra 
+ * @{
  */
 #pragma once
 
@@ -207,3 +209,5 @@ int PrintMatrix(const Matrix* mat);
  * @return 0 if successful
  */
 int PrintRowVector(const Matrix* mat);
+
+/**@}*/

@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup rsLQR 
+ * @{
  */
 #pragma once
 
@@ -127,7 +129,7 @@ bool ndlqr_ShouldCalcLambda(OrderedBinaryTree* tree, int index, int i);
  * 
  * @param fact        NdData for the factorization data
  * @param soln        NdData for the factorization data or solution vector
- * @param index       Knot point index of the "separator" at level @level.
+ * @param index       Knot point index of the "separator" at level @p level.
  *                    Should be calculated using ndlqr_GetIndexAtlevel().
  * @param i           Knot point index to be processed
  * @param level       Level index for the level currently being processed
@@ -141,3 +143,5 @@ int ndlqr_UpdateShurFactor(NdData* fact, NdData* soln, int index, int i,
                            int level, int upper_level, bool calc_lambda);
 
 int ndlqr_ComputeShurCompliment(NdLqrSolver* solver, int index, int level, int upper_level);
+
+/**@} */

@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup riccati 
+ * @{
  */
 #pragma once
 
@@ -158,3 +160,5 @@ int ndlqr_CopyRiccatiSolution(RiccatiSolver* solver, double* soln);
  * @return 0 if successful
  */
 int ndlqr_GetRiccatiSolveTimes(RiccatiSolver* solver, double* t_solve, double* t_bp, double* t_fp);
+
+/**@} */

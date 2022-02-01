@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup rsLQR 
+ * @{
  */
 #include "solver.h"
 
@@ -69,3 +71,5 @@ Matrix ndlqr_GetSolution(NdLqrSolver* solver);
  * @return
  */
 int ndlqr_CopySolution(NdLqrSolver* solver, double* soln);
+
+/**@} */

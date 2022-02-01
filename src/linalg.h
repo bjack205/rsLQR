@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup LinearAlgebra Linear Algebra
+ * @{
  */
 #pragma once
 
@@ -49,11 +51,11 @@ static const int kUseBLAS = 0;
  * - FreeFactorization()
  */
 typedef struct {
-  char uplo;    // 'L' or 'U' 
-  int success;  // 0 if success, failure otherwise
-  char lib;     // 'B' for BLAS, 'E' for eigen, 'I' for internal
-  void* fact;   // pointer to Eigen data
-  int is_freed;  // has the Eigen data been freed
+  char uplo;     ///< 'L' or 'U' 
+  int success;   ///< 0 if success, failure otherwise
+  char lib;      ///< 'B' for BLAS, 'E' for eigen, 'I' for internal
+  void* fact;    ///< pointer to Eigen data
+  int is_freed;  ///< has the Eigen data been freed
 } CholeskyInfo;
 
 /**
@@ -144,7 +146,12 @@ int MatrixCholeskySolve(Matrix* A, Matrix* b);
 int MatrixCholeskySolveWithInfo(Matrix* A, Matrix* b, CholeskyInfo* cholinfo);
 
 /**
- * @brief Matrix multiplication $\f C = \alpha A B + \beta C \f$
+ * @brief Matrix multiplication with scaling
+ * 
+ * Perform the computation
+ * \f[
+ * C = \alpha A B + \beta C
+ * \f]
  * 
  * @param[in]    A     Matrix of size (m,n)
  * @param[in]    B     Matrix of size (n,p)
@@ -158,13 +165,13 @@ int MatrixCholeskySolveWithInfo(Matrix* A, Matrix* b, CholeskyInfo* cholinfo);
 void MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double alpha, double beta);
 
 /**
- * @brief Matrix multiplication with a symmetric matrix \f$ A \f$
+ * @brief Matrix multiplication with a symmetric matrix A
  * 
  * Perform the following computation
  * \f[
  *  C = \alpha A B + \beta C
  * \f]
- * For a symmetric matrix $\f A \f$.
+ * For a symmetric matrix \f$ A \f$.
  * 
  * @param[in]    Asym 
  * @param[in]    B 
@@ -175,7 +182,7 @@ void MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double al
 void MatrixSymmetricMultiply(Matrix* Asym, Matrix* B, Matrix* C, double alpha, double beta);
 
 /**
- * @brief Copy just the diagonal element of @src to the diagonal of @dest
+ * @brief Copy just the diagonal element of @p src to the diagonal of @p dest
  * 
  * @param dest Destination matrix
  * @param src  Source matrix
@@ -196,3 +203,5 @@ enum MatrixLinearAlgebraLibrary MatrixGetLinearAlgebraLibrary();
  * 
  */
 void MatrixPrintLinearAlgebraLibrary();
+
+/**@}*/

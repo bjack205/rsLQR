@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup probdef Problem Definition
+ * @{
  */
 #pragma once
 
@@ -64,3 +66,5 @@ LQRProblem* ndlqr_NewLQRProblem(int nstates, int ninputs, int nhorizon);
  * @return 0 if successful
  */
 int ndlqr_FreeLQRProblem(LQRProblem* lqrprob);
+
+/**@} */

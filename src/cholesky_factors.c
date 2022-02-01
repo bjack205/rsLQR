@@ -43,6 +43,7 @@ int ndlqr_FreeCholeskyFactors(NdLqrCholeskyFactors* cholfacts) {
   }
   free(cholfacts->cholinfo);
   free(cholfacts);
+  cholfacts = NULL;
   return 0;
 }
 

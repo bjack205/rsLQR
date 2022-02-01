@@ -1,3 +1,15 @@
+/**
+ * @file lqr_data.h
+ * @author Brian Jackson (bjack205@gmail.com)
+ * @brief LQRData type
+ * @version 0.1
+ * @date 2022-01-31
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ * @addtogroup probdef 
+ * @{ 
+ */
 #pragma once
 
 #include "matrix.h"
@@ -102,13 +114,13 @@ int ndlqr_FreeLQRData(LQRData* lqrdata);
  */
 int ndlqr_CopyLQRData(LQRData* dest, LQRData* src);
 
-Matrix ndlqr_GetA(LQRData* lqrdata);
-Matrix ndlqr_GetB(LQRData* lqrdata);
-Matrix ndlqr_Getd(LQRData* lqrdata);
-Matrix ndlqr_GetQ(LQRData* lqrdata);
-Matrix ndlqr_GetR(LQRData* lqrdata);
-Matrix ndlqr_Getq(LQRData* lqrdata);
-Matrix ndlqr_Getr(LQRData* lqrdata);
+Matrix ndlqr_GetA(LQRData* lqrdata); ///< @brief Get (n,n) state transition matrix
+Matrix ndlqr_GetB(LQRData* lqrdata); ///< @brief Get (n,m) control input matrix
+Matrix ndlqr_Getd(LQRData* lqrdata); ///< @brief Get (n,) affine dynamice term
+Matrix ndlqr_GetQ(LQRData* lqrdata); ///< @brief Get state cost Hessian
+Matrix ndlqr_GetR(LQRData* lqrdata); ///< @brief Get control cost Hessian
+Matrix ndlqr_Getq(LQRData* lqrdata); ///< @brief Get affine state cost
+Matrix ndlqr_Getr(LQRData* lqrdata); ///< @brief Get affine control cost
 
 /**
  * @brief Prints the data contained in LQRData
@@ -118,3 +130,5 @@ Matrix ndlqr_Getr(LQRData* lqrdata);
  * @param lqrdata 
  */
 void ndlqr_PrintLQRData(LQRData* lqrdata);
+
+/**@} */

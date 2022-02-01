@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup rsLQR 
+ * @{
  */
 #pragma once
 
@@ -223,3 +225,5 @@ int ndlqr_PrintSolveProfile(NdLqrSolver* solver);
            See NdLqrProfile for more info.
  */
 NdLqrProfile ndlqr_GetProfile(NdLqrSolver* solver);
+
+/**@} */

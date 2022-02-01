@@ -7,6 +7,9 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @ingroup LinearAlgebra 
+ * @{
+ * 
  */
 #include "matrix.h"
 
@@ -50,7 +53,11 @@ int clap_MatrixAddition(Matrix* A, Matrix* B, double alpha);
 int clap_MatrixScale(Matrix* A, double alpha);
 
 /**
- * @brief Matrix multiplication $\f C = \alpha A B + \beta C \f$
+ * @brief Matrix multiplication 
+ * 
+ * \f[
+ * C = \alpha A B + \beta C
+ * \f]
  * 
  * @param[in]    A     Matrix of size (m,n)
  * @param[in]    B     Matrix of size (n,p)
@@ -65,7 +72,12 @@ int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, doubl
 
 
 /**
- * @brief A shortcut to perform \f$ C = A^T B \f$
+ * @brief A shortcut to perform transposed matrix multiplication
+ * 
+ * Calculates 
+ * \f[
+ *  C = A^T B 
+ * \f]
  * 
  * @param[in]  A any matrix of size (n,m)
  * @param[in]  B any matrix of size (n,p)
@@ -75,13 +87,15 @@ int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, doubl
 int clap_MatrixTransposeMultiply(Matrix* A, Matrix* B, Matrix* C);
 
 /**
- * @brief Matrix multiplication with a symmetric matrix \f$ A \f$
+ * @brief Matrix multiplication with a symmetric matrix A
  * 
  * Perform the following computation
  * \f[
- *  C = \alpha A B + \beta C
+ * C = \alpha A B + \beta C
  * \f]
- * For a symmetric matrix $\f A \f$.
+ * 
+ * For a symmetric matrix \f$ A \f$.
+ * 
  * 
  * @param[in]    Asym 
  * @param[in]    B 
@@ -142,3 +156,5 @@ int clap_CholeskySolve(Matrix* A, Matrix* b);
  * @return 0 if successful
  */
 int clap_LowerTriBackSub(Matrix* L, Matrix* b, bool istransposed);
+
+/**@} */

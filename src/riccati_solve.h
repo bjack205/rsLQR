@@ -7,6 +7,8 @@
  * 
  * @copyright Copyright (c) 2022
  * 
+ * @addtogroup riccati Riccati Solver 
+ * @{
  */
 #pragma once
 
@@ -46,3 +48,5 @@ int ndlqr_BackwardPass(RiccatiSolver* solver);
  * @return 0 if successful
  */
 int ndlqr_ForwardPass(RiccatiSolver* solver);
+
+/**@} */
