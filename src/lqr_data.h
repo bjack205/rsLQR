@@ -70,8 +70,8 @@ typedef struct {
  * Does not allocate any new memory.
  * 
  * @param lqrdata Initialized LQRData struct
- * @param Q       State cost Hessian
- * @param R       Control cost Hessian
+ * @param Q       Diagonal of state cost Hessian
+ * @param R       Diagonal of control cost Hessian
  * @param q       State cost affine term
  * @param r       Control cost affine term
  * @param c       Constant cost term

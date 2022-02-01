@@ -173,6 +173,8 @@ Matrix ndlqr_GetRiccatiSolution(RiccatiSolver* solver) {
   return soln;
 }
 
+int ndlqr_GetNumVarsRiccati(RiccatiSolver* solver) { return solver->nvars; }
+
 int ndlqr_CopyRiccatiSolution(RiccatiSolver* solver, double* soln) {
   if (!solver) return -1;
   memcpy(soln, solver->Y->data, solver->nvars * sizeof(double));

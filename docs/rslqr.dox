@@ -1,0 +1,140 @@
+/** \page page_rslqr The rsLQR Algorithm
+
+## Algorithm Overview
+The rsLQR algorithm works by recursively solving 3x3 Schur compliments of the 
+form:
+\f[
+    \begin{bmatrix}
+        A & D \\
+        D^T & B & E^T \\
+        & E & C \\
+    \end{bmatrix}
+    \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+    \begin{bmatrix} a \\ b \\ c \end{bmatrix}
+\f]
+
+When solving this system, we need to solve equations of the form:
+
+\f[
+    A \bar{a} = a
+\f]
+\f[
+    C \bar{c} = c
+\f]
+
+For a banded system, these solves also take the same form, so we can recursively 
+solve these 3x3 Schur compliments, stopping the recursion when the \f$ A \f$ and 
+\f$ C \f$ are small or dense enough to solve using e.g. a dense Cholesky decomposition.
+The full details of the algorithm are provided in the paper, which provides some of the 
+details on "flattening" the algorithm to make it more amenable to parallelization on 
+a many-core CPU. The following sections provide some details on the structure of the 
+actual implementation.
+
+## Memory layout
+Most of the matrix information stored by the algorithm is stored in arrays of the 
+following form:
+
+\f[\begin{bmatrix}
+\Lambda_1^{(1)} & \Lambda_1^{(2)} & \dots & \Lambda_1^{(K)} \\
+X_1^{(1)} & X_1^{(2)} & \dots & X_1^{(K)} \\
+U_1^{(1)} & U_1^{(2)} & \dots & U_1^{(K)} \\
+\Lambda_2^{(1)} & \Lambda_2^{(2)} & \dots & \Lambda_2^{(K)} \\
+X_2^{(1)} & X_2^{(2)} & \dots & X_2^{(K)} \\
+U_2^{(1)} & U_2^{(2)} & \dots & U_2^{(K)} \\
+\vdots    & \vdots    & \ddots & \vdots \\
+\Lambda_N^{(1)} & \Lambda_N^{(2)} & \dots & \Lambda_N^{(K)} \\
+X_N^{(1)} & X_N^{(2)} & \dots & X_N^{(K)} \\
+U_N^{(1)} & U_N^{(2)} & \dots & U_N^{(K)} \\
+\end{bmatrix} \f]
+
+where \f$ N \f$ is the horizon length, \f$ K = \log_2{N} \f$ is the depth of the tree,
+and \f$ \Lambda_k^{(j)} \in \mathbb{R}^{n \times w}, X_k^{(j)} \in \mathbb{R}^{n \times w}
+U_k^{(j)} \in \mathbb{R}^{m \times w} \f$ are the blocks associated with dual variables, 
+state variables, and control variables for knot point \f$ k \f$ and level \f$ j \f$, 
+respectively. If a block has bar, e.g.  \f$ \bar{X}_i^{(j)} \f$, it represents a piece 
+of the factorized matrix information, whereas any block without is part of the original 
+matrix data.
+
+These blocks make up the \f$ D_i^{(j)}, E_i^{(j)}, a_i^{(j,p)}, \f$ and \f$ c_i^{(j,p)} \f$
+blocks referenced in the original paper. At higher levels, each of these blocks get 
+larger, and are therefore made up of more of these basic blocks indexed by knot point 
+index instead of leaf index. This allows the entire algorithm to work on small blocks of 
+similar size, decreasing the likelihood of cache misses. It also simplifies many of 
+the parallel loops and resulting computational kernels.
+
+## High level overview
+Pseudocode for the algorithm, invoked by ndlqr_Solve(), is included below:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.c}
+int K = tree.depth;
+
+// In parallel
+for (int index = 0; index < N; ++index) {
+    ndlqr_SolveLeaf(solver, index)
+}
+// Sync threads
+
+// Compute matrix factorization
+for (int level = 0; level < K; ++level) {
+    int L = NumLeaves(level, K);
+
+    // In parallel
+    for (int i = 0; i < L; ++i) {
+        for (int p = level; p < K; ++p) {
+            int k = ndlqr_GetIndexFromLeaf(tree, leaf, level);
+            ndlqr_FactorInnerProduct(k, level, p);
+        }
+    }
+    // Sync threads
+
+    // In parallel
+    for (int i = 0; i < L; ++i) {
+        FactorizeBbar(i, level);  // not an actually implemented method
+    }
+    // Sync threads
+
+    // In parallel
+    for (int i = 0; i < L; ++i) {
+        for (int p = level + 1; level < K; ++p) {
+            int k = ndlqr_GetIndexFromLeaf(tree, i, level);
+            ndlqr_SolveCholeskyFactor(solver, k, level, p)
+        }
+    }
+    // Sync threads
+    
+    // In parallel
+    for (int k = 0; k < N; ++k) {
+        for (int p = level; p < K; ++p) {
+            ndlqr_UpdateShurFactor(solver, k, level, p);
+        }
+    }
+    // Sync threads
+}
+
+// Solve for solution vector
+for (int level = 0; level < K; ++level) {
+    int L = NumLeaves(level, K);
+
+    // In Parallel
+    for (int i = 0; i < L; ++i) {
+        int k = ndlqr_GetIndexFromLeaf(i, level);
+        ndlqr_FactorInnerProduct(k, level, K+1);
+    }
+    // Sync threads
+
+    // In Parallel
+    for (int i = 0; i < L; ++i) {
+        int k = ndlqr_GetIndexFromLeaf(i, level);
+        ndlqr_SolveCholeskyFactor(k, level, K+1);
+    }
+    // Sync threads
+
+    // In parallel
+    for (int k = 0; k < N; ++k) {
+        ndlqr_UpdateShurFactor(k, level, K+1);
+    }
+    // Sync threads
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*/

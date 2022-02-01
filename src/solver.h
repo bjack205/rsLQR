@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  * @addtogroup rsLQR 
- * @{
+//  * @{
  */
 #pragma once
 
@@ -44,7 +44,7 @@ typedef struct {
 NdLqrProfile ndlqr_NewNdLqrProfile();
 
 /**
- * @brief Reset the profile to it's initialized state
+ * @brief Reset the profile to its initialized state
  * 
  * @param prof A profile
  */

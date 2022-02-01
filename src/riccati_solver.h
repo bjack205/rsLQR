@@ -49,6 +49,13 @@
  * free(soln);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * 
+ * ## Methods
+ * - ndlqr_NewRiccatiSolver()
+ * - ndlqr_FreeRiccatiSolver()
+ * - ndlqr_PrintRiccatiSummary()
+ * - ndlqr_GetRiccatiSolution()
+ * - ndlqr_CopyRiccatiSolution()
+ * - ndlqr_GetRiccatiSolveTimes()
  */
 typedef struct {
   LQRProblem* prob;  ///< Problem data
@@ -134,6 +141,8 @@ int ndlqr_PrintRiccatiSummary(RiccatiSolver* solver);
  * @return
  */
 Matrix ndlqr_GetRiccatiSolution(RiccatiSolver* solver);
+
+int ndlqr_GetNumVarsRiccati(RiccatiSolver* solver);
 
 /**
  * @brief Copies the solution to a user-supplied array
