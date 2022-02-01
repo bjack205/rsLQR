@@ -121,13 +121,39 @@ int MatrixNumElements(const Matrix* mat);
  * Converts a cartesian index of row and column into a linear index for accessing 
  * an element of the underlying data.
  *
- * @param mat Matrix with nonzero size an initialized data
+ * @param mat Matrix with nonzero size and initialized data
  * @param row Row index
  * @param col Column index
  * @return Linear index corresponding to `row` and `col`.
            Returns -1 for a bad input.
  */
 int MatrixGetLinearIndex(const Matrix* mat, int row, int col);
+
+/**
+ * @brief Get the element of a matrix or its transpose
+ * 
+ * If @p istransposed is false, then this method acts just like MatrixGetElement().
+ * Otherwise, it is equalivalent to flipping the @p row and @p col arguments to 
+ * MatrixGetElement().
+ * 
+ * @param mat         Matrix with nonzero size and initialized data
+ * @param row         Row index
+ * @param col         Column index
+ * @param istranposed Are the indicies for the transpose of A?
+ * @return            Pointer to the data at the given element.
+ */
+double* MatrixGetElementTranspose(const Matrix* mat, int row, int col, bool istranposed);
+
+/**
+ * @brief The a matrix element to a given value
+ * 
+ * @param mat Matrix with nonzero size and initialized data
+ * @param row Row index
+ * @param col Column index
+ * @param val Value to which the element should be set
+ * @return    0 if successful
+ */
+int MatrixSetElement(Matrix* mat, int row, int col, double val);
 
 /**
  * @brief Get the element of a matrix given row, column indices
@@ -148,6 +174,14 @@ double* MatrixGetElement(const Matrix* mat, int row, int col);
  */
 int MatrixCopyTranspose(Matrix* dest, Matrix* src);
 
+/**
+ * @brief Copy a matrix to another matrix
+ * 
+ * @param dest a matrix of size (m,n)
+ * @param src a matrix of size (n,m)
+ * @return 0 if successful
+ */
+int MatrixCopy(Matrix* dest, Matrix* src);
 /**
  * @brief Scale a matrix by a constant factor
  * 
