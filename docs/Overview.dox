@@ -1,5 +1,6 @@
 /**
 * \mainpage rsLQR: A Parallel Solver for LQR Problems
+* \tableofcontents
 * 
 * This is the documentation for the rsLQR solver for solving LQR problems on a 
 * many-core CPU. The linear-quadratic regulator is the canonical optimal control

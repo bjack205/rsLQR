@@ -72,8 +72,12 @@ endif()
 # Documentation 
 ##############################
 if (DOXYGEN_FOUND)
+  set(DOXYGEN_IN ${PROJECT_SOURCE_DIR}/docs/Doxyfile.in)
+  set(DOXYGEN_OUT ${PROJECT_SOURCE_DIR}/docs/Doxyfile)
+  configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+
   add_custom_target(doxygen
-    COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_SOURCE_DIR}/Doxyfile
+    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT} 
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Build documentation with Doxygen." 
   )
