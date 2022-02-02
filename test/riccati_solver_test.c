@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <string.h>
+
 #include "riccati_solver.h"
 #include "riccati_solve.h"
 #include "ndlqr.h"
@@ -224,7 +227,9 @@ int RiccatiSolveTwiceTest() {
   ndlqr_SolveRiccati(solver);
 
   Matrix x_ans = ReadMatrixJSONFile(SAMPLEPROBFILE, "soln");
-  Matrix x = ndlqr_GetRiccatiSolution(solver);
+  double* soln = (double*) malloc(solver->nvars * sizeof(double));
+  ndlqr_CopyRiccatiSolution(solver, soln);
+  Matrix x = {solver->nvars, 1, soln};
   double err = MatrixNormedDifference(&x, &x_ans);
   printf("Final error after 2nd solve: %g\n", err);
   mu_assert(err < 1e-10);

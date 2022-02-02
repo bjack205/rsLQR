@@ -48,6 +48,7 @@ add_subdirectory(deps)
 # Find required packages
 find_package(OpenMP REQUIRED)
 include(FindLinearAlgebra)
+find_package(Doxygen)
 
 
 ##############################
@@ -64,4 +65,16 @@ if (RSLQR_BUILD_TESTS)
   enable_testing()
   include_directories(${rsLQR_SOURCE_DIR})
   add_subdirectory(test)
+endif()
+
+
+##############################
+# Documentation 
+##############################
+if (DOXYGEN_FOUND)
+  add_custom_target(doxygen
+    COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_SOURCE_DIR}/Doxyfile
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMENT "Build documentation with Doxygen." 
+  )
 endif()

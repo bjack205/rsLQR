@@ -145,6 +145,7 @@ int ndlqr_FreeRiccatiSolver(RiccatiSolver* solver) {
   free(solver->Y);
   free(solver->Qx);
   free(solver);
+  solver = NULL;
   return 0;
 }
 
@@ -171,6 +172,8 @@ Matrix ndlqr_GetRiccatiSolution(RiccatiSolver* solver) {
   Matrix soln = {solver->nvars, 1, solver->Y->data};
   return soln;
 }
+
+int ndlqr_GetNumVarsRiccati(RiccatiSolver* solver) { return solver->nvars; }
 
 int ndlqr_CopyRiccatiSolution(RiccatiSolver* solver, double* soln) {
   if (!solver) return -1;

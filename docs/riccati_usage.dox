@@ -1,0 +1,67 @@
+
+/** \page page_riccati_usage Using the Riccati Solver 
+This page provides some details on how to use the rsLQR solver to solve an LQR problem.
+
+## Part I: Defining the problem
+
+First, create a new LQRProblem with ndlqr_NewLQRProblem 
+~~~
+LQRProblem* lqrprob = ndlqr_NewLQRProblem(nstates, ninputs, nhorizon);
+~~~
+
+Next, fill in the LQRProblem data.
+You can choose to define an array of LQRData structs and use ndlqr_InitializeLQRProblem(), 
+or loop over time steps and do it yourself
+~~~
+lqrprob->nhorizon = nhorizon;
+for (int i = 0; i < nstates; ++i) {
+    lqrprob->x0[i] = x0[i];  // assumes x0 is defined somewhere
+}
+for (int k = 0; i < nhorizon; ++k) {
+    // Assumes all of the following data is defined
+    LQRData* data = lqrprob->lqrdata[k];
+    ndlqr_InitializeLQRData(data, Q, R, q, r, c, A, B, d);
+}
+~~~
+
+## Part II: Setting up the solver
+Initialize a new solver:
+~~~
+RiccatiSolver* solver = rdlqr_NewRiccatiSolver(lqrprob);
+~~~
+
+
+## Part III: Solving
+
+Call the ndlqr_SolveRiccati() method to solve the system using Riccati recursion:
+~~~
+ndlqr_SolveRiccati(solver);
+~~~
+
+## Part IV: Getting the solution and post-processing
+A summary of the solve can be printed using:
+~~~
+ndlqr_PrintRiccatiSummary(solver);
+~~~
+
+Like the rsLQR solver, the solution can vector can be obtained either one of two ways:
+~~~
+int nvars = ndlqr_GetNumVarsRiccati(solver);  // can also use solver->nvars
+double* soln = (double*) malloc(nvars * sizeof(double));
+ndlqr_CopyRiccatiSolution(solver, soln);
+~~~
+or
+~~~
+Matrix soln = ndlqr_GetRiccatiSolution(solver);
+~~~
+Note that the second method return a Matrix whose data is still owned by the 
+solver (avoids a memory allocation or copy). Do not free this memory and be aware 
+that editing it will edit the data stored in the solver.
+
+## Part V: Freeing the solver
+Don't forget to free the solver!
+~~~
+ndlqr_FreeRiccatiSolver(solver);
+~~~
+
+*/

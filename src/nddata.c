@@ -18,9 +18,9 @@ Matrix ndlqr_GetInputFactor(NdFactor* factor) {
   return factor->input;
 }
 
-NdData* ndlqr_NewNdData(int nstates, int ninputs, int nsegments, int width) {
+NdData* ndlqr_NewNdData(int nstates, int ninputs, int nhorizon, int width) {
+  int nsegments = nhorizon - 1;
   if (nstates <= 0 || ninputs <= 0 || nsegments <= 0) return NULL;
-  int nhorizon = nsegments + 1;  // or, equivalently, number of knot points
   if (!IsPowerOfTwo(nhorizon)) {
     fprintf(stderr, "ERROR: Number of segments must be one less than a power of 2.\n");
     return NULL;

@@ -10,16 +10,16 @@ int NewNdDataTest() {
   int nstates = 6;
   int ninputs = 3;
   int nsegments = 7;
-  NdData* nddata_bad = ndlqr_NewNdData(nstates, ninputs, nsegments + 1, nstates);
+  NdData* nddata_bad = ndlqr_NewNdData(nstates, ninputs, nsegments, nstates);
   mu_assert(nddata_bad == NULL);
-  nddata_bad = ndlqr_NewNdData(nstates * 0, ninputs, nsegments, nstates);
+  nddata_bad = ndlqr_NewNdData(nstates * 0, ninputs, nsegments + 1, nstates);
   mu_assert(nddata_bad == NULL);
-  nddata_bad = ndlqr_NewNdData(nstates, ninputs * 0, nsegments, nstates);
+  nddata_bad = ndlqr_NewNdData(nstates, ninputs * 0, nsegments + 1, nstates);
   mu_assert(nddata_bad == NULL);
-  nddata_bad = ndlqr_NewNdData(nstates, ninputs, nsegments * 0, nstates);
+  nddata_bad = ndlqr_NewNdData(nstates, ninputs, nsegments * 1, nstates);
   mu_assert(nddata_bad == NULL);
 
-  NdData* nddata = ndlqr_NewNdData(nstates, ninputs, nsegments, nstates);
+  NdData* nddata = ndlqr_NewNdData(nstates, ninputs, nsegments + 1, nstates);
   mu_assert(nddata->nstates == nstates);
   mu_assert(nddata->ninputs == ninputs);
   mu_assert(nddata->nsegments == nsegments);
@@ -61,7 +61,7 @@ int SetFactors() {
   int ninputs = 3;
   int nsegments = 7;
   int nhorizon = nsegments + 1;
-  NdData* nddata = ndlqr_NewNdData(nstates, ninputs, nsegments, nstates);
+  NdData* nddata = ndlqr_NewNdData(nstates, ninputs, nsegments + 1, nstates);
   int depth = nddata->depth;
   int factorsize = (2 * nstates + ninputs) * nstates;
   int levelsize = factorsize * nhorizon;  // number of doubles in a level
@@ -100,7 +100,7 @@ int SetSolutionFactors() {
   int ninputs = 3;
   int nsegments = 7;
   int width = 1;  // the solution vector
-  NdData* nddata = ndlqr_NewNdData(nstates, ninputs, nsegments, width);
+  NdData* nddata = ndlqr_NewNdData(nstates, ninputs, nsegments + 1, width);
   int factorsize = (2 * nstates + ninputs) * width;
   NdFactor* factor;
 

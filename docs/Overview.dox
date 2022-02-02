@@ -1,0 +1,42 @@
+/**
+* \mainpage rsLQR: A Parallel Solver for LQR Problems
+* 
+* This is the documentation for the rsLQR solver for solving LQR problems on a 
+* many-core CPU. The linear-quadratic regulator is the canonical optimal control
+* problem, and has significant practical applications. The current software package
+* works with the follow form, which includes the affine terms on the cost and dynamics:
+*
+* \f{align*}{
+* \underset{x_{1:N}, u_{1:N-1}}{\text{minimize}} &&& \frac{1}{2} x_N^T Q_N + x_N + q_N^T x_N + \sum_{k-1}^{N-1} \frac{1}{2} x_k^T Q_k + x_k + q_k^T x_k + u_k^T R_k + u_k + r_k^T u_k \\
+* \text{subject to} &&& x_{k+1} = A_k x_k + B_k u_k + f_k \\
+* &&& x_1 = x_\text{init}
+* \f}
+* 
+* where \f$ x \in \mathbb{R}^n, u \in \mathbb{R}^m \f$ are the state and control vectors.
+* This optimization problem is a simple quadratic program (QP) that can be solved 
+* using any of the methods to solve this generic class of optimization problems, as well 
+* as extensions including equality and inequality constraints on the states and the controls. 
+* However, in the form presented, it can also be solved by solving a single sparse, symmetric,
+* and banded linear system encoding the optimality conditions. This package provides two 
+* methods for solving this linear system:
+* 
+* ## 1. rsLQR
+* The rsLQR (or recursive Schur compliment LQR) algorithm solves the LQR problem using a 
+* hierarchical set of 3x3 Schur compliments. The details and derivation of the algorithm 
+* are published [in this conference paper](). This software package provides the open-source
+* implementation of the proposed algorithm, while this documentation is meant to provide some
+* further details on the implementation that were left out of the original paper.
+* - \subpage page_rslqr
+* - \subpage page_rslqr_usage
+* 
+* ## 2. Riccati Recursion
+* Solving the LQR problem using a backward Riccati recursion is perhaps the most well-known 
+* and most popular method for solving these problems, given it's extreme computation efficiency
+* and straightforward implementation. It is, however, inherently serial in nature. The 
+* current software package provides an implementation in pure C, and provided as a comparison 
+* baseline benchmark for the proposed rsLQR algorithm.
+* - \subpage page_riccati_usage
+* 
+* ## References
+* Please cite the following paper when using this package:
+*/

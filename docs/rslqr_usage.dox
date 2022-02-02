@@ -1,0 +1,82 @@
+/** \page page_rslqr_usage Using the rsLQR Algorithm
+This page provides some details on how to use the rsLQR solver to solve an LQR problem.
+
+## Part I: Defining the problem
+
+First, create a new LQRProblem with ndlqr_NewLQRProblem 
+~~~
+LQRProblem* lqrprob = ndlqr_NewLQRProblem(nstates, ninputs, nhorizon);
+~~~
+
+Next, fill in the LQRProblem data.
+You can choose to define an array of LQRData structs and use ndlqr_InitializeLQRProblem(), 
+or loop over time steps and do it yourself
+~~~
+lqrprob->nhorizon = nhorizon;
+for (int i = 0; i < nstates; ++i) {
+    lqrprob->x0[i] = x0[i];  // assumes x0 is defined somewhere
+}
+for (int k = 0; i < nhorizon; ++k) {
+    // Assumes all of the following data is defined
+    LQRData* data = lqrprob->lqrdata[k];
+    ndlqr_InitializeLQRData(data, Q, R, q, r, c, A, B, d);
+}
+~~~
+
+## Part II: Setting up the solver
+
+Initialize a new solver 
+~~~
+NdLqrSolver* solver = rdlqr_NewNdLqrSolver(nstates, ninputs, nhorizon);
+~~~
+
+Then copy in the data from the LQRProblem
+~~~
+ndlqr_InitializeWithLQRProblem(lqrprob, solver);
+~~~
+
+Optionally, you can also set the number of threads.
+~~~
+ndlqr_SetNumThreads(solver, num_threads);
+~~~
+Note that this just requests the number of threads from OpenMP, but doesn't provide a 
+guarantee that this number of threads will be provided. Check the actual number of threads
+afterwards with ndlqr_GetNumThreads();
+
+## Part III: Solving
+
+Call the ndlqr_Solve() method to solve the system:
+~~~
+ndlqr_Solve(solver);
+~~~
+
+Right now the solve can't be separated between the factorization step and the 
+solve step.
+
+## Part IV: Getting the solution and post-processing
+You can print the summary using
+~~~
+ndlqr_PrintSolveSummary(solver);
+~~~
+
+For retrieving the solution vector, you can use one of two methods:
+~~~
+int nvars = ndlqr_GetNumVars(solver);
+double* soln = (double*) malloc(nvars * sizeof(double));
+ndlqr_CopySolution(solver, soln);
+~~~
+or
+~~~
+Matrix soln = ndlqr_GetSolution(solver);
+~~~
+Note that the second method return a Matrix whose data is still owned by the 
+solver (avoids a memory allocation or copy). Do not free this memory and be aware 
+that editing it will edit the data stored in the solver.
+
+## Part V: Freeing the solver
+Don't forget to free the solver!
+~~~
+ndlqr_FreeNdLqrSolver(solver);
+~~~
+
+*/
