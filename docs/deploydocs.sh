@@ -1,6 +1,7 @@
 #!/bin/bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 CUR_DIR=$PWD
+cd $SCRIPT_DIR/..
 CUR_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo "Deploying to gh-pages branch"
