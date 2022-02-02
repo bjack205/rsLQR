@@ -7,9 +7,8 @@
 
 #include "utils.h"
 
-int ndlqr_InitializeLQRData(LQRData* lqrdata, double* Q, double* R, double* q,
-                            double* r, double c, double* A, double* B,
-                            double* d) {
+int ndlqr_InitializeLQRData(LQRData* lqrdata, double* Q, double* R, double* q, double* r,
+                            double c, double* A, double* B, double* d) {
   if (!lqrdata) return -1;
   memcpy(lqrdata->Q, Q, lqrdata->nstates * sizeof(double));
   memcpy(lqrdata->R, R, lqrdata->ninputs * sizeof(double));
@@ -23,7 +22,7 @@ int ndlqr_InitializeLQRData(LQRData* lqrdata, double* Q, double* R, double* q,
 }
 
 LQRData* ndlqr_NewLQRData(int nstates, int ninputs) {
-  int cost_size = 2 * nstates + 2 * ninputs + 1;  // Q,R,q,r,c
+  int cost_size = 2 * nstates + 2 * ninputs + 1;                        // Q,R,q,r,c
   int dynamics_size = nstates * nstates + nstates * ninputs + nstates;  // A,B,d
   int total_size = cost_size + dynamics_size;
   double* data = (double*)malloc(total_size * sizeof(double));
@@ -52,9 +51,7 @@ LQRData* ndlqr_NewLQRData(int nstates, int ninputs) {
 int ndlqr_FreeLQRData(LQRData* lqrdata) {
   if (!lqrdata) return -1;
   if (lqrdata->Q) {
-    free(
-        lqrdata
-            ->Q);  // This points to the beginning of the allocated memory block
+    free(lqrdata->Q);  // This points to the beginning of the allocated memory block
   }
   free(lqrdata);
   lqrdata = NULL;
@@ -63,14 +60,13 @@ int ndlqr_FreeLQRData(LQRData* lqrdata) {
 
 int ndlqr_CopyLQRData(LQRData* dest, LQRData* src) {
   if (dest->nstates != src->nstates || dest->ninputs != src->ninputs) {
-    fprintf(stderr,
-            "Can't copy LQRData of different sizes: (%d,%d) and (%d,%d).\n",
+    fprintf(stderr, "Can't copy LQRData of different sizes: (%d,%d) and (%d,%d).\n",
             dest->nstates, dest->ninputs, src->nstates, src->ninputs);
     return -1;
   }
   int nstates = dest->nstates;
   int ninputs = dest->ninputs;
-  int cost_size = 2 * nstates + 2 * ninputs + 1;  // Q,R,q,r,c
+  int cost_size = 2 * nstates + 2 * ninputs + 1;                        // Q,R,q,r,c
   int dynamics_size = nstates * nstates + nstates * ninputs + nstates;  // A,B,d
   int total_size = cost_size + dynamics_size;
   memcpy(dest->Q, src->Q, total_size * sizeof(double));

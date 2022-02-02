@@ -1,7 +1,8 @@
 #pragma once
 
-#include <matrix.h>
 #include <linalg.h>
+#include <matrix.h>
+
 #include "eigen_c/eigen_c.h"
 
 int MatMulLoops(Matrix* A, Matrix* B, Matrix* C);

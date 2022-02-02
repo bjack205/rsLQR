@@ -14,12 +14,12 @@ int ndlqr_InitializeLQRProblem(LQRProblem* lqrproblem, double* x0, LQRData** lqr
 }
 
 LQRProblem* ndlqr_NewLQRProblem(int nstates, int ninputs, int nhorizon) {
-  if (nhorizon <= 0)  {
+  if (nhorizon <= 0) {
     fprintf(stderr, "ERROR: Horizon must be positive.\n");
     return NULL;
   }
 
-  LQRData** lqrdata = (LQRData**) malloc(nhorizon * sizeof(LQRData*));
+  LQRData** lqrdata = (LQRData**)malloc(nhorizon * sizeof(LQRData*));
   if (lqrdata == NULL) {
     fprintf(stderr, "ERROR: Couldn't allocate memory for LQRProblem.\n");
     return NULL;
@@ -27,8 +27,8 @@ LQRProblem* ndlqr_NewLQRProblem(int nstates, int ninputs, int nhorizon) {
   for (int k = 0; k < nhorizon; ++k) {
     lqrdata[k] = ndlqr_NewLQRData(nstates, ninputs);
   }
-  double* x0 = (double*) malloc(nstates * sizeof(double));
-  LQRProblem* lqrproblem = (LQRProblem*) malloc(sizeof(LQRProblem));
+  double* x0 = (double*)malloc(nstates * sizeof(double));
+  LQRProblem* lqrproblem = (LQRProblem*)malloc(sizeof(LQRProblem));
   lqrproblem->nhorizon = nhorizon;
   lqrproblem->x0 = x0;
   lqrproblem->lqrdata = lqrdata;

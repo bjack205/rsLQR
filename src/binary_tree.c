@@ -89,12 +89,12 @@ const BinaryNode* GetNodeAtLevel(const BinaryNode* node, int index, int level) {
 int ndlqr_GetIndexAtLevel(const OrderedBinaryTree* tree, int index, int level) {
   if (!tree) return -1;
   if (index < 0 || index >= tree->num_elements) {
-    fprintf(stderr, "ERROR: Invalid index (%d). Should be between %d and %d.\n",
-            index, 0, tree->num_elements - 1);
+    fprintf(stderr, "ERROR: Invalid index (%d). Should be between %d and %d.\n", index, 0,
+            tree->num_elements - 1);
   }
   if (level < 0 || level >= tree->depth) {
-    fprintf(stderr, "ERROR: Invalid level (%d). Should be between %d and %d.\n",
-            level, 0, tree->depth - 1);
+    fprintf(stderr, "ERROR: Invalid level (%d). Should be between %d and %d.\n", level, 0,
+            tree->depth - 1);
   }
   BinaryNode* node = tree->node_list + index;
   if (index == tree->num_elements - 1) {

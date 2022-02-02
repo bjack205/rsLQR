@@ -4,12 +4,11 @@
  * @brief Interface file. This is the file users should include to use the rsLQR solver.
  * @version 0.1
  * @date 2022-01-31
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
-#include "solver.h"
-#include "solve.h"
 #include "lqr_problem.h"
 #include "matmul.h"
-
+#include "solve.h"
+#include "solver.h"
