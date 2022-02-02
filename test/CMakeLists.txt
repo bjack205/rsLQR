@@ -1,3 +1,6 @@
+add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-error=unknown-pragmas)
+add_compile_options(-fPIC -fPIE -mavx2 -mfma)
+
 add_library(minunit
     minunit.h
     minunit.c
