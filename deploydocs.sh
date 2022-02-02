@@ -7,6 +7,7 @@ echo "Deploying to gh-pages branch"
 git config user.email "bjack205@gmail.com"
 git config user.name "Brian Jackson"
 echo $PWD
+git fetch
 git checkout origin/gh-pages
 cp -r build/docs/html/* html
 git add html/*
