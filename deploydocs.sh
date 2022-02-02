@@ -8,7 +8,7 @@ git config user.email "bjack205@gmail.com"
 git config user.name "Brian Jackson"
 echo $PWD
 git fetch
-git checkout origin/gh-pages
+git checkout gh-pages
 echo "Copying html files"
 cp -r build/docs/html/* html
 sleep 0.5
