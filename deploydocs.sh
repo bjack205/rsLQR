@@ -9,9 +9,12 @@ git config user.name "Brian Jackson"
 echo $PWD
 git fetch
 git checkout origin/gh-pages
+echo "Copying html files"
 cp -r build/docs/html/* html
+echo "Committing html"
 git add html/*
 git commit -m "Update documentation"
+echo "pusing to origin"
 git push -f origin gh-pages
 git checkout $CUR_BRANCH
 
