@@ -1,0 +1,27 @@
+name: Documentation 
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: |
+        sudo apt-get install libeigen3-dev -y
+        sudo apt-get install clang -y
+        sudo apt-get install doxygen -y
+        sudo apt-get install graphviz -y
+      
+    - name: Build documentation
+      working-directory: ${{ github.workspace }}
+      run: ./builddocs.sh
+
+    - name: Deploy documentation
+      working-directory: ${{ github.workspace }}
+      run: ./deploydocs.sh

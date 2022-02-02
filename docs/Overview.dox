@@ -36,6 +36,10 @@
 * current software package provides an implementation in pure C, and provided as a comparison 
 * baseline benchmark for the proposed rsLQR algorithm.
 * - \subpage page_riccati_usage
+*
+* ## Installation
+* TODO: Add installation instructions.
+* Another line of documentation.
 * 
 * ## References
 * Please cite the following paper when using this package:
