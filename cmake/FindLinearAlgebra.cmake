@@ -12,6 +12,7 @@ if (RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
   list(POP_BACK CMAKE_MESSAGE_CONTEXT LAPACK)
   add_library(LAPACK::CBLAS ALIAS cblas)
   add_library(LAPACK::LAPACKE ALIAS lapacke)
+  install(TARGETS cblas lapacke EXPORT rsLQR_export)
 endif()
 
 find_package(Eigen3 3.3 NO_MODULE)
