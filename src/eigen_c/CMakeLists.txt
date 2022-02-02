@@ -1,4 +1,4 @@
-add_library(eigen_c STATIC 
+add_library(eigen_c SHARED
   eigen_c.h
   eigen_c.cpp
 )
