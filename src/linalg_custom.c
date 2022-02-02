@@ -1,4 +1,5 @@
 #include "linalg_custom.h"
+
 #include "math.h"
 #include "stdio.h"
 
@@ -16,7 +17,8 @@ int clap_MatrixScale(Matrix* A, double alpha) {
   return 0;
 }
 
-int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double alpha, double beta) {
+int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, double alpha,
+                        double beta) {
   int n, m;
   if (tA) {
     n = A->cols;
@@ -25,11 +27,11 @@ int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, doubl
     n = A->rows;
     m = A->cols;
   }
-  int p = tB ? B->rows :  B->cols;
+  int p = tB ? B->rows : B->cols;
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < p; ++j) {
       double* Cij = MatrixGetElement(C, i, j);
-      *Cij *= beta; 
+      *Cij *= beta;
       for (int k = 0; k < m; ++k) {
         double Aik = *MatrixGetElementTranspose(A, i, k, tA);
         double Bkj = *MatrixGetElementTranspose(B, k, j, tB);
@@ -40,7 +42,8 @@ int clap_MatrixMultiply(Matrix* A, Matrix* B, Matrix* C, bool tA, bool tB, doubl
   return 0;
 }
 
-int clap_SymmetricMatrixMultiply(Matrix* Asym, Matrix* B, Matrix* C, double alpha, double beta) {
+int clap_SymmetricMatrixMultiply(Matrix* Asym, Matrix* B, Matrix* C, double alpha,
+                                 double beta) {
   int n, m;
   bool tA = false;
   bool tB = false;
@@ -51,16 +54,16 @@ int clap_SymmetricMatrixMultiply(Matrix* Asym, Matrix* B, Matrix* C, double alph
     n = Asym->rows;
     m = Asym->cols;
   }
-  int p = tB ? B->rows :  B->cols;
+  int p = tB ? B->rows : B->cols;
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < p; ++j) {
       double* Cij = MatrixGetElement(C, i, j);
-      *Cij *= beta; 
+      *Cij *= beta;
       for (int k = 0; k < m; ++k) {
         int row = i;
         int col = k;
         if (i < k) {
-          row = k; 
+          row = k;
           col = i;
         }
         double Aik = *MatrixGetElement(Asym, row, col);
@@ -117,8 +120,8 @@ int clap_LowerTriBackSub(Matrix* L, Matrix* b, bool istransposed) {
       double Ljj = *MatrixGetElement(L, j, j);
       *xjk /= Ljj;
 
-      for (int i_ = j_+1; i_ < n; ++i_) {
-        int i = istransposed ? i_ - (j_+1)  : i_;
+      for (int i_ = j_ + 1; i_ < n; ++i_) {
+        int i = istransposed ? i_ - (j_ + 1) : i_;
         double* xik = MatrixGetElement(b, i, k);
         double Lij = *MatrixGetElementTranspose(L, i, j, istransposed);
         *xik -= Lij * (*xjk);

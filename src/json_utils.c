@@ -1,15 +1,14 @@
 #include "json_utils.h"
 
+#include <cjson/cJSON.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <cjson/cJSON.h>
 
 #include "utils.h"
 
 /**
  * @brief Read a JSON array into a vector of doubles.
- * 
+ *
  * @param json JSON object containing the array
  * @param name Name of the JSON array
  * @param buf  Storage location for the data
@@ -40,7 +39,7 @@ int ReadJSONArray(cJSON* json, const char* name, double* buf, int len) {
   return -1;
 }
 
-int GetJSONMatrixSize(cJSON* json, const char* name, int* rows, int * cols) {
+int GetJSONMatrixSize(cJSON* json, const char* name, int* rows, int* cols) {
   cJSON* array = cJSON_GetObjectItemCaseSensitive(json, name);
   cJSON* column;
   cJSON* number;
@@ -48,16 +47,16 @@ int GetJSONMatrixSize(cJSON* json, const char* name, int* rows, int * cols) {
     // Loop over columns
     int j = 0;
     cJSON_ArrayForEach(column, array) {
-      if (cJSON_IsArray(column))  {
+      if (cJSON_IsArray(column)) {
         // Loop over rows
         int i = 0;
-        cJSON_ArrayForEach(number, column) {
-          ++i;
-        }
+        cJSON_ArrayForEach(number, column) { ++i; }
         if (j == 0) {
           *rows = i;
         } else if (*rows != i) {
-          fprintf(stderr, "ERROR: The number of rows changed during parsing. Failed to read as a 2D array.\n");
+          fprintf(stderr,
+                  "ERROR: The number of rows changed during parsing. Failed to read as a "
+                  "2D array.\n");
           rows = NULL;
           cols = NULL;
           return -1;
@@ -72,12 +71,12 @@ int GetJSONMatrixSize(cJSON* json, const char* name, int* rows, int * cols) {
     fprintf(stderr, "ERROR: Unable to parse the field %s as a JSON array.\n", name);
     return -1;
   }
-  return 0; 
+  return 0;
 }
 
 /**
  * @brief Read a column-major JSON array into a vector of doubles.
- * 
+ *
  * @param json JSON object containing the array
  * @param name Name of the JSON array
  * @param buf  Storage location for the data
@@ -94,8 +93,7 @@ int ReadJSONMatrix(cJSON* json, const char* name, double* buf, int rows, int col
   if (cJSON_IsArray(array)) {
     // Loop over columns
     cJSON_ArrayForEach(column, array) {
-      if (cJSON_IsArray(column) && j < cols)  {
-
+      if (cJSON_IsArray(column) && j < cols) {
         // Loop over rows
         int i = 0;
         cJSON_ArrayForEach(number, column) {
@@ -107,7 +105,9 @@ int ReadJSONMatrix(cJSON* json, const char* name, double* buf, int rows, int col
         // Check that we got the expected number of rows
         if (i != rows) {
           status = -1;
-          fprintf(stderr, "Got unexpected length of JSON column number %d (%d instead of %d).\n", j, i, rows);
+          fprintf(stderr,
+                  "Got unexpected length of JSON column number %d (%d instead of %d).\n", j,
+                  i, rows);
         }
         ++j;
       }
@@ -115,24 +115,26 @@ int ReadJSONMatrix(cJSON* json, const char* name, double* buf, int rows, int col
     // Check that we got the expected number of columns
     if (j != cols) {
       status = -1;
-      fprintf(stderr, "Got an unexpected number of JSON columns (%d instead of %d).\n", j, cols);
+      fprintf(stderr, "Got an unexpected number of JSON columns (%d instead of %d).\n", j,
+              cols);
     }
   } else {
     status = -1;
     fprintf(stderr, "Couldn't find an array of name %s.\n", name);
   }
-  return status; 
+  return status;
 }
 
 /**
- * @brief Parse a JSON object containing LQRData into an LQRData type 
- * 
+ * @brief Parse a JSON object containing LQRData into an LQRData type
+ *
  * @param json        JSON data containing the LQR data to be parsed.
- * @param lqrdata_out Address of LQRData pointer. Needs to be freed using `ndlqr_FreeLQRData`.
+ * @param lqrdata_out Address of LQRData pointer. Needs to be freed using
+ * `ndlqr_FreeLQRData`.
  * @return int        0 if successful, -1 otherwise.
  */
 int ReadLQRDataJSON(cJSON* json, LQRData** lqrdata_out) {
-  LQRData* lqrdata = *lqrdata_out; 
+  LQRData* lqrdata = *lqrdata_out;
   cJSON* item;
   int nstates = 0;
   item = cJSON_GetObjectItemCaseSensitive(json, "nstates");
@@ -143,10 +145,12 @@ int ReadLQRDataJSON(cJSON* json, LQRData** lqrdata_out) {
   int ninputs = 0;
   item = cJSON_GetObjectItemCaseSensitive(json, "ninputs");
   if (cJSON_IsNumber(item)) {
-    ninputs  = item->valueint;
+    ninputs = item->valueint;
   }
   if (nstates != lqrdata->nstates || ninputs != lqrdata->ninputs) {
-    fprintf(stderr, "ERROR: The state and input dimensions in the JSON file didn't match the expected dimensions\n");
+    fprintf(stderr,
+            "ERROR: The state and input dimensions in the JSON file didn't match the "
+            "expected dimensions\n");
     return -1;
   }
 
@@ -172,7 +176,9 @@ int ReadLQRDataJSON(cJSON* json, LQRData** lqrdata_out) {
     *lqrdata_out = lqrdata;
     return 0;
   } else {
-    fprintf(stderr, "ERROR: The LQR data file wasn't successfully parsed. Returning an empty struct.\n");
+    fprintf(stderr,
+            "ERROR: The LQR data file wasn't successfully parsed. Returning an empty "
+            "struct.\n");
     return -1;
   }
 }
@@ -228,7 +234,7 @@ LQRProblem* ndlqr_ReadLQRProblemJSONFile(const char* filename) {
       cJSON* json_index = cJSON_GetObjectItemCaseSensitive(json_lqrdata, "index");
       int index = -1;
       if (cJSON_IsNumber(json_index)) {
-        index = json_index->valueint - 1; // Since Julia is 1-based indexed
+        index = json_index->valueint - 1;  // Since Julia is 1-based indexed
       }
 
       LQRData* lqrdata = lqrprob->lqrdata[index];
@@ -281,10 +287,13 @@ LQRData* ndlqr_ReadLQRDataJSONFile(const char* filename) {
   int ninputs = 0;
   item = cJSON_GetObjectItemCaseSensitive(json, "ninputs");
   if (cJSON_IsNumber(item)) {
-    ninputs  = item->valueint;
+    ninputs = item->valueint;
   }
   if (ninputs <= 0 || nstates <= 0) {
-    fprintf(stderr, "ERROR: Couldn't get a valid state and control dimension from the LQR Data file: %s\n", filename);
+    fprintf(stderr,
+            "ERROR: Couldn't get a valid state and control dimension from the LQR Data "
+            "file: %s\n",
+            filename);
     return NULL;
   }
 
@@ -335,5 +344,5 @@ Matrix ReadMatrixJSONFile(const char* filename, const char* name) {
     return nullmat;
   }
   cJSON_Delete(json);
-  return mat; 
+  return mat;
 }
