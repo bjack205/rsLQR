@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['linalgtiming_191',['LinAlgTiming',['../structLinAlgTiming.html',1,'']]],
-  ['lqrdata_192',['LQRData',['../structLQRData.html',1,'']]],
-  ['lqrproblem_193',['LQRProblem',['../structLQRProblem.html',1,'']]]
+  ['linalgtiming_0',['LinAlgTiming',['../structLinAlgTiming.html',1,'']]],
+  ['lqrdata_1',['LQRData',['../structLQRData.html',1,'']]],
+  ['lqrproblem_2',['LQRProblem',['../structLQRProblem.html',1,'']]]
 ];

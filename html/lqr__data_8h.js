@@ -10,6 +10,6 @@ var lqr__data_8h =
     [ "ndlqr_GetR", "group__probdef.html#ga797fc9c5f1d91c041d4317d6528f88ac", null ],
     [ "ndlqr_Getr", "group__probdef.html#ga236e10efe3e0f1cbdde50f3827a9e80a", null ],
     [ "ndlqr_InitializeLQRData", "group__probdef.html#ga1440c28bd4f3d01d5d5b609f6d0e2f3e", null ],
-    [ "ndlqr_NewLQRData", "group__probdef.html#gaaa01da8298ee85062052b060b3704fb0", null ],
+    [ "ndlqr_NewLQRData", "group__probdef.html#ga8a9798448ee4eb71ecec79acee886a64", null ],
     [ "ndlqr_PrintLQRData", "group__probdef.html#gab96436054f40fe8a82a0937619f3fc45", null ]
 ];

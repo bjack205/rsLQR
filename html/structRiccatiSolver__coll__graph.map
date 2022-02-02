@@ -1,0 +1,6 @@
+<map id="RiccatiSolver" name="RiccatiSolver">
+<area shape="rect" id="node1" title="Solver that uses Riccati recursion to solve an LQR problem." alt="" coords="58,331,165,357"/>
+<area shape="rect" id="node2" href="$structLQRProblem.html" title="Describes an LQR problem with affine terms." alt="" coords="5,95,108,121"/>
+<area shape="rect" id="node3" href="$structLQRData.html" title="Holds the data for a single time step of LQR." alt="" coords="17,5,96,32"/>
+<area shape="rect" id="node4" href="$structMatrix.html" title="Represents a matrix of double&#45;precision data." alt="" coords="133,95,197,121"/>
+</map>

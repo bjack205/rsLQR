@@ -1,0 +1,6 @@
+<map id="src/solver.h" name="src/solver.h">
+<area shape="rect" id="node1" title="High&#45;level methods for the nsLQR solver." alt="" coords="62,5,158,32"/>
+<area shape="rect" id="node2" href="$ndlqr_8h.html" title="Interface file. This is the file users should include to use the rsLQR solver." alt="" coords="82,155,171,181"/>
+<area shape="rect" id="node3" href="$nested__dissection_8h.html" title="Core methods using during the rsLQR solve." alt="" coords="23,80,198,107"/>
+<area shape="rect" id="node4" href="$solve_8h.html" title="Core methods for solving problems with nsLQR." alt="" coords="222,80,314,107"/>
+</map>

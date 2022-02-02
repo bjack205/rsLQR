@@ -1,0 +1,17 @@
+<map id="src/matrix.h" name="src/matrix.h">
+<area shape="rect" id="node1" title="Matrix type and basic operations." alt="" coords="323,5,423,32"/>
+<area shape="rect" id="node2" href="$json__utils_8h.html" title="Some basic utility function for working with json files. Uses the cJSON library." alt="" coords="5,229,124,256"/>
+<area shape="rect" id="node3" href="$linalg_8h.html" title="Defines core linear algebra routines needed by the solvers." alt="" coords="526,80,619,107"/>
+<area shape="rect" id="node9" href="$matmul_8h_source.html" title=" " alt="" coords="732,155,840,181"/>
+<area shape="rect" id="node11" href="$linalg__custom_8h.html" title="Simple linear algebra routines." alt="" coords="299,80,447,107"/>
+<area shape="rect" id="node12" href="$lqr__data_8h.html" title="LQRData type." alt="" coords="164,80,275,107"/>
+<area shape="rect" id="node14" href="$riccati__solver_8h.html" title="Basic methods for creating and using the Riccati solver." alt="" coords="148,229,291,256"/>
+<area shape="rect" id="node15" href="$nddata_8h.html" title="Defines the core storage types used by the rsLQR solver." alt="" coords="311,155,413,181"/>
+<area shape="rect" id="node4" href="$cholesky__factors_8h.html" title="A struct for storing all of the info for the Cholesky factorization of the rsLQR solver." alt="" coords="489,155,656,181"/>
+<area shape="rect" id="node5" href="$solver_8h.html" title="High&#45;level methods for the nsLQR solver." alt="" coords="523,229,619,256"/>
+<area shape="rect" id="node10" href="$riccati__solve_8h.html" title="Core methods for the Riccati solve." alt="" coords="151,304,290,331"/>
+<area shape="rect" id="node6" href="$ndlqr_8h.html" title="Interface file. This is the file users should include to use the rsLQR solver." alt="" coords="511,379,600,405"/>
+<area shape="rect" id="node7" href="$nested__dissection_8h.html" title="Core methods using during the rsLQR solve." alt="" coords="484,304,659,331"/>
+<area shape="rect" id="node8" href="$solve_8h.html" title="Core methods for solving problems with nsLQR." alt="" coords="368,304,460,331"/>
+<area shape="rect" id="node13" href="$lqr__problem_8h.html" title="Defines the LQRProblem type." alt="" coords="152,155,287,181"/>
+</map>

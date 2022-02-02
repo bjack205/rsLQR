@@ -1,0 +1,12 @@
+<map id="NdLqrSolver" name="NdLqrSolver">
+<area shape="rect" id="node1" title="Main solver for rsLQR." alt="" coords="271,364,372,391"/>
+<area shape="rect" id="node2" href="$structOrderedBinaryTree.html" title="The binary tree for the rsLQR solver." alt="" coords="49,245,191,272"/>
+<area shape="rect" id="node3" href="$structBinaryNode__s.html" title=" " alt="" coords="5,133,117,159"/>
+<area shape="rect" id="node4" href="$structUnitRange.html" title="Represents a range of consecutive integers." alt="" coords="16,5,107,32"/>
+<area shape="rect" id="node5" href="$structMatrix.html" title="Represents a matrix of double&#45;precision data." alt="" coords="237,5,301,32"/>
+<area shape="rect" id="node7" href="$structNdFactor.html" title="A chunk of memory for a single time step." alt="" coords="297,133,375,159"/>
+<area shape="rect" id="node6" href="$structNdData.html" title="Core storage container for the rsLQR solver." alt="" coords="286,245,357,272"/>
+<area shape="rect" id="node8" href="$structNdLqrCholeskyFactors.html" title="Stores a list of CholeskyInfo structs for the rsLQR solver." alt="" coords="381,245,547,272"/>
+<area shape="rect" id="node9" href="$structCholeskyInfo.html" title="Stores info about a Cholesky decomposition." alt="" coords="411,133,517,159"/>
+<area shape="rect" id="node10" href="$structNdLqrProfile.html" title="A struct describing how long each part of the solve took, in milliseconds." alt="" coords="571,245,672,272"/>
+</map>

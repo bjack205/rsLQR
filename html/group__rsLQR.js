@@ -1,19 +1,6 @@
 var group__rsLQR =
 [
-    [ "UnitRange", "structUnitRange.html", [
-      [ "Part I: Defining the problem", "page_rslqr_usage.html#autotoc_md44", null ],
-      [ "Part II: Setting up the solver", "page_rslqr_usage.html#autotoc_md45", null ],
-      [ "Part III: Solving", "page_rslqr_usage.html#autotoc_md46", null ],
-      [ "Part IV: Getting the solution and post-processing", "page_rslqr_usage.html#autotoc_md47", null ],
-      [ "Part V: Freeing the solver", "page_rslqr_usage.html#autotoc_md48", null ],
-      [ "Part I: Defining the problem", "page_riccati_usage.html#autotoc_md36", null ],
-      [ "Part II: Setting up the solver", "page_riccati_usage.html#autotoc_md37", null ],
-      [ "Part III: Solving", "page_riccati_usage.html#autotoc_md38", null ],
-      [ "Part IV: Getting the solution and post-processing", "page_riccati_usage.html#autotoc_md39", null ],
-      [ "Part V: Freeing the solver", "page_riccati_usage.html#autotoc_md40", null ],
-      [ "start", "structUnitRange.html#a04dfc2d7eea700d48fc0f9439776b084", null ],
-      [ "stop", "structUnitRange.html#af4dc5ef59f61a9e03ba70b1eb93b48c8", null ]
-    ] ],
+    [ "UnitRange", "structUnitRange.html", null ],
     [ "BinaryNode_s", "structBinaryNode__s.html", [
       [ "idx", "structBinaryNode__s.html#aa38b8385dc7e149a19eeecd0c8ac638e", null ],
       [ "left_child", "structBinaryNode__s.html#a95611b814760450706546fc7199e738e", null ],
@@ -30,12 +17,7 @@ var group__rsLQR =
       [ "num_elements", "structOrderedBinaryTree.html#a20bf5306738f41adbc96c3f818ace60d", null ],
       [ "root", "structOrderedBinaryTree.html#a70fa256a7cda86670a45e6d449a83208", null ]
     ] ],
-    [ "NdLqrCholeskyFactors", "structNdLqrCholeskyFactors.html", [
-      [ "cholinfo", "structNdLqrCholeskyFactors.html#a439603d8d58d562a2abe140719dab380", null ],
-      [ "depth", "structNdLqrCholeskyFactors.html#a908fb3fdb4da09ace65594b75fd6c27b", null ],
-      [ "nhorizon", "structNdLqrCholeskyFactors.html#a76a077ae41cc6858a9283a9271c297b2", null ],
-      [ "numfacts", "structNdLqrCholeskyFactors.html#ae83ad94041d3c1e653ec7a82a9f38c8c", null ]
-    ] ],
+    [ "NdLqrCholeskyFactors", "structNdLqrCholeskyFactors.html", null ],
     [ "NdFactor", "structNdFactor.html", [
       [ "input", "structNdFactor.html#ad65a89c5eb75c299d2c30b377125d1b4", null ],
       [ "lambda", "structNdFactor.html#a6a4aa196ac075d290c264d4be3e2ce57", null ],
@@ -50,31 +32,19 @@ var group__rsLQR =
       [ "nstates", "structNdData.html#a0fc7fc16d5d08163d1c4eee2582183a1", null ],
       [ "width", "structNdData.html#a83cc60f18dcd48c74b11532744ee0a48", null ]
     ] ],
-    [ "NdLqrProfile", "structNdLqrProfile.html", [
-      [ "num_threads", "structNdLqrProfile.html#a56dfde9ab382a8a16d435eec20763c7d", null ],
-      [ "t_cholesky_ms", "structNdLqrProfile.html#a8bc41b4d1f1cc544b2aa4d36c3780578", null ],
-      [ "t_cholsolve_ms", "structNdLqrProfile.html#a4703064feef208d9d1b2b9c31b9242cf", null ],
-      [ "t_leaves_ms", "structNdLqrProfile.html#aa3a80a284348a457404bb22134992378", null ],
-      [ "t_products_ms", "structNdLqrProfile.html#abfc17e22f746f307086eb868c19e06da", null ],
-      [ "t_shur_ms", "structNdLqrProfile.html#a7367399e55c5520a966cf9a22816fae1", null ],
-      [ "t_total_ms", "structNdLqrProfile.html#a703a0c282a6b7918e71f5971b36d715a", null ]
-    ] ],
+    [ "NdLqrProfile", "structNdLqrProfile.html", null ],
     [ "NdLqrSolver", "structNdLqrSolver.html", [
-      [ "cholfacts", "structNdLqrSolver.html#a6f02db8dfa9a08c6dddc0401563f1135", null ],
       [ "data", "structNdLqrSolver.html#a8aa5454e2e2b2721b9bb138daded6d64", null ],
       [ "depth", "structNdLqrSolver.html#a4be043f88057fc69c5d7b36175d81748", null ],
       [ "diagonals", "structNdLqrSolver.html#aee1bad6c5b6d721a5e948cbb0ab69598", null ],
       [ "fact", "structNdLqrSolver.html#a94011649e59031f57cac8358e7dbae41", null ],
-      [ "linalg_time_ms", "structNdLqrSolver.html#a1318484df68038b0e0ab82afefc859f9", null ],
       [ "nhorizon", "structNdLqrSolver.html#aca82587b27b5bc6fd00ab8bcf27424b3", null ],
       [ "ninputs", "structNdLqrSolver.html#ab3a5b73e993b7c9bac2cab878b86f4f0", null ],
       [ "nstates", "structNdLqrSolver.html#ad42b523f8711c272e4280e4a9e3e384a", null ],
       [ "num_threads", "structNdLqrSolver.html#a74c0e2b79a1e07b6480cec7842eaa2fd", null ],
       [ "nvars", "structNdLqrSolver.html#a758997ec6f74ff5d2bd31ae604984606", null ],
-      [ "profile", "structNdLqrSolver.html#a4cdb3f14b9b38473e64e740f95ac208d", null ],
       [ "soln", "structNdLqrSolver.html#ad7fd2de74327f8db08af10632663fba8", null ],
-      [ "solve_time_ms", "structNdLqrSolver.html#ad2e6aa0d46c0f93a4934f1c22e37b662", null ],
-      [ "tree", "structNdLqrSolver.html#a8b86312b2ca2debd5dab6c998b4931bf", null ]
+      [ "solve_time_ms", "structNdLqrSolver.html#ad2e6aa0d46c0f93a4934f1c22e37b662", null ]
     ] ],
     [ "BinaryNode", "group__rsLQR.html#ga532315ee0795052537eafde38f7339dc", null ],
     [ "ndlqr_BuildTree", "group__rsLQR.html#ga58621bd1feb25e3dee120e49c6451172", null ],
@@ -98,10 +68,10 @@ var group__rsLQR =
     [ "ndlqr_GetSFactorization", "group__rsLQR.html#ga98d1d95ede3b3b83a19f7b6edeba0a44", null ],
     [ "ndlqr_GetSolution", "group__rsLQR.html#ga01780b3bc4f5f408ddee594e74106f58", null ],
     [ "ndlqr_InitializeWithLQRProblem", "group__rsLQR.html#ga3b0247c6971e10113d9b77b3a282511a", null ],
-    [ "ndlqr_NewCholeskyFactors", "group__rsLQR.html#gad801130d6d4665a38e595940cbd7c9d0", null ],
-    [ "ndlqr_NewNdData", "group__rsLQR.html#gacb4af7ec708c47e37406f3ba224ff335", null ],
+    [ "ndlqr_NewCholeskyFactors", "group__rsLQR.html#ga0afa3d33bd0a5a7853434a2ddf084f7e", null ],
+    [ "ndlqr_NewNdData", "group__rsLQR.html#ga48a8b869c8f653a598474393a5f95630", null ],
     [ "ndlqr_NewNdLqrProfile", "group__rsLQR.html#gaa8b72898fba663c7767386460de2103b", null ],
-    [ "ndlqr_NewNdLqrSolver", "group__rsLQR.html#ga6ea3a7ec0632b221f096c104820e0afd", null ],
+    [ "ndlqr_NewNdLqrSolver", "group__rsLQR.html#gaf0df834b89b50395f7eef1ae9783e093", null ],
     [ "ndlqr_PrintProfile", "group__rsLQR.html#gaa96a6ad46dd8363ce5d2e5e26e137084", null ],
     [ "ndlqr_PrintSolveProfile", "group__rsLQR.html#ga4491fc432e176360dcd5e8260aa0281e", null ],
     [ "ndlqr_PrintSolveSummary", "group__rsLQR.html#gad7ee614703b9d0768ed30ce18068f33e", null ],

@@ -1,0 +1,12 @@
+<map id="src/solve.h" name="src/solve.h">
+<area shape="rect" id="node1" title="Core methods for solving problems with nsLQR." alt="" coords="113,5,205,32"/>
+<area shape="rect" id="node2" href="$solver_8h.html" title="High&#45;level methods for the nsLQR solver." alt="" coords="123,80,196,107"/>
+<area shape="rect" id="node3" href="$binary__tree_8h.html" title="Binary tree for rsLQR algorithm." alt="" coords="5,304,113,331"/>
+<area shape="rect" id="node5" href="$linalg_8h.html" title="Defines core linear algebra routines needed by the solvers." alt="" coords="124,229,195,256"/>
+<area shape="rect" id="node7" href="$lqr__problem_8h.html" title="Defines the LQRProblem type." alt="" coords="255,155,367,181"/>
+<area shape="rect" id="node9" href="$nddata_8h.html" title="Defines the core storage types used by the rsLQR solver." alt="" coords="392,155,471,181"/>
+<area shape="rect" id="node10" href="$cholesky__factors_8h.html" title="A struct for storing all of the info for the Cholesky factorization of the rsLQR solver." alt="" coords="88,155,231,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="77,379,159,405"/>
+<area shape="rect" id="node6" href="$matrix_8h.html" title="Matrix type and basic operations." alt="" coords="197,304,274,331"/>
+<area shape="rect" id="node8" href="$lqr__data_8h.html" title="LQRData type." alt="" coords="268,229,355,256"/>
+</map>

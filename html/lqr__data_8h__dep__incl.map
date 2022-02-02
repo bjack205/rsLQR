@@ -1,0 +1,12 @@
+<map id="src/lqr_data.h" name="src/lqr_data.h">
+<area shape="rect" id="node1" title="LQRData type." alt="" coords="287,5,397,32"/>
+<area shape="rect" id="node2" href="$lqr__problem_8h.html" title="Defines the LQRProblem type." alt="" coords="204,80,339,107"/>
+<area shape="rect" id="node10" href="$nddata_8h.html" title="Defines the core storage types used by the rsLQR solver." alt="" coords="363,80,465,107"/>
+<area shape="rect" id="node3" href="$json__utils_8h.html" title="Some basic utility function for working with json files. Uses the cJSON library." alt="" coords="5,155,124,181"/>
+<area shape="rect" id="node4" href="$ndlqr_8h.html" title="Interface file. This is the file users should include to use the rsLQR solver." alt="" coords="331,304,420,331"/>
+<area shape="rect" id="node5" href="$riccati__solver_8h.html" title="Basic methods for creating and using the Riccati solver." alt="" coords="200,155,343,181"/>
+<area shape="rect" id="node7" href="$solver_8h.html" title="High&#45;level methods for the nsLQR solver." alt="" coords="367,155,463,181"/>
+<area shape="rect" id="node6" href="$riccati__solve_8h.html" title="Core methods for the Riccati solve." alt="" coords="199,229,338,256"/>
+<area shape="rect" id="node8" href="$nested__dissection_8h.html" title="Core methods using during the rsLQR solve." alt="" coords="413,229,588,256"/>
+<area shape="rect" id="node9" href="$solve_8h.html" title="Core methods for solving problems with nsLQR." alt="" coords="612,229,704,256"/>
+</map>

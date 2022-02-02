@@ -1,0 +1,9 @@
+<map id="src/riccati_solve.h" name="src/riccati_solve.h">
+<area shape="rect" id="node1" title="Core methods for the Riccati solve." alt="" coords="56,5,195,32"/>
+<area shape="rect" id="node2" href="$riccati__solver_8h.html" title="Basic methods for creating and using the Riccati solver." alt="" coords="17,80,137,107"/>
+<area shape="rect" id="node7" href="$linalg_8h.html" title="Defines core linear algebra routines needed by the solvers." alt="" coords="157,155,227,181"/>
+<area shape="rect" id="node3" href="$matrix_8h.html" title="Matrix type and basic operations." alt="" coords="39,304,116,331"/>
+<area shape="rect" id="node5" href="$lqr__problem_8h.html" title="Defines the LQRProblem type." alt="" coords="21,155,133,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="36,379,119,405"/>
+<area shape="rect" id="node6" href="$lqr__data_8h.html" title="LQRData type." alt="" coords="34,229,121,256"/>
+</map>

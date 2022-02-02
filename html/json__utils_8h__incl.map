@@ -1,0 +1,7 @@
+<map id="src/json_utils.h" name="src/json_utils.h">
+<area shape="rect" id="node1" title="Some basic utility function for working with json files. Uses the cJSON library." alt="" coords="49,5,167,32"/>
+<area shape="rect" id="node2" href="$lqr__problem_8h.html" title="Defines the LQRProblem type." alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node4" href="$matrix_8h.html" title="Matrix type and basic operations." alt="" coords="69,229,147,256"/>
+<area shape="rect" id="node3" href="$lqr__data_8h.html" title="LQRData type." alt="" coords="25,155,111,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="67,304,149,331"/>
+</map>

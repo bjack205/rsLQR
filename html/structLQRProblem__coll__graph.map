@@ -1,0 +1,4 @@
+<map id="LQRProblem" name="LQRProblem">
+<area shape="rect" id="node1" title="Describes an LQR problem with affine terms." alt="" coords="5,95,108,121"/>
+<area shape="rect" id="node2" href="$structLQRData.html" title="Holds the data for a single time step of LQR." alt="" coords="17,5,96,32"/>
+</map>

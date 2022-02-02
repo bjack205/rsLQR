@@ -1,0 +1,5 @@
+<map id="NdData" name="NdData">
+<area shape="rect" id="node1" title="Core storage container for the rsLQR solver." alt="" coords="9,213,80,240"/>
+<area shape="rect" id="node2" href="$structNdFactor.html" title="A chunk of memory for a single time step." alt="" coords="5,124,84,151"/>
+<area shape="rect" id="node3" href="$structMatrix.html" title="Represents a matrix of double&#45;precision data." alt="" coords="13,5,77,32"/>
+</map>

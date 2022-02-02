@@ -1,0 +1,10 @@
+<map id="src/lqr_problem.h" name="src/lqr_problem.h">
+<area shape="rect" id="node1" title="Defines the LQRProblem type." alt="" coords="149,5,284,32"/>
+<area shape="rect" id="node2" href="$json__utils_8h.html" title="Some basic utility function for working with json files. Uses the cJSON library." alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node3" href="$ndlqr_8h.html" title="Interface file. This is the file users should include to use the rsLQR solver." alt="" coords="331,229,420,256"/>
+<area shape="rect" id="node4" href="$riccati__solver_8h.html" title="Basic methods for creating and using the Riccati solver." alt="" coords="200,80,343,107"/>
+<area shape="rect" id="node6" href="$solver_8h.html" title="High&#45;level methods for the nsLQR solver." alt="" coords="410,80,506,107"/>
+<area shape="rect" id="node5" href="$riccati__solve_8h.html" title="Core methods for the Riccati solve." alt="" coords="199,155,338,181"/>
+<area shape="rect" id="node7" href="$nested__dissection_8h.html" title="Core methods using during the rsLQR solve." alt="" coords="413,155,588,181"/>
+<area shape="rect" id="node8" href="$solve_8h.html" title="Core methods for solving problems with nsLQR." alt="" coords="612,155,704,181"/>
+</map>

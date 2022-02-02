@@ -1,0 +1,10 @@
+<map id="src/linalg.h" name="src/linalg.h">
+<area shape="rect" id="node1" title="Defines core linear algebra routines needed by the solvers." alt="" coords="247,5,341,32"/>
+<area shape="rect" id="node2" href="$cholesky__factors_8h.html" title="A struct for storing all of the info for the Cholesky factorization of the rsLQR solver." alt="" coords="64,80,231,107"/>
+<area shape="rect" id="node3" href="$solver_8h.html" title="High&#45;level methods for the nsLQR solver." alt="" coords="99,155,195,181"/>
+<area shape="rect" id="node7" href="$matmul_8h_source.html" title=" " alt="" coords="283,155,391,181"/>
+<area shape="rect" id="node8" href="$riccati__solve_8h.html" title="Core methods for the Riccati solve." alt="" coords="357,80,495,107"/>
+<area shape="rect" id="node4" href="$ndlqr_8h.html" title="Interface file. This is the file users should include to use the rsLQR solver." alt="" coords="225,304,315,331"/>
+<area shape="rect" id="node5" href="$nested__dissection_8h.html" title="Core methods using during the rsLQR solve." alt="" coords="25,229,200,256"/>
+<area shape="rect" id="node6" href="$solve_8h.html" title="Core methods for solving problems with nsLQR." alt="" coords="224,229,316,256"/>
+</map>

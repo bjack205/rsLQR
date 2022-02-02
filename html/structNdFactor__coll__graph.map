@@ -1,0 +1,4 @@
+<map id="NdFactor" name="NdFactor">
+<area shape="rect" id="node1" title="A chunk of memory for a single time step." alt="" coords="5,124,84,151"/>
+<area shape="rect" id="node2" href="$structMatrix.html" title="Represents a matrix of double&#45;precision data." alt="" coords="13,5,77,32"/>
+</map>

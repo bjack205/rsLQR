@@ -1,0 +1,6 @@
+<map id="src/nddata.h" name="src/nddata.h">
+<area shape="rect" id="node1" title="Defines the core storage types used by the rsLQR solver." alt="" coords="5,5,108,32"/>
+<area shape="rect" id="node2" href="$matrix_8h.html" title="Matrix type and basic operations." alt="" coords="18,155,95,181"/>
+<area shape="rect" id="node4" href="$lqr__data_8h.html" title="LQRData type." alt="" coords="55,80,141,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="15,229,98,256"/>
+</map>
