@@ -4,6 +4,7 @@ list(APPEND CMAKE_MESSAGE_CONTEXT rsLQR)
 project(rsLQR VERSION 0.1 LANGUAGES C CXX)
 
 include(CMakePrintHelpers)
+include(GNUInstallDirs)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ##############################
@@ -82,3 +83,9 @@ if (DOXYGEN_FOUND)
     COMMENT "Build documentation with Doxygen." 
   )
 endif()
+
+
+##############################
+# Packaging 
+##############################
+add_subdirectory(packaging)

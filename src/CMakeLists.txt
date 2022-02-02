@@ -69,6 +69,17 @@ elseif(RSLQR_LINALG_LIBRARY STREQUAL "BLAS")
   )
 endif()
 
+# Prep for install 
+add_library(rsLQR::matrix ALIAS matrix)
+set_target_properties(matrix PROPERTIES
+  OUTPUT_NAME matrix  # sets the name of the installed library
+  EXPORT_NAME matrix  # sets the name of the imported target
+)
+install(TARGETS matrix
+  EXPORT rsLQR_export   # add to the export set
+)
+
+
 add_library(ndlqr 
   ndlqr.h
 
@@ -120,3 +131,13 @@ target_link_libraries(ndlqr
   OpenMP::OpenMP_C
 )
 set_property(TARGET ndlqr PROPERTY C_STANDARD 11)
+
+# Prep for install
+add_library(rsLQR::rslqr ALIAS ndlqr)
+set_target_properties(ndlqr PROPERTIES
+  OUTPUT_NAME rslqr  # sets the name of the installed library
+  EXPORT_NAME rslqr  # sets the name of the imported target
+)
+install(TARGETS ndlqr
+  EXPORT rsLQR_export   # add to the export set
+)
