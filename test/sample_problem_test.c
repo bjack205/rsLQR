@@ -13,13 +13,13 @@
 #ifdef FULLTEST
   int kRunFullTest = FULLTEST;
   #if FULLTEST
-    static const int kNruns = 1000;
+    #define kNruns 1000
   #else
-    static const int kNruns = 10;
+    #define kNruns 10
   #endif
 #else
   int kRunFullTest = 0;
-  static const int kNruns = 10;
+  #define kNruns 10
 #endif
 
 int compare_doubles(const void* a, const void* b) {
