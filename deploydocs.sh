@@ -17,11 +17,11 @@ echo "Add"
 git add html/* || exit 1
 echo "Commit"
 git pull
-git commit -m "Update documentation" || exit 1
+git commit -m "Update documentation"
 echo "Push"
-git push -f origin gh-pages || exit 1
+git push -f origin gh-pages
 echo "Checkout"
-git checkout $CUR_BRANCH || exit 1
+git checkout $CUR_BRANCH
 
 cd $CUR_DIR
 
