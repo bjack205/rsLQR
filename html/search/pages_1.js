@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['the_20rslqr_20algorithm_0',['The rsLQR Algorithm',['../page_rslqr.html',1,'index']]]
+  ['rslqr_3a_20a_20parallel_20solver_20for_20lqr_20problems_0',['rsLQR: A Parallel Solver for LQR Problems',['../index.html',1,'']]]
 ];
