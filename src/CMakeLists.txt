@@ -1,7 +1,3 @@
-# Add Compile options
-add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-error=unknown-pragmas)
-add_compile_options(-fPIC -fPIE -mavx2 -mfma)
-
 if (Eigen3_FOUND)
   add_subdirectory(eigen_c)
 endif()

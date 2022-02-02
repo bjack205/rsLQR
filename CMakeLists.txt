@@ -17,7 +17,6 @@ file(RELATIVE_PATH relDir
 )
 set(CMAKE_INSTALL_RPATH $ORIGIN $ORIGIN/${relDir})
 
-
 ##############################
 # Options 
 ##############################
@@ -67,7 +66,19 @@ find_package(Doxygen)
 # Build
 ##############################
 
+# Compile options
+if(CMAKE_C_COMPILER_ID MATCHES "GNU")
+  add_compile_options(-fPIC)
+elseif(CMAKE_C_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-fPIE)
+endif()
+add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-error=unknown-pragmas)
+add_compile_options(-mavx2 -mfma)
+
+# Make all includes relative to src/ folder
 include_directories(${rsLQR_SOURCE_DIR}/src)
+
+# Build source files
 add_subdirectory(src)
 
 ##############################
