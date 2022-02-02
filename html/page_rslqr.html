@@ -76,7 +76,7 @@ $(function() {
   <div class="headertitle"><div class="title">The rsLQR Algorithm </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2><a class="anchor" id="autotoc_md40"></a>
+<div class="textblock"><h2><a class="anchor" id="autotoc_md41"></a>
 Algorithm Overview</h2>
 <p >The rsLQR algorithm works by recursively solving 3x3 Schur compliments of the form: </p><p class="formulaDsp">
 \[ \begin{bmatrix} A &amp; D \\ D^T &amp; B &amp; E^T \\ &amp; E &amp; C \\ \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} \begin{bmatrix} a \\ b \\ c \end{bmatrix} \]
@@ -89,7 +89,7 @@ Algorithm Overview</h2>
 \[ C \bar{c} = c \]
 </p>
 <p >For a banded system, these solves also take the same form, so we can recursively solve these 3x3 Schur compliments, stopping the recursion when the \( A \) and \( C \) are small or dense enough to solve using e.g. a dense Cholesky decomposition. The full details of the algorithm are provided in the paper, which provides some of the details on "flattening" the algorithm to make it more amenable to parallelization on a many-core CPU. The following sections provide some details on the structure of the actual implementation.</p>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md42"></a>
 Memory layout</h2>
 <p >Most of the matrix information stored by the algorithm is stored in arrays of the following form:</p>
 <p class="formulaDsp">
@@ -97,7 +97,7 @@ Memory layout</h2>
 </p>
 <p >where \( N \) is the horizon length, \( K = \log_2{N} \) is the depth of the tree, and \( \Lambda_k^{(j)} \in \mathbb{R}^{n \times w}, X_k^{(j)} \in \mathbb{R}^{n \times w} U_k^{(j)} \in \mathbb{R}^{m \times w} \) are the blocks associated with dual variables, state variables, and control variables for knot point \( k \) and level \( j \), respectively. If a block has bar, e.g. \( \bar{X}_i^{(j)} \), it represents a piece of the factorized matrix information, whereas any block without is part of the original matrix data.</p>
 <p >These blocks make up the \( D_i^{(j)}, E_i^{(j)}, a_i^{(j,p)}, \) and \( c_i^{(j,p)} \) blocks referenced in the original paper. At higher levels, each of these blocks get larger, and are therefore made up of more of these basic blocks indexed by knot point index instead of leaf index. This allows the entire algorithm to work on small blocks of similar size, decreasing the likelihood of cache misses. It also simplifies many of the parallel loops and resulting computational kernels.</p>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="autotoc_md43"></a>
 High level overview</h2>
 <p >Pseudocode for the algorithm, invoked by <a class="el" href="group__rsLQR.html#ga3ee14a10200c2d84096964703030dda2" title="Solve an LQR problem using rsLQR.">ndlqr_Solve()</a>, is included below: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> K = tree.depth;</div>
 <div class="line"> </div>
