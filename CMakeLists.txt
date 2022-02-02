@@ -100,4 +100,3 @@ endif()
 # Packaging 
 ##############################
 add_subdirectory(packaging)
-cmake_print_variables(CMAKE_INSTALL_RPATH)
