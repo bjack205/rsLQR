@@ -1,0 +1,45 @@
+var group__LinearAlgebra =
+[
+    [ "linalg_custom.h", "linalg__custom_8h.html", null ],
+    [ "CholeskyInfo", "structCholeskyInfo.html", [
+      [ "fact", "structCholeskyInfo.html#a511404a3866bde8594d48aeeeed2f64e", null ],
+      [ "is_freed", "structCholeskyInfo.html#ad72cef2d0c1fd8eeb0f559cdb600e068", null ],
+      [ "lib", "structCholeskyInfo.html#a82eda3873c855fb55f572fb996d40854", null ],
+      [ "success", "structCholeskyInfo.html#ac801e9e0ffeea479b42f5173547451fa", null ],
+      [ "uplo", "structCholeskyInfo.html#a589420c4c49b5700212a1505f1fcc340", null ]
+    ] ],
+    [ "Matrix", "structMatrix.html", [
+      [ "cols", "structMatrix.html#a2067cc7ed367cc427cd869b3e1074ad7", null ],
+      [ "data", "structMatrix.html#a7097cbd5ded96225e7f1fecb1c39936f", null ],
+      [ "rows", "structMatrix.html#a994b1578e9a64d5cc3c4d0b11d7532a9", null ]
+    ] ],
+    [ "MatrixLinearAlgebraLibrary", "group__LinearAlgebra.html#gaf8f0d722db6003d5051550235c6b2e7f", null ],
+    [ "DefaultCholeskyInfo", "group__LinearAlgebra.html#ga9ae585fa47edf62d4d657df76355232e", null ],
+    [ "FreeFactorization", "group__LinearAlgebra.html#gae9c35a2cc66e5e83448e86cd6716377e", null ],
+    [ "FreeMatrix", "group__LinearAlgebra.html#ga6b2f7c3368d3543b7cdd23b078aba1ed", null ],
+    [ "MatrixAddition", "group__LinearAlgebra.html#gac40fc8e8c33f86c4ba35d78f6bb7367e", null ],
+    [ "MatrixCholeskyFactorize", "group__LinearAlgebra.html#ga1f9a266d51c0e9bbf8d408480fc9a048", null ],
+    [ "MatrixCholeskyFactorizeWithInfo", "group__LinearAlgebra.html#ga491522203df5e142068fda1b4c66f0b4", null ],
+    [ "MatrixCholeskySolve", "group__LinearAlgebra.html#gaedf807987f9fa1e656188a4fddaf4df9", null ],
+    [ "MatrixCholeskySolveWithInfo", "group__LinearAlgebra.html#gaeaafec6c0fce0e8d77864abac496976f", null ],
+    [ "MatrixCopy", "group__LinearAlgebra.html#gadbd6570e91aef246595f70660859cff3", null ],
+    [ "MatrixCopyDiagonal", "group__LinearAlgebra.html#ga45dd432a92826731e15eb240df88c344", null ],
+    [ "MatrixCopyTranspose", "group__LinearAlgebra.html#gab8f28661c84920c5f678210f65e762f3", null ],
+    [ "MatrixFlatten", "group__LinearAlgebra.html#ga6f13c668bec6030bf8907ae494f336ec", null ],
+    [ "MatrixFlattenToRow", "group__LinearAlgebra.html#gab5ccf9706f0aaace15e2d225f32fc9bd", null ],
+    [ "MatrixGetElement", "group__LinearAlgebra.html#ga30b8b3da59da0bba5f5dac192efcf686", null ],
+    [ "MatrixGetElementTranspose", "group__LinearAlgebra.html#ga7170cd28cf3fc88b0658ac2b22bef0a4", null ],
+    [ "MatrixGetLinearAlgebraLibrary", "group__LinearAlgebra.html#ga824baf575aa48ea4c1cd2c98feabfb97", null ],
+    [ "MatrixGetLinearIndex", "group__LinearAlgebra.html#gab55c467587e56edaddaa20a1ae920fb2", null ],
+    [ "MatrixMultiply", "group__LinearAlgebra.html#ga4b5b201d2541263095b6c660e3594aec", null ],
+    [ "MatrixNormedDifference", "group__LinearAlgebra.html#ga69272e4b8b78cd886c2559f9e534f31a", null ],
+    [ "MatrixNumElements", "group__LinearAlgebra.html#gacce9b96fb6ae3776197a32b11694ce4f", null ],
+    [ "MatrixPrintLinearAlgebraLibrary", "group__LinearAlgebra.html#ga2732a9d7377aae8b5dd4f2b0f0aee7f4", null ],
+    [ "MatrixScaleByConst", "group__LinearAlgebra.html#gae87288b36e7b202a3726a1a58cff263b", null ],
+    [ "MatrixSetConst", "group__LinearAlgebra.html#gadbf27de4adf61e79441a44a06b59f8e4", null ],
+    [ "MatrixSetElement", "group__LinearAlgebra.html#ga2bc0ec593f77fa1e84ef994a962c948f", null ],
+    [ "MatrixSymmetricMultiply", "group__LinearAlgebra.html#ga709190e027d9279485e9e1e4b1b612b1", null ],
+    [ "NewMatrix", "group__LinearAlgebra.html#ga7b4db0dc6e4c852575cf73e0d415f415", null ],
+    [ "PrintMatrix", "group__LinearAlgebra.html#gaf021aebf1dcc3ee390bb060b5b477111", null ],
+    [ "PrintRowVector", "group__LinearAlgebra.html#ga74100828ca366e9681a5ba1af463ef6e", null ]
+];
