@@ -61,6 +61,7 @@ add_ndlqr_test(nested_dissection)
 add_ndlqr_test(sample_problem)
 add_ndlqr_test(riccati_solver)
 
+add_test(NAME sample_problem_test_256 COMMAND sample_problem_test 256)
 # add_ndlqr_test(matmul)
 # target_link_libraries(matmul_test
 #   PRIVATE

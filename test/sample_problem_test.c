@@ -13,7 +13,7 @@
 #ifdef FULLTEST
   int kRunFullTest = FULLTEST;
   #if FULLTEST
-    #define kNruns 1000
+    #define kNruns 100
   #else
     #define kNruns 10
   #endif
@@ -133,7 +133,12 @@ int main(int argc, char* argv[]) {
 
   bool right_answer = true;
   bool same_answer = true;
-  for (int i = 0; i < kNruns; ++i) {
+  int nruns = kNruns;
+  if (!kRunFullTest) {
+    nruns = 1;
+  }
+
+  for (int i = 0; i < nruns; ++i) {
     ndlqr_InitializeWithLQRProblem(lqrprob, solver);
 
     clock_t start = clock();
