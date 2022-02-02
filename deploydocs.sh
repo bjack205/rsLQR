@@ -11,10 +11,12 @@ git fetch
 git checkout origin/gh-pages
 echo "Copying html files"
 cp -r build/docs/html/* html
-echo "Committing html"
+sleep 0.5
+echo "Adding html folder"
 git add html/*
+echo "Committing changes"
 git commit -m "Update documentation"
-echo "pusing to origin"
+echo "pushing to origin"
 git push -f origin gh-pages
 git checkout $CUR_BRANCH
 
