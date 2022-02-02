@@ -12,8 +12,8 @@
 #define mu_run_test(test) do { tests_passed += test(); tests_run++; } while (0)
 #define mu_test_main int main() {ResetTests(); AllTests(); PrintTestResult(); return TestResult(); }
 #define mu_test_init extern int tests_run; extern int tests_passed;
-int tests_run = 0;
-int tests_passed = 0;
+static int tests_run = 0;
+static int tests_passed = 0;
 
 bool NearlyEqual(double a, double b);
 

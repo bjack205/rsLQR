@@ -125,12 +125,20 @@ add_library(ndlqr
 target_link_libraries(ndlqr
   PUBLIC
   matrix
+  CJSON::CJSON
 
   PRIVATE
-  CJSON::CJSON
   OpenMP::OpenMP_C
 )
 set_property(TARGET ndlqr PROPERTY C_STANDARD 11)
+target_include_directories(ndlqr
+  INTERFACE
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/rslqr>
+)
+
+get_target_property(NDLQR_INCLUDEDIR ndlqr INCLUDE_DIRECTORIES)
+cmake_print_variables(NDLQR_INCLUDEDIR)
 
 # Prep for install
 add_library(rsLQR::rslqr ALIAS ndlqr)
