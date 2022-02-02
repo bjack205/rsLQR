@@ -4,6 +4,9 @@ CUR_DIR=$PWD
 CUR_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo "Deploying to gh-pages branch"
+git config user.email "bjack205@gmail.com"
+git config user.name "Brian Jackson"
+echo $PWD
 git checkout gh-pages
 cp -r build/docs/html/* html
 git add html/*
