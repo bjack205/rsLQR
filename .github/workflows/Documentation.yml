@@ -20,8 +20,8 @@ jobs:
       
     - name: Build documentation
       working-directory: ${{ github.workspace }}
-      run: ./builddocs.sh
+      run: docs/builddocs.sh
 
     - name: Deploy documentation
       working-directory: ${{ github.workspace }}
-      run: ./deploydocs.sh
+      run: docs/deploydocs.sh
