@@ -119,7 +119,7 @@ target_link_library(main PRIVATE rsLQR::rslqr)
 ~~~ 
 See the "Install Example" in the `examples/` directory for a working example.
 
-## Importing the package via `FetchContent`
+## Importing the package via FetchContent
 It's often not convenient to require users to build another library in order 
 to use your application. You can easily incorporate this library as part of your 
 CMake project, importing all of its targets, via the `FetchContent` CMake module.

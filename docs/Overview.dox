@@ -39,8 +39,8 @@
 * - \subpage page_riccati_usage
 *
 * ## Installation
-* TODO: Add installation instructions.
-* Another line of documentation.
+* See the \subpage page_install page for detailed instructions on building, installing, 
+* and using the library in your own CMake projects.
 * 
 * ## References
 * Please cite the following paper when using this package:
