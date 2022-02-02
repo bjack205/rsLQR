@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['riccatisolver_0',['RiccatiSolver',['../structRiccatiSolver.html',1,'']]]
+  ['riccatisolver_201',['RiccatiSolver',['../structRiccatiSolver.html',1,'']]]
 ];
