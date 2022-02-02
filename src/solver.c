@@ -217,6 +217,7 @@ void ndlqr_PrintSolveSummary(NdLqrSolver *solver) {
            100.0 * solver->linalg_time_ms / solver->solve_time_ms);
   }
   printf("  Solved with %d threads.\n", solver->num_threads);
+  printf("  "); MatrixPrintLinearAlgebraLibrary();
 }
 
 int ndlqr_GetNumVars(NdLqrSolver *solver) { return solver->nvars; }
