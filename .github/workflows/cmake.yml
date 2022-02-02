@@ -19,8 +19,8 @@ jobs:
     strategy:
       matrix:
         compiler:
-          - gcc
-          - clang
+          - [gcc, g++]
+          - [clang, clang++]
         linalg:
           - InternalRoutines
           - Eigen
@@ -38,7 +38,8 @@ jobs:
       run: |
         mkdir ${{github.workspace}}/build && cd build
         cmake -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
-              -D CMAKE_C_COMPILER=${{matrix.compiler}} \
+              -D CMAKE_C_COMPILER=${{matrix.compiler[0]}} \
+              -D CMAKE_CXX_COMPILER=${{matrix.compiler[1]}} \
               -D RSLQR_LINALG_LIBRARY=${{matrix.linalg}} \
               -D RSLQR_RUN_FULL_TEST=0 \
               --log-context ..

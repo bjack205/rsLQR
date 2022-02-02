@@ -8,7 +8,7 @@
 * works with the follow form, which includes the affine terms on the cost and dynamics:
 *
 * \f{align*}{
-* \underset{x_{1:N}, u_{1:N-1}}{\text{minimize}} &&& \frac{1}{2} x_N^T Q_N + x_N + q_N^T x_N + \sum_{k-1}^{N-1} \frac{1}{2} x_k^T Q_k + x_k + q_k^T x_k + u_k^T R_k + u_k + r_k^T u_k \\
+* \underset{x_{1:N}, u_{1:N-1}}{\text{minimize}} &&& \frac{1}{2} x_N^T Q_N x_N + q_N^T x_N + \sum_{k-1}^{N-1} \frac{1}{2} x_k^T Q_k x_k + q_k^T x_k + u_k^T R_k u_k + r_k^T u_k \\
 * \text{subject to} &&& x_{k+1} = A_k x_k + B_k u_k + f_k \\
 * &&& x_1 = x_\text{init}
 * \f}
@@ -39,8 +39,8 @@
 * - \subpage page_riccati_usage
 *
 * ## Installation
-* TODO: Add installation instructions.
-* Another line of documentation.
+* See the \subpage page_install page for detailed instructions on building, installing, 
+* and using the library in your own CMake projects.
 * 
 * ## References
 * Please cite the following paper when using this package:

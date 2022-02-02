@@ -1,0 +1,151 @@
+/** \page page_install Installation
+
+This page provides details about both building the rsLQR from source, 
+as well as using it in other project. 
+
+## Building the Library
+The rsLQR library uses CMake as its build system, and follows standard 
+CMake practices. To build the library, follow these steps, starting in the
+root directory of the repository:
+
+~~~{.sh}
+mkdir build
+cd build
+cmake ..             # add additional arguments here
+cmake --build . -j4  # build with 4 processors
+~~~
+The library provides several options for controlling the build, these are 
+detailed below:
+| Variable Name | Options | Default | Description |
+| ------------- | ------- | ------- | ----------- |
+| RSLQR_BUILD_TESTS | ON/OFF | ON | Specifies whether or not the test suite should be built |
+| RSLQR_CODE_COVERAGE | ON/OFF | OFF | Build the library and build code coverage reports.  Note this option turns off compiler optimizations so runtime performance will be slow. |
+| RSLQR_LINALG_LIBRARY | InternalRoutines, Eigen, BLAS | InternalRoutines | Select the linear algebra library to use. |
+| RSLQR_NTHREADS_TEST | Integer | 2 | Select default number of threads to use for tests. |
+| RSLQR_RUN_FULL_TEST | ON/OFF | ON | Disabling this option will run a less computationally intensive set of tests. |
+
+### Linear Algebra Library
+If the `RSLQR_LINALG_LIBRARY` option is set to `BLAS`, it will download the open-source 
+LAPACK distribution with includes the default NetLib BLAS routines. Note that this build
+wil take significantly longer since it builds LAPACK and BLAS from source as part of the 
+build.
+
+If the `RSLQR_LINALG_LIBRARY` option is set to `Eigen`, the Eigen C++ linear algebra 
+library must be installed on the host computer.
+
+From our benchmarks, the default internal routines provide the best performance when 
+running the algorithm with many threads.
+
+### Default build type
+The `CMAKE_BUILD_TYPE` defaults to `Release` if non is specified.
+
+### Specifying the build options
+These options can be specified during the configure step, e.g.:
+~~~{.sh}
+cmake -D CMAKE_BUILD_TYPE=Debug -D RSLQR_LINALG_LIBRARY=Eigen ..
+~~~
+or via any CMake cache editor, like the CMake GUI:
+~~~{.sh}
+cmake-gui .
+~~~
+
+The current values of these variables can be queried via the command line:
+~~~{.sh}
+cmake -L
+~~~
+
+## Installing locally
+The library can be installed locally onto your machine using the standard 
+CMake installation steps. After building the library (see previous section),
+the library can be installed by building the `install` target:
+~~~{.sh}
+cmake --build . --target install
+~~~
+For a custom install location, you need to specify the `CMAKE_INSTALL_PREFIX`
+~~~{.sh}
+cmake -D CMAKE_INSTALL_PREFIX=<install directory> ..
+cmake --build . --target install
+~~~
+This will generate the following output in the install directory for a
+Linux system:
+~~~
+cmake/
+  rsLQR.cmake
+  rsLQRConfig.cmake
+  rsLQRConfigVersion.cmake
+  rsLQR-release.cmake
+include/
+  cjson/
+    cJSON.h
+  rslqr/
+    ...
+    ndlqr.h
+  cblas.h       # if using BLAS
+  ...
+  lapacke.h  
+bin/
+  cmake/
+  pkgconfig/
+  libblas.so    # if using BLAS
+  ...
+  libcjson.a 
+  libeigen_c.a  # if Eigen3 is installed
+  libmatrix.a   
+  libslqr.so    # if building shared library
+~~~
+
+## Using a local installation
+If the library is installed locally using the previous section, then the 
+library can be incorporated into another CMake project using standard the
+`find_package` procedure. In the `CMakeLists.txt` file of your project, 
+include the following:
+~~~
+find_package(rsLQR)
+~~~
+Which imports the following targets:
+~~~
+rsLQR::rslqr    # main target
+rsLQR::matrix
+rsLQR::cjson
+rsLQR::eigen_c  # if Eigen is install
+rsLQR::cblas    # if using BLAS
+rsLQR::lapacke  # if using BLAS
+~~~
+To use the library in your application, simply link against the `rsLQR::rslqr`
+target, e.g.
+~~~
+add_executable(main main.c)
+target_link_library(main PRIVATE rsLQR::rslqr)
+~~~ 
+See the "Install Example" in the `examples/` directory for a working example.
+
+## Importing the package via FetchContent
+It's often not convenient to require users to build another library in order 
+to use your application. You can easily incorporate this library as part of your 
+CMake project, importing all of its targets, via the `FetchContent` CMake module.
+This downloads the GitHub repository locally into your `build` folder, adds 
+it's CMake build to your top-level CMake build, and builds the library as part 
+of your build system. This project uses this approach to bundle the cJSON library.
+
+To use this approach, copy these lines into your `CMakeLists.txt`:
+~~~
+include(FetchContent)
+FetchContent_Declare(librslqr
+    GIT_REPOSITORY https://github.com/bjack205/rsLQR.git
+    # NOTE: Replace this with whichever commit you want to use 
+    GIT_TAG cda47a585079f8fed5311738aac9db766d21e135 
+)
+FetchContent_MakeAvailable(librslqr)
+~~~
+
+From here, it looks identical to the previous example, since our build system 
+provides alias targets matching all of the installed targets. So to link against
+the rsLQR library, you simply link against the `rsLQR::rslqr` target like we 
+did before:
+~~~
+add_executable(main main.c)
+target_link_library(main PRIVATE rsLQR::rslqr)
+~~~ 
+See the "Import Example" in the `examples/` directory for a working example.
+
+*/

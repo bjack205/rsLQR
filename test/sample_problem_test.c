@@ -13,13 +13,13 @@
 #ifdef FULLTEST
   int kRunFullTest = FULLTEST;
   #if FULLTEST
-    static const int kNruns = 1000;
+    #define kNruns 100
   #else
-    static const int kNruns = 10;
+    #define kNruns 10
   #endif
 #else
   int kRunFullTest = 0;
-  static const int kNruns = 10;
+  #define kNruns 10
 #endif
 
 int compare_doubles(const void* a, const void* b) {
@@ -133,7 +133,12 @@ int main(int argc, char* argv[]) {
 
   bool right_answer = true;
   bool same_answer = true;
-  for (int i = 0; i < kNruns; ++i) {
+  int nruns = kNruns;
+  if (!kRunFullTest) {
+    nruns = 1;
+  }
+
+  for (int i = 0; i < nruns; ++i) {
     ndlqr_InitializeWithLQRProblem(lqrprob, solver);
 
     clock_t start = clock();

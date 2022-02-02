@@ -15,7 +15,10 @@ FetchContent_Declare(cjson_lib
   GIT_REPOSITORY https://github.com/DaveGamble/cJSON.git
   GIT_TAG d348621ca93571343a56862df7de4ff3bc9b5667 # version 1.7.15
 )
+set(CJSON_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(CJSON_OVERRIDE_BUILD_SHARED_LIBS ON CACHE BOOL "" FORCE)
 set(ENABLE_CJSON_TEST OFF CACHE BOOL "" FORCE)
+add_compile_options(-fPIC)
 FetchContent_MakeAvailable(cjson_lib)
 
 # Copy the header file into build/include and add as a dependency to the target

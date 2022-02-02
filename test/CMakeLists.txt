@@ -1,3 +1,4 @@
+
 add_library(minunit
     minunit.h
     minunit.c
@@ -14,13 +15,16 @@ function (add_ndlqr_test name)
   add_executable(${TEST_NAME}
     ${TEST_NAME}.c
 
+    minunit.h
+    minunit.c
+
     test_problem.h
     test_problem.c
   )
   target_link_libraries(${TEST_NAME}
     PRIVATE
     ndlqr
-    minunit
+    # minunit
   )
   add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
   if (Eigen3_FOUND)
@@ -57,6 +61,7 @@ add_ndlqr_test(nested_dissection)
 add_ndlqr_test(sample_problem)
 add_ndlqr_test(riccati_solver)
 
+add_test(NAME sample_problem_test_256 COMMAND sample_problem_test 256)
 # add_ndlqr_test(matmul)
 # target_link_libraries(matmul_test
 #   PRIVATE

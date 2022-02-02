@@ -124,6 +124,7 @@ int ndlqr_InitializeWithLQRProblem(const LQRProblem *lqrprob,
                                    NdLqrSolver *solver) {
   int nstates = solver->nstates;
   int ninputs = solver->ninputs;
+  if (lqrprob->nhorizon != solver->nhorizon) return -1;
 
   // Create a minux identity matrix for copying into the original matrix
   Matrix minus_identity = NewMatrix(nstates, nstates);
@@ -142,6 +143,9 @@ int ndlqr_InitializeWithLQRProblem(const LQRProblem *lqrprob,
   int k;
   for (k = 0; k < solver->nhorizon - 1; ++k)
   {
+    if (nstates != lqrprob->lqrdata[k]->nstates) return -1;
+    if (ninputs != lqrprob->lqrdata[k]->ninputs) return -1;
+
     // Copy data into C factors and rhs vector from LQR data
     int level = ndlqr_GetIndexLevel(&(solver->tree), k);
     ndlqr_GetNdFactor(solver->data, k, level, &Cfactor);
@@ -202,13 +206,18 @@ int ndlqr_InitializeWithLQRProblem(const LQRProblem *lqrprob,
 }
 
 void ndlqr_PrintSolveSummary(NdLqrSolver *solver) {
-  printf("Solve time:  %f ms\n", solver->solve_time_ms);
+  printf("rsLQR Solve Summary\n");
+  printf("-------------------\n");
+  printf("  The rsLQR solver is a parallel solver for LQR problems\n");
+  printf("  developed by the RExLab at Carnegie Mellon University.\n\n");
+  printf("  Solve time:  %f ms\n", solver->solve_time_ms);
   if (kMatrixLinearAlgebraTimingEnabled)
   {
-    printf("LinAlg time: %f ms (%.1f%% of total)\n", solver->linalg_time_ms,
+    printf("  LinAlg time: %f ms (%.1f%% of total)\n", solver->linalg_time_ms,
            100.0 * solver->linalg_time_ms / solver->solve_time_ms);
   }
-  printf("Solved with %d threads.\n", solver->num_threads);
+  printf("  Solved with %d threads.\n", solver->num_threads);
+  printf("  "); MatrixPrintLinearAlgebraLibrary();
 }
 
 int ndlqr_GetNumVars(NdLqrSolver *solver) { return solver->nvars; }
