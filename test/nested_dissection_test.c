@@ -1,10 +1,9 @@
-#include "nested_dissection.h"
+#include "rslqr.h"
+#include "rslqr/nested_dissection.h"
 
 #include <time.h>
 
-#include "linalg.h"
-#include "ndlqr.h"
-#include "solver.h"
+#include "matrix/linalg.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
 

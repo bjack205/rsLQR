@@ -104,19 +104,33 @@ find_package(rsLQR)
 ~~~
 Which imports the following targets:
 ~~~
-rsLQR::rslqr    # main target
-rsLQR::matrix
+rsLQR::rsLQR    # interface target that includes all of the following 
+rsLQR::rslqr    # target for rsLQR solver
+rsLQR::riccati  # target for riccati solver
+rsLQR::lqr      # target for defining LQR problems
+rsLQR::matrix   # target for linear algebra core
 rsLQR::cjson
 rsLQR::eigen_c  # if Eigen is install
 rsLQR::cblas    # if using BLAS
 rsLQR::lapacke  # if using BLAS
 ~~~
-To use the library in your application, simply link against the `rsLQR::rslqr`
-target, e.g.
+To use the library in your application, simply link against the `rsLQR::rsLQR`
+target which is an interface target to link against all the libraries in this
+package, e.g.
 ~~~
 add_executable(main main.c)
-target_link_library(main PRIVATE rsLQR::rslqr)
+target_link_library(main PRIVATE rsLQR::rsLQR)
 ~~~ 
+Alternatively, you could link against any of targets listed above if you only 
+need certain functionality.
+
+In your source code you will include one of the following headers:
+~~~{.c}
+#include "rslqr.h"
+#include "lqr.h
+#include "riccati.h"
+~~~
+
 See the "Install Example" in the `examples/` directory for a working example.
 
 ## Importing the package via FetchContent

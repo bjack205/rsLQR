@@ -1,4 +1,4 @@
-#include "solver.h"
+#include "rslqr/solver.h"
 
 #include "test/minunit.h"
 #include "test/test_problem.h"

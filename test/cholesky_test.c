@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "cholesky_factors.h"
-#include "linalg.h"
-#include "matmul.h"
-#include "matrix.h"
+#include "rslqr/cholesky_factors.h"
+#include "matrix/linalg.h"
+#include "eigen_c/eigen_c.h"
+#include "matrix/matrix.h"
 #include "test/minunit.h"
 
 mu_test_init

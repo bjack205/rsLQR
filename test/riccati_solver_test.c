@@ -1,10 +1,10 @@
-#include "riccati_solver.h"
+#include "riccati/riccati_solver.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-#include "ndlqr.h"
-#include "riccati_solve.h"
+#include "rslqr.h"
+#include "riccati/riccati_solve.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
 

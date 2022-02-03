@@ -1,16 +1,16 @@
 #include <string.h>
 #include <time.h>
+#include <stdlib.h>
 
-#include "linalg.h"
-#include "matmul.h"
+#include "rslqr.h"
+#include "rslqr/nested_dissection.h"
+#include "matrix/linalg.h"
 #include "minunit.h"
-#include "ndlqr.h"
-#include "nested_dissection.h"
+#include "eigen_c/eigen_c.h"
 #include "omp.h"
-#include "solve.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
-#include "utils.h"
+#include "rslqr/utils.h"
 
 #ifdef NTHREADS
 const int kNumThreads = NTHREADS;

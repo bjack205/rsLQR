@@ -1,6 +1,6 @@
-#include "linalg.h"
+#include "matrix/linalg.h"
 
-#include "matrix.h"
+#include "matrix/matrix.h"
 #include "test/minunit.h"
 
 int MatMul() {

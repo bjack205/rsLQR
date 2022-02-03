@@ -17,7 +17,6 @@ sleep 0.5
 echo "Add"
 git add html/* || exit 1
 echo "Commit"
-git pull
 git commit -m "Update documentation"
 echo "Push"
 git push -f origin gh-pages

@@ -23,7 +23,7 @@ add_executable(installexample
 )
 # Link against the imported library target
 target_link_libraries(installexample
-    rsLQR::rslqr
+    rsLQR::rsLQR
 )
 # Add a compile definition to provide the location of the JSON file
 target_compile_definitions(installexample
