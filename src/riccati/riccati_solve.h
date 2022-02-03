@@ -13,7 +13,7 @@
 #pragma once
 
 #include "linalg.h"
-#include "riccati_solver.h"
+#include "riccati/riccati_solver.h"
 
 /**
  * @brief Solve the LQR problem using Riccati recursion and a forward simulation of the

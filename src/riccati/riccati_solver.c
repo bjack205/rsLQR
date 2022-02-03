@@ -1,4 +1,4 @@
-#include "riccati_solver.h"
+#include "riccati/riccati_solver.h"
 
 #include <stdio.h>
 #include <stdlib.h>

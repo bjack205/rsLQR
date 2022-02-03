@@ -6,7 +6,7 @@
 #include <time.h>
 
 #include "ndlqr.h"
-#include "riccati_solve.h"
+#include "riccati/riccati_solve.h"
 #include "test/test_problem.h"
 
 #ifdef FULLTEST
