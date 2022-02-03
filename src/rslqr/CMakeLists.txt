@@ -18,12 +18,6 @@ add_library(ndlqr
   solve.h
   solve.c
 
-#   ../riccati_solver.h
-#   ../riccati_solver.c
-
-#   ../riccati_solve.h
-#   ../riccati_solve.c
-
   ../utils.h
   ../utils.c
 )

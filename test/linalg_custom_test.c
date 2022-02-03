@@ -1,7 +1,7 @@
-#include "linalg_custom.h"
+#include "matrix/linalg_custom.h"
 
-#include "linalg.h"
-#include "matrix.h"
+#include "matrix/linalg.h"
+#include "matrix/matrix.h"
 #include "test/minunit.h"
 
 #ifdef USE_EIGEN

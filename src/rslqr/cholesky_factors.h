@@ -11,7 +11,7 @@
  * @addtogroup rsLQR
  * @{
  */
-#include "linalg.h"
+#include "matrix/linalg.h"
 
 /**
  * @brief Stores a list of CholeskyInfo structs for the rsLQR solver

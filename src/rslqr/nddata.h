@@ -13,7 +13,7 @@
 #pragma once
 
 #include "lqr/lqr_data.h"
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 /**
  * @brief A chunk of memory for a single time step

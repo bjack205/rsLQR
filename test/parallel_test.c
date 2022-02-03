@@ -4,7 +4,7 @@
 
 #include "ndlqr.h"
 #include "rslqr/nested_dissection.h"
-#include "linalg.h"
+#include "matrix/linalg.h"
 #include "minunit.h"
 #include "eigen_c/eigen_c.h"
 #include "omp.h"

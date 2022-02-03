@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "linalg_utils.h"
+#include "matrix/linalg_utils.h"
 #include "omp.h"
 #include "utils.h"
 

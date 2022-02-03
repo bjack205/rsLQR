@@ -13,7 +13,7 @@
 #pragma once
 
 #include "lqr/lqr_problem.h"
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 /**
  * @brief Solver that uses Riccati recursion to solve an LQR problem.

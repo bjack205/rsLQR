@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 #ifndef PRECISION
 #define PRECISION 5

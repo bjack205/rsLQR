@@ -11,7 +11,7 @@
  * @{
  *
  */
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 /**
  * @brief Flag for a successful Cholesky decomposition,

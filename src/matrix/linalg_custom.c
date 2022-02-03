@@ -1,4 +1,4 @@
-#include "linalg_custom.h"
+#include "matrix/linalg_custom.h"
 
 #include "math.h"
 #include "stdio.h"

@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "linalg.h"
-#include "linalg_utils.h"
+#include "matrix/linalg.h"
+#include "matrix/linalg_utils.h"
 #include "utils.h"
 
 int ndlqr_SolveLeaf(NdLqrSolver* solver, int index) {

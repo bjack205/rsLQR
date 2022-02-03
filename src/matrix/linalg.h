@@ -12,7 +12,7 @@
  */
 #pragma once
 
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 #ifdef USE_MKL
 static const int kUseMKL = 1;

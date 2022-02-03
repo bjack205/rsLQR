@@ -12,7 +12,7 @@
  */
 #pragma once
 
-#include "linalg.h"
+#include "matrix/linalg.h"
 #include "riccati/riccati_solver.h"
 
 /**

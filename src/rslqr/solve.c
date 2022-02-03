@@ -6,8 +6,8 @@
 #include <time.h>
 
 #include "rslqr/binary_tree.h"
-#include "linalg.h"
-#include "linalg_utils.h"
+#include "matrix/linalg.h"
+#include "matrix/linalg_utils.h"
 #include "rslqr/nested_dissection.h"
 #include "omp.h"
 #include "utils.h"

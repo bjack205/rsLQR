@@ -1,4 +1,4 @@
-#include "linalg.h"
+#include "matrix/linalg.h"
 
 #ifdef USE_MKL
 #include "mkl_cblas.h"
@@ -16,8 +16,8 @@
 #include "eigen_c/eigen_c.h"
 #endif
 
-#include "linalg_custom.h"
-#include "linalg_utils.h"
+#include "matrix/linalg_custom.h"
+#include "matrix/linalg_utils.h"
 
 CholeskyInfo DefaultCholeskyInfo() {
   CholeskyInfo cholinfo = {'\0', 0, '\0', NULL, 1};

@@ -12,7 +12,7 @@
  */
 #pragma once
 
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 /**
  * @brief Holds the data for a single time step of LQR

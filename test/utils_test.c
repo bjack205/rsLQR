@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "lqr/json_utils.h"
-#include "matrix.h"
+#include "matrix/matrix.h"
 #include "test/minunit.h"
 
 #ifndef LQRDATAFILE

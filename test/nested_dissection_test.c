@@ -3,7 +3,7 @@
 
 #include <time.h>
 
-#include "linalg.h"
+#include "matrix/linalg.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
 

@@ -14,7 +14,7 @@
 #pragma once
 
 #include "lqr/lqr_problem.h"
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 /**
  * @brief Read an LQRData structure from JSON data
