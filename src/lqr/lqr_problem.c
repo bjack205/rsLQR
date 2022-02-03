@@ -1,4 +1,4 @@
-#include "lqr_problem.h"
+#include "lqr/lqr_problem.h"
 
 #include <stdio.h>
 #include <stdlib.h>

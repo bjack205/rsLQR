@@ -8,6 +8,6 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "lqr_problem.h"
+#include "lqr/lqr_problem.h"
 #include "rslqr/solve.h"
 #include "rslqr/solver.h"

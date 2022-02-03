@@ -75,4 +75,5 @@ install(TARGETS matrix
   EXPORT rsLQR_export   # add to the export set
 )
 
+add_subdirectory(lqr)
 add_subdirectory(rslqr)

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lqr_problem.h"
+#include "lqr/lqr_problem.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
 

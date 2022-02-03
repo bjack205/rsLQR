@@ -15,7 +15,7 @@
 #include "rslqr/binary_tree.h"
 #include "rslqr/cholesky_factors.h"
 #include "linalg.h"
-#include "lqr_problem.h"
+#include "lqr/lqr_problem.h"
 #include "rslqr/nddata.h"
 
 /**

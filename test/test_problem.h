@@ -1,7 +1,7 @@
 #pragma once
 
-#include "json_utils.h"
-#include "lqr_problem.h"
+#include "lqr/json_utils.h"
+#include "lqr/lqr_problem.h"
 #include "rslqr/solver.h"
 
 #ifndef LQRDATAFILE

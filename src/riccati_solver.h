@@ -12,7 +12,7 @@
  */
 #pragma once
 
-#include "lqr_problem.h"
+#include "lqr/lqr_problem.h"
 #include "matrix.h"
 
 /**

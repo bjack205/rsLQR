@@ -1,4 +1,4 @@
-#include "lqr_data.h"
+#include "lqr/lqr_data.h"
 
 #include <cjson/cJSON.h>
 #include <stdio.h>

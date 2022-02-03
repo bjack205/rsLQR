@@ -18,15 +18,6 @@ add_library(ndlqr
   solve.h
   solve.c
 
-  ../lqr_data.h
-  ../lqr_data.c
-
-  ../lqr_problem.h
-  ../lqr_problem.c
-
-  ../json_utils.h
-  ../json_utils.c
-
   ../riccati_solver.h
   ../riccati_solver.c
 
@@ -40,6 +31,7 @@ target_link_libraries(ndlqr
   PUBLIC
   matrix
   CJSON::CJSON
+  lqr
 
   PRIVATE
   OpenMP::OpenMP_C

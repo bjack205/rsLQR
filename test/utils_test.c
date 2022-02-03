@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "json_utils.h"
+#include "lqr/json_utils.h"
 #include "matrix.h"
 #include "test/minunit.h"
 

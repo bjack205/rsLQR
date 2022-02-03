@@ -12,7 +12,7 @@
  */
 #pragma once
 
-#include "lqr_data.h"
+#include "lqr/lqr_data.h"
 
 /**
  * @brief Describes an LQR problem with affine terms
