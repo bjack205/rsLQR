@@ -8,7 +8,7 @@ var solver_8h =
     [ "ndlqr_GetProfile", "group__rsLQR.html#ga190e06d756e8c2c51d77d4d8bf44a860", null ],
     [ "ndlqr_InitializeWithLQRProblem", "group__rsLQR.html#ga3b0247c6971e10113d9b77b3a282511a", null ],
     [ "ndlqr_NewNdLqrProfile", "group__rsLQR.html#gaa8b72898fba663c7767386460de2103b", null ],
-    [ "ndlqr_NewNdLqrSolver", "group__rsLQR.html#gaf0df834b89b50395f7eef1ae9783e093", null ],
+    [ "ndlqr_NewNdLqrSolver", "group__rsLQR.html#ga6ea3a7ec0632b221f096c104820e0afd", null ],
     [ "ndlqr_PrintProfile", "group__rsLQR.html#gaa96a6ad46dd8363ce5d2e5e26e137084", null ],
     [ "ndlqr_PrintSolveProfile", "group__rsLQR.html#ga4491fc432e176360dcd5e8260aa0281e", null ],
     [ "ndlqr_PrintSolveSummary", "group__rsLQR.html#gad7ee614703b9d0768ed30ce18068f33e", null ],

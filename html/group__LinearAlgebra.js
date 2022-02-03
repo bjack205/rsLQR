@@ -8,7 +8,11 @@ var group__LinearAlgebra =
       [ "success", "structCholeskyInfo.html#ac801e9e0ffeea479b42f5173547451fa", null ],
       [ "uplo", "structCholeskyInfo.html#a589420c4c49b5700212a1505f1fcc340", null ]
     ] ],
-    [ "Matrix", "structMatrix.html", null ],
+    [ "Matrix", "structMatrix.html", [
+      [ "cols", "structMatrix.html#a2067cc7ed367cc427cd869b3e1074ad7", null ],
+      [ "data", "structMatrix.html#a7097cbd5ded96225e7f1fecb1c39936f", null ],
+      [ "rows", "structMatrix.html#a994b1578e9a64d5cc3c4d0b11d7532a9", null ]
+    ] ],
     [ "MatrixLinearAlgebraLibrary", "group__LinearAlgebra.html#gaf8f0d722db6003d5051550235c6b2e7f", null ],
     [ "DefaultCholeskyInfo", "group__LinearAlgebra.html#ga9ae585fa47edf62d4d657df76355232e", null ],
     [ "FreeFactorization", "group__LinearAlgebra.html#gae9c35a2cc66e5e83448e86cd6716377e", null ],
@@ -23,8 +27,8 @@ var group__LinearAlgebra =
     [ "MatrixCopyTranspose", "group__LinearAlgebra.html#gab8f28661c84920c5f678210f65e762f3", null ],
     [ "MatrixFlatten", "group__LinearAlgebra.html#ga6f13c668bec6030bf8907ae494f336ec", null ],
     [ "MatrixFlattenToRow", "group__LinearAlgebra.html#gab5ccf9706f0aaace15e2d225f32fc9bd", null ],
-    [ "MatrixGetElement", "group__LinearAlgebra.html#ga1567e2ccbf45571eb090ea6b883354c8", null ],
-    [ "MatrixGetElementTranspose", "group__LinearAlgebra.html#ga6943814415f723fd1b6723904a1d37dc", null ],
+    [ "MatrixGetElement", "group__LinearAlgebra.html#ga30b8b3da59da0bba5f5dac192efcf686", null ],
+    [ "MatrixGetElementTranspose", "group__LinearAlgebra.html#ga7170cd28cf3fc88b0658ac2b22bef0a4", null ],
     [ "MatrixGetLinearAlgebraLibrary", "group__LinearAlgebra.html#ga824baf575aa48ea4c1cd2c98feabfb97", null ],
     [ "MatrixGetLinearIndex", "group__LinearAlgebra.html#gab55c467587e56edaddaa20a1ae920fb2", null ],
     [ "MatrixMultiply", "group__LinearAlgebra.html#ga4b5b201d2541263095b6c660e3594aec", null ],

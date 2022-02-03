@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['orderedbinarytree_0',['OrderedBinaryTree',['../structOrderedBinaryTree.html',1,'']]]
+  ['orderedbinarytree_201',['OrderedBinaryTree',['../structOrderedBinaryTree.html',1,'']]]
 ];

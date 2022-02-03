@@ -29,7 +29,7 @@ var group__riccati =
     [ "ndlqr_FreeRiccatiSolver", "group__riccati.html#ga826883ea7eefc5588a31f4d780a7d0ae", null ],
     [ "ndlqr_GetRiccatiSolution", "group__riccati.html#ga3bddd986f8ce1d494489f71444a78701", null ],
     [ "ndlqr_GetRiccatiSolveTimes", "group__riccati.html#ga922bce64c83451521dc30e761db29464", null ],
-    [ "ndlqr_NewRiccatiSolver", "group__riccati.html#ga7816129c04bb0613847c6ee4ba28012e", null ],
+    [ "ndlqr_NewRiccatiSolver", "group__riccati.html#ga6047837d0fe6a73dd984a6d8955b2931", null ],
     [ "ndlqr_PrintRiccatiSummary", "group__riccati.html#ga757a0cf7c373df4f3bee5e3debcd9f7f", null ],
     [ "ndlqr_SolveRiccati", "group__riccati.html#ga98ff0affb1c4c351083d1e3ba7e6119a", null ]
 ];
