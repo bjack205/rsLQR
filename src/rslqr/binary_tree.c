@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "utils.h"
+#include "rslqr/utils.h"
 
 static BinaryNode* BuildSubTree(BinaryNode* start, int len) {
   int mid = (len + 1) / 2;

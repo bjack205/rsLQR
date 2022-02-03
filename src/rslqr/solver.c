@@ -6,7 +6,7 @@
 
 #include "matrix/linalg_utils.h"
 #include "omp.h"
-#include "utils.h"
+#include "rslqr/utils.h"
 
 NdLqrProfile ndlqr_NewNdLqrProfile() {
   NdLqrProfile prof = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1};

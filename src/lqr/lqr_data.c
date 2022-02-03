@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "utils.h"
+#include "rslqr/utils.h"
 
 int ndlqr_InitializeLQRData(LQRData* lqrdata, double* Q, double* R, double* q, double* r,
                             double c, double* A, double* B, double* d) {

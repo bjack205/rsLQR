@@ -1,7 +1,7 @@
 #include "rslqr/cholesky_factors.h"
 
 #include "stdlib.h"
-#include "utils.h"
+#include "rslqr/utils.h"
 
 NdLqrCholeskyFactors* ndlqr_NewCholeskyFactors(int depth, int nhorizon) {
   if (depth <= 0) return NULL;

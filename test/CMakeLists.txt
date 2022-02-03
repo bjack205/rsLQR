@@ -23,7 +23,7 @@ function (add_ndlqr_test name)
   )
   target_link_libraries(${TEST_NAME}
     PRIVATE
-    ndlqr
+    rslqr
     # minunit
   )
   add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
@@ -62,11 +62,6 @@ add_ndlqr_test(sample_problem)
 add_ndlqr_test(riccati_solver)
 
 add_test(NAME sample_problem_test_256 COMMAND sample_problem_test 256)
-# add_ndlqr_test(matmul)
-# target_link_libraries(matmul_test
-#   PRIVATE
-#   OpenMP::OpenMP_C
-# )
 
 if (Eigen3_FOUND)
   add_ndlqr_test(cholesky)

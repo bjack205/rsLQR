@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "utils.h"
+#include "rslqr/utils.h"
 
 Matrix ndlqr_GetLambdaFactor(NdFactor* factor) { return factor->lambda; }
 

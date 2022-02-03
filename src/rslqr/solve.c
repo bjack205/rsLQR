@@ -10,7 +10,7 @@
 #include "matrix/linalg_utils.h"
 #include "rslqr/nested_dissection.h"
 #include "omp.h"
-#include "utils.h"
+#include "rslqr/utils.h"
 
 #define ENABLE_PROFILER
 #ifdef ENABLE_PROFILER

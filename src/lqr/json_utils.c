@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "utils.h"
+#include "rslqr/utils.h"
 
 /**
  * @brief Read a JSON array into a vector of doubles.

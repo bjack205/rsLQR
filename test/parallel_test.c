@@ -10,7 +10,7 @@
 #include "omp.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
-#include "utils.h"
+#include "rslqr/utils.h"
 
 #ifdef NTHREADS
 const int kNumThreads = NTHREADS;

@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "rslqr/utils.h"
 
 #include <assert.h>
 #include <stdio.h>

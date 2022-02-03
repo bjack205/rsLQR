@@ -5,7 +5,7 @@
 
 #include "matrix/linalg.h"
 #include "matrix/linalg_utils.h"
-#include "utils.h"
+#include "rslqr/utils.h"
 
 int ndlqr_SolveLeaf(NdLqrSolver* solver, int index) {
   int nstates = solver->nstates;
