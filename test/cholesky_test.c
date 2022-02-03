@@ -4,7 +4,7 @@
 
 #include "cholesky_factors.h"
 #include "linalg.h"
-#include "matmul.h"
+#include "eigen_c/eigen_c.h"
 #include "matrix.h"
 #include "test/minunit.h"
 

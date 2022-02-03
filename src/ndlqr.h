@@ -9,6 +9,5 @@
  *
  */
 #include "lqr_problem.h"
-#include "matmul.h"
 #include "solve.h"
 #include "solver.h"

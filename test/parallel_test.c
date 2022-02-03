@@ -2,10 +2,10 @@
 #include <time.h>
 
 #include "linalg.h"
-#include "matmul.h"
 #include "minunit.h"
 #include "ndlqr.h"
 #include "nested_dissection.h"
+#include "eigen_c/eigen_c.h"
 #include "omp.h"
 #include "solve.h"
 #include "test/minunit.h"
