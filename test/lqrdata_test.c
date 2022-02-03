@@ -5,14 +5,14 @@
 #include "test/minunit.h"
 #include "test/test_problem.h"
 
-
 #ifndef LQRDATAFILE
 #define LQRDATAFILE "../lqr_data.json"
 #endif
 
 mu_test_init
 
-int CheckLQRData(LQRData* lqrdata) {
+    int
+    CheckLQRData(LQRData* lqrdata) {
   mu_assert(lqrdata->nstates == 6);
   mu_assert(lqrdata->ninputs == 3);
   double h = 0.1;
@@ -66,7 +66,7 @@ int ReadProblemFile() {
   mu_assert(lqrprob->x0[3] == -2);
   mu_assert(lqrprob->x0[4] == +3);
   mu_assert(lqrprob->x0[5] == -3);
-  
+
   // Check each knot point
   for (int k = 0; k < 7; ++k) {
     LQRData* lqrdata = lqrprob->lqrdata[0];
@@ -119,7 +119,7 @@ int InitializeLQRProblem() {
   Matrix A = NewMatrix(nstates, nstates);
   Matrix B = NewMatrix(nstates, ninputs);
   Matrix d = NewMatrix(nstates, 1);
-  LQRData** alldata = (LQRData**) malloc(nhorizon * sizeof(LQRData*));
+  LQRData** alldata = (LQRData**)malloc(nhorizon * sizeof(LQRData*));
   for (int k = 0; k < nhorizon; ++k) {
     LQRData* lqrdata = ndlqr_NewLQRData(nstates, ninputs);
     MatrixSetConst(&Q, 1.2);
@@ -130,11 +130,12 @@ int InitializeLQRProblem() {
     MatrixSetConst(&A, 10.1);
     MatrixSetConst(&B, 11.1);
     MatrixSetConst(&d, -20.2 + k);
-    ndlqr_InitializeLQRData(lqrdata, Q.data, R.data, q.data, r.data, c, A.data, B.data, d.data);
+    ndlqr_InitializeLQRData(lqrdata, Q.data, R.data, q.data, r.data, c, A.data, B.data,
+                            d.data);
     alldata[k] = lqrdata;
   }
 
-  double* x0 = (double*) malloc(nstates * sizeof(double));
+  double* x0 = (double*)malloc(nstates * sizeof(double));
   for (int i = 0; i < nstates; ++i) {
     x0[i] = i * i - 0.2 * i;
   }
@@ -185,7 +186,7 @@ int InitializeLQRProblem() {
 }
 
 int ReadLongProb() {
-  LQRProblem* prob = ndlqr_ReadLongTestLQRProblem(); 
+  LQRProblem* prob = ndlqr_ReadLongTestLQRProblem();
   mu_assert(prob->nhorizon == 256);
   ndlqr_FreeLQRProblem(prob);
   return 1;

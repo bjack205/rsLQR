@@ -1,35 +1,34 @@
-#include <time.h>
 #include <string.h>
+#include <time.h>
 
-#include "omp.h"
-
-#include "minunit.h"
-#include "test/minunit.h"
-#include "ndlqr.h"
-#include "solve.h"
-#include "nested_dissection.h"
-#include "test/test_problem.h"
 #include "linalg.h"
-#include "utils.h"
 #include "matmul.h"
+#include "minunit.h"
+#include "ndlqr.h"
+#include "nested_dissection.h"
+#include "omp.h"
+#include "solve.h"
+#include "test/minunit.h"
+#include "test/test_problem.h"
+#include "utils.h"
 
 #ifdef NTHREADS
-  const int kNumThreads = NTHREADS;
+const int kNumThreads = NTHREADS;
 #else
-  const int kNumThreads = 2;
+const int kNumThreads = 2;
 #endif
 
 #ifdef FULLTEST
-  int kRunFullTest = FULLTEST;
+int kRunFullTest = FULLTEST;
 #else
-  int kRunFullTest = 0;
+int kRunFullTest = 0;
 #endif
 
 mu_test_init
-
 #define kNumTests 5
 
-void ParallelTiming(int (*func)(NdLqrSolver* solver, int i), NdLqrSolver* solver, int len) {
+    void
+    ParallelTiming(int (*func)(NdLqrSolver* solver, int i), NdLqrSolver* solver, int len) {
   printf("This problem has a horizon of %d\n", solver->nhorizon);
 
   for (int k = 0; k < len; ++k) {
@@ -42,7 +41,7 @@ void ParallelTiming(int (*func)(NdLqrSolver* solver, int i), NdLqrSolver* solver
     // ndlqr_SolveLeaf(solver, k);
     func(solver, k);
   }
-  double t_elapsed = (omp_get_wtime() - t_start) * 1000.0; 
+  double t_elapsed = (omp_get_wtime() - t_start) * 1000.0;
   double t_serial_ms = t_elapsed;
   printf("Took %f ms without threading\n", t_elapsed);
 
@@ -55,32 +54,29 @@ void ParallelTiming(int (*func)(NdLqrSolver* solver, int i), NdLqrSolver* solver
     omp_set_num_threads(num_threads[i]);
     int tasks_per_thread = len / num_threads[i];
     double t_start, t_parallel;
-    #pragma omp parallel shared(t_start, t_parallel)
-    { 
+#pragma omp parallel shared(t_start, t_parallel)
+    {
       int id = omp_get_thread_num();
       int start = tasks_per_thread * id;
       int stop = tasks_per_thread * (id + 1);
-      #pragma omp single
-      {
-        t_start = omp_get_wtime();
-      }
+#pragma omp single
+      { t_start = omp_get_wtime(); }
 
       for (int k = start; k < stop; ++k) {
-      // for (int k = 0; k < len; ++k) {
+        // for (int k = 0; k < len; ++k) {
         func(solver, k);
         // ndlqr_SolveLeaf(solver, k);
       }
 
-      #pragma omp single
-      {
-        t_parallel = (omp_get_wtime() - t_start) * 1000.0;
-      }
+#pragma omp single
+      { t_parallel = (omp_get_wtime() - t_start) * 1000.0; }
     }
     times_ms[i] = t_parallel;
     double speedup = t_serial_ms / t_parallel;
-    printf("Took %f ms (speedup of %.2fx) with %d threads\n", t_parallel, speedup, num_threads[i]);
+    printf("Took %f ms (speedup of %.2fx) with %d threads\n", t_parallel, speedup,
+           num_threads[i]);
   }
-  (void) times_ms;
+  (void)times_ms;
 }
 
 int SolveLeaves() {
@@ -96,8 +92,7 @@ int InnerProductTask(NdLqrSolver* solver, int i) {
   int leaf = i / cur_depth;
   int upper_level = level + (i % cur_depth);
   int index = ndlqr_GetIndexFromLeaf(&solver->tree, leaf, level);
-  ndlqr_FactorInnerProduct(solver->data, solver->fact, index, level,
-                            upper_level);
+  ndlqr_FactorInnerProduct(solver->data, solver->fact, index, level, upper_level);
   return 0;
 }
 
@@ -122,16 +117,16 @@ int MatMul() {
   eigen_SetNumThreads(1);
   eigen_InitParallel();
 #endif
-  Matrix* A = (Matrix*) malloc(N * sizeof(Matrix));
-  Matrix* B = (Matrix*) malloc(N * sizeof(Matrix));
-  Matrix* C = (Matrix*) malloc(N * sizeof(Matrix));
+  Matrix* A = (Matrix*)malloc(N * sizeof(Matrix));
+  Matrix* B = (Matrix*)malloc(N * sizeof(Matrix));
+  Matrix* C = (Matrix*)malloc(N * sizeof(Matrix));
   for (int i = 0; i < N; ++i) {
     A[i] = NewMatrix(n, n);
     B[i] = NewMatrix(n, n);
     C[i] = NewMatrix(n, n);
     for (int j = 0; j < n * n; ++j) {
       A[i].data[j] = cos(2 * i);
-      B[i].data[j] = 2.1 * i  - 3.2 * i * i;
+      B[i].data[j] = 2.1 * i - 3.2 * i * i;
     }
     MatrixSetConst(&C[i], 0.0);
   }
@@ -155,17 +150,17 @@ int MatMul() {
   // double t_avx = (omp_get_wtime() - t_start) * 1000.0;
   // printf("Avx mul: %g ms\n", t_avx);
 
-
-  int num_threads = 4; 
+  int num_threads = 4;
   omp_set_num_threads(num_threads);
   double t_parallel;
-  (void) t_parallel;
+  (void)t_parallel;
   int tasks_per_thread = N / num_threads;
   int num_threads_actual = 0;
   printf("Total tasks: %d, tasks per thread = %d\n", N, tasks_per_thread);
-  #pragma omp parallel default(none) shared(t_start, t_parallel, A, B, C, num_threads_actual) firstprivate(N, tasks_per_thread, n)
+#pragma omp parallel default(none) shared( \
+    t_start, t_parallel, A, B, C, num_threads_actual) firstprivate(N, tasks_per_thread, n)
   {
-    #pragma omp single
+#pragma omp single
     {
       t_start = omp_get_wtime();
       num_threads_actual = omp_get_num_threads();
@@ -175,8 +170,8 @@ int MatMul() {
     int stop = tasks_per_thread * (id + 1);
     // printf("Id = %d, range = %d - %d\n", id, start, stop);
     for (int i = start; i < stop; ++i) {
-    // #pragma omp for schedule(static, 1000)
-    // for (int i = 0; i < N; ++i) {
+      // #pragma omp for schedule(static, 1000)
+      // for (int i = 0; i < N; ++i) {
       // MatrixMul(A + i, B + i, C + i);
       MatrixMultiply(A + i, B + i, C + i, 0, 0, 1.0, 0.0);
 
@@ -185,14 +180,13 @@ int MatMul() {
       // MatMul4x4_unrolled(A[i].data, B[i].data, C[i].data);
       // MatMulSIMD(n, A[i].data, B[i].data, C[i].data);
     }
-    #pragma omp single
-    {
-      t_parallel = (omp_get_wtime() - t_start) * 1000.0;
-    }
+#pragma omp single
+    { t_parallel = (omp_get_wtime() - t_start) * 1000.0; }
   }
   printf("Actual number of threads = %d\n", num_threads_actual);
   printf("Parallel time = %g ms\n", t_parallel);
-  printf("Expected / actual speedup: (%dx / %.2fx) = %.2f\n", num_threads, t_serial / t_parallel, t_serial / t_parallel / num_threads);
+  printf("Expected / actual speedup: (%dx / %.2fx) = %.2f\n", num_threads,
+         t_serial / t_parallel, t_serial / t_parallel / num_threads);
 
   for (int i = 0; i < N; ++i) {
     FreeMatrix(&A[i]);

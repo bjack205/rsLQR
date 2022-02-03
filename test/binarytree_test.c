@@ -22,7 +22,7 @@ int TestBuildTree() {
 
 int GetIndexLevel() {
   OrderedBinaryTree tree = ndlqr_BuildTree(8);
-  mu_assert(ndlqr_GetIndexLevel(&tree, 0) == 0); 
+  mu_assert(ndlqr_GetIndexLevel(&tree, 0) == 0);
   mu_assert(ndlqr_GetIndexLevel(&tree, 1) == 1);
   mu_assert(ndlqr_GetIndexLevel(&tree, 2) == 0);
   mu_assert(ndlqr_GetIndexLevel(&tree, 3) == 2);
@@ -59,7 +59,7 @@ int GetIndexAtLevel() {
   mu_assert(base_index == 6);
   return 1;
 }
- 
+
 void AllTests() {
   mu_run_test(TestBuildTree);
   mu_run_test(GetIndexLevel);

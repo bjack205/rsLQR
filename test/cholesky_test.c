@@ -1,31 +1,30 @@
-#include <stdlib.h>
-#include <stdio.h>
-
 #include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "cholesky_factors.h"
-#include "test/minunit.h"
-#include "matrix.h"
 #include "linalg.h"
 #include "matmul.h"
+#include "matrix.h"
+#include "test/minunit.h"
 
 mu_test_init
 
-Matrix* A;
+    Matrix* A;
 Matrix* B;
 Matrix* C;
 
 void InitMatrices(int N, int n) {
-  A = (Matrix*) malloc(N * sizeof(Matrix));
-  B = (Matrix*) malloc(N * sizeof(Matrix));
-  C = (Matrix*) malloc(N * sizeof(Matrix));
+  A = (Matrix*)malloc(N * sizeof(Matrix));
+  B = (Matrix*)malloc(N * sizeof(Matrix));
+  C = (Matrix*)malloc(N * sizeof(Matrix));
   for (int i = 0; i < N; ++i) {
     A[i] = NewMatrix(n, n);
     B[i] = NewMatrix(n, n);
     C[i] = NewMatrix(n, n);
     for (int j = 0; j < n * n; ++j) {
       B[i].data[j] = cos(0.01 * j);
-      A[i].data[j] = (2.1 * j  - 3.2 * j * j) / 100.0;
+      A[i].data[j] = (2.1 * j - 3.2 * j * j) / 100.0;
     }
     MatrixSetConst(&C[i], 0.0);
   }
@@ -70,7 +69,7 @@ int CholeskyFree() {
   FreeMatrices(N);
   return 1;
 }
- 
+
 int CholeskyFactors() {
   int n = 8;
   int N = 2;

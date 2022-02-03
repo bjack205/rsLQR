@@ -1,9 +1,10 @@
+#include "utils.h"
+
 #include <stdlib.h>
 #include <string.h>
 
-#include "matrix.h"
-#include "utils.h"
 #include "json_utils.h"
+#include "matrix.h"
 #include "test/minunit.h"
 
 #ifndef LQRDATAFILE
@@ -12,7 +13,9 @@
 
 mu_test_init
 
+    // clang-format off
 int ReadFileTest() {
+  // clang-format on
   const char* filename = LQRDATAFILE;
   char* data = NULL;
   int len;

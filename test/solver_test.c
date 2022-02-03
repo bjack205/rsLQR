@@ -1,10 +1,13 @@
-#include "test/minunit.h"
 #include "solver.h"
+
+#include "test/minunit.h"
 #include "test/test_problem.h"
 
 mu_test_init
 
+    // clang-format off
 int NewSolver() {
+  // clang-format on
   NdLqrSolver* solver = ndlqr_NewNdLqrSolver(6, 3, 8);
   int level = ndlqr_GetIndexLevel(&solver->tree, 0);
   mu_assert(level == 0);
@@ -19,7 +22,7 @@ int InitializeWithLQRProblem() {
   NdLqrSolver* solver = ndlqr_GenTestSolver();
   mu_assert(solver->nvars == 117);
   int nstates = solver->nstates;
-  int ninputs = solver->ninputs; 
+  int ninputs = solver->ninputs;
 
   // Create an identity matrix
   Matrix minus_identity = NewMatrix(nstates, nstates);
@@ -135,7 +138,8 @@ int InitializeWithLQRProblem() {
 
   int k = solver->nhorizon - 1;
   for (int i = 0; i < nstates; ++i) {
-    mu_assert(fabs(*MatrixGetElement(&solver->diagonals[2 * k], i, i) - lqrprob->lqrdata[k]->Q[i]) < 1e-6);
+    mu_assert(fabs(*MatrixGetElement(&solver->diagonals[2 * k], i, i) -
+                   lqrprob->lqrdata[k]->Q[i]) < 1e-6);
   }
 
   FreeMatrix(&minus_identity);
@@ -150,5 +154,5 @@ void AllTests() {
   mu_run_test(NewSolver);
   mu_run_test(InitializeWithLQRProblem);
 }
- 
+
 mu_test_main
