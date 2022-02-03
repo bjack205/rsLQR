@@ -100,18 +100,16 @@ $(document).ready(function(){initNavTree('utils_8h_source.html',''); initResizab
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">bool</span> <a class="code hl_function" href="utils_8h.html#a6d41e140e34bd4804ca7f30eb8553edd">IsPowerOfTwo</a>(<span class="keywordtype">int</span> x);</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> PowerOfTwo(<span class="keywordtype">int</span> x) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordflow">return</span> 1 &lt;&lt; x;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> ndlqr_LinAlgTimeStart();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> ndlqr_LinAlgTimeStop();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#a24a4898b45309465461661024b72d763">LogOfTwo</a>(<span class="keywordtype">int</span> x);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#a1211b739b0395e3a6af394e3c3b93782">ReadFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <span class="keywordtype">char</span>** out, <span class="keywordtype">int</span>* len);</div>
-<div class="ttc" id="autils_8h_html_a1211b739b0395e3a6af394e3c3b93782"><div class="ttname"><a href="utils_8h.html#a1211b739b0395e3a6af394e3c3b93782">ReadFile</a></div><div class="ttdeci">int ReadFile(const char *filename, char **out, int *len)</div><div class="ttdoc">Read the contents of a file into a heap-allocated char array.</div><div class="ttdef"><b>Definition:</b> utils.c:19</div></div>
-<div class="ttc" id="autils_8h_html_a24a4898b45309465461661024b72d763"><div class="ttname"><a href="utils_8h.html#a24a4898b45309465461661024b72d763">LogOfTwo</a></div><div class="ttdeci">int LogOfTwo(int x)</div><div class="ttdoc">Efficient computation of log2(x) for integers.</div><div class="ttdef"><b>Definition:</b> utils.c:11</div></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> PowerOfTwo(<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> 1 &lt;&lt; x; }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> ndlqr_LinAlgTimeStart();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> ndlqr_LinAlgTimeStop();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#a24a4898b45309465461661024b72d763">LogOfTwo</a>(<span class="keywordtype">int</span> x);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">int</span> <a class="code hl_function" href="utils_8h.html#a1211b739b0395e3a6af394e3c3b93782">ReadFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <span class="keywordtype">char</span>** out, <span class="keywordtype">int</span>* len);</div>
+<div class="ttc" id="autils_8h_html_a1211b739b0395e3a6af394e3c3b93782"><div class="ttname"><a href="utils_8h.html#a1211b739b0395e3a6af394e3c3b93782">ReadFile</a></div><div class="ttdeci">int ReadFile(const char *filename, char **out, int *len)</div><div class="ttdoc">Read the contents of a file into a heap-allocated char array.</div><div class="ttdef"><b>Definition:</b> utils.c:17</div></div>
+<div class="ttc" id="autils_8h_html_a24a4898b45309465461661024b72d763"><div class="ttname"><a href="utils_8h.html#a24a4898b45309465461661024b72d763">LogOfTwo</a></div><div class="ttdeci">int LogOfTwo(int x)</div><div class="ttdoc">Efficient computation of log2(x) for integers.</div><div class="ttdef"><b>Definition:</b> utils.c:9</div></div>
 <div class="ttc" id="autils_8h_html_a6d41e140e34bd4804ca7f30eb8553edd"><div class="ttname"><a href="utils_8h.html#a6d41e140e34bd4804ca7f30eb8553edd">IsPowerOfTwo</a></div><div class="ttdeci">bool IsPowerOfTwo(int x)</div><div class="ttdoc">Determines if the input integer is a power of 2.</div><div class="ttdef"><b>Definition:</b> utils.c:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 <div class="textblock"><p >This is the documentation for the rsLQR solver for solving LQR problems on a many-core CPU. The linear-quadratic regulator is the canonical optimal control problem, and has significant practical applications. The current software package works with the follow form, which includes the affine terms on the cost and dynamics:</p>
 <p class="formulaDsp">
-\begin{align*} \underset{x_{1:N}, u_{1:N-1}}{\text{minimize}} &amp;&amp;&amp; \frac{1}{2} x_N^T Q_N + x_N + q_N^T x_N + \sum_{k-1}^{N-1} \frac{1}{2} x_k^T Q_k + x_k + q_k^T x_k + u_k^T R_k + u_k + r_k^T u_k \\ \text{subject to} &amp;&amp;&amp; x_{k+1} = A_k x_k + B_k u_k + f_k \\ &amp;&amp;&amp; x_1 = x_\text{init} \end{align*}
+\begin{align*} \underset{x_{1:N}, u_{1:N-1}}{\text{minimize}} &amp;&amp;&amp; \frac{1}{2} x_N^T Q_N x_N + q_N^T x_N + \sum_{k-1}^{N-1} \frac{1}{2} x_k^T Q_k x_k + q_k^T x_k + u_k^T R_k u_k + r_k^T u_k \\ \text{subject to} &amp;&amp;&amp; x_{k+1} = A_k x_k + B_k u_k + f_k \\ &amp;&amp;&amp; x_1 = x_\text{init} \end{align*}
 </p>
 <p >where \( x \in \mathbb{R}^n, u \in \mathbb{R}^m \) are the state and control vectors. This optimization problem is a simple quadratic program (QP) that can be solved using any of the methods to solve this generic class of optimization problems, as well as extensions including equality and inequality constraints on the states and the controls. However, in the form presented, it can also be solved by solving a single sparse, symmetric, and banded linear system encoding the optimality conditions. This package provides two methods for solving this linear system:</p>
 <h2><a class="anchor" id="autotoc_md39"></a>
