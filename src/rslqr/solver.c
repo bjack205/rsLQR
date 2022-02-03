@@ -1,4 +1,4 @@
-#include "solver.h"
+#include "rslqr/solver.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -14,7 +14,7 @@
 
 #include <stdlib.h>
 
-#include "solver.h"
+#include "rslqr/solver.h"
 
 /**
  * @brief Solve all the equations for the lowest-level diagonal blocks, by timestep

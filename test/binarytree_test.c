@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "rslqr/binary_tree.h"
 #include "test/minunit.h"
 
 int TestBuildTree() {

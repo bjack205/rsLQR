@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "cholesky_factors.h"
+#include "rslqr/cholesky_factors.h"
 #include "linalg.h"
 #include "eigen_c/eigen_c.h"
 #include "matrix.h"

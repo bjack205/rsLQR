@@ -2,7 +2,7 @@
 
 #include "json_utils.h"
 #include "lqr_problem.h"
-#include "solver.h"
+#include "rslqr/solver.h"
 
 #ifndef LQRDATAFILE
 #define LQRDATAFILE "../lqr_data.json"

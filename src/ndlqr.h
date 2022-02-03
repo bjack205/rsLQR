@@ -9,5 +9,5 @@
  *
  */
 #include "lqr_problem.h"
-#include "solve.h"
-#include "solver.h"
+#include "rslqr/solve.h"
+#include "rslqr/solver.h"

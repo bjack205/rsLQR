@@ -1,4 +1,4 @@
-#include "nested_dissection.h"
+#include "rslqr/nested_dissection.h"
 
 #include <stdio.h>
 #include <time.h>

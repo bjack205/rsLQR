@@ -12,11 +12,11 @@
  */
 #pragma once
 
-#include "binary_tree.h"
-#include "cholesky_factors.h"
+#include "rslqr/binary_tree.h"
+#include "rslqr/cholesky_factors.h"
 #include "linalg.h"
 #include "lqr_problem.h"
-#include "nddata.h"
+#include "rslqr/nddata.h"
 
 /**
  * @brief A struct describing how long each part of the solve took, in milliseconds.

@@ -10,7 +10,7 @@
  * @addtogroup rsLQR
  * @{
  */
-#include "solver.h"
+#include "rslqr/solver.h"
 
 /**
  * @brief Solve an LQR problem using rsLQR

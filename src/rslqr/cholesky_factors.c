@@ -1,4 +1,4 @@
-#include "cholesky_factors.h"
+#include "rslqr/cholesky_factors.h"
 
 #include "stdlib.h"
 #include "utils.h"

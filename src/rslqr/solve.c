@@ -5,10 +5,10 @@
 #include <string.h>
 #include <time.h>
 
-#include "binary_tree.h"
+#include "rslqr/binary_tree.h"
 #include "linalg.h"
 #include "linalg_utils.h"
-#include "nested_dissection.h"
+#include "rslqr/nested_dissection.h"
 #include "omp.h"
 #include "utils.h"
 

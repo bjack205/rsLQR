@@ -1,4 +1,4 @@
-#include "nddata.h"
+#include "rslqr/nddata.h"
 
 #include <math.h>
 #include <stdio.h>
