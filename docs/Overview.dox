@@ -1,5 +1,5 @@
 /**
-* \mainpage rsLQR: A Parallel Solver for LQR Problems
+* \mainpage rsLQR: A Parallel LQR Solver 
 * \tableofcontents
 * 
 * This is the documentation for the rsLQR solver for solving LQR problems on a 
