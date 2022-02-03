@@ -1,7 +1,7 @@
 #include "riccati_solve.h"
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 int ndlqr_SolveRiccati(RiccatiSolver* solver) {
@@ -35,7 +35,7 @@ int ndlqr_BackwardPass(RiccatiSolver* solver) {
   MatrixCopyDiagonal(Pn, &Qd);
   MatrixCopy(pn, &q);
 
-  for(--k; k >= 0; --k) {
+  for (--k; k >= 0; --k) {
     Pn = solver->P + k + 1;
     pn = solver->p + k + 1;
 
@@ -56,7 +56,7 @@ int ndlqr_BackwardPass(RiccatiSolver* solver) {
     MatrixMultiply(Pn, &f, Qx_tmp, 0, 0, 1.0, 1.0);  // Qx = P * f + p
 
     MatrixMultiply(&B, Qx_tmp, Qu, 1, 0, 1.0, 0.0);  // Qu = B' * (P * f + p)
-    MatrixMultiply(&A, Qx_tmp, Qx, 1, 0, 1.0, 0.0);  // Qx = A' * (P * f + p) 
+    MatrixMultiply(&A, Qx_tmp, Qx, 1, 0, 1.0, 0.0);  // Qx = A' * (P * f + p)
     MatrixAddition(&r, Qu, 1.0);                     // Qu = r + B' * (P * f + p)
     MatrixAddition(&q, Qx, 1.0);                     // Qx = q + A' * (P * f + p)
 
@@ -93,7 +93,7 @@ int ndlqr_BackwardPass(RiccatiSolver* solver) {
     FreeFactorization(&cholinfo);
 
     // Calulate Cost-to-Go
-    Matrix* P = solver->P + k; 
+    Matrix* P = solver->P + k;
     Matrix* p = solver->p + k;
 
     MatrixCopy(P, Qxx);
@@ -107,7 +107,6 @@ int ndlqr_BackwardPass(RiccatiSolver* solver) {
     MatrixMultiply(K, Qu_tmp, p, 1, 0, 1.0, 1.0);    // p = Qx + K'Quu*d
     MatrixMultiply(K, Qu, p, 1, 0, 1.0, 1.0);        // p = Qx + K'Quu*d + K'Qu
     MatrixMultiply(Qux, d, p, 1, 0, 1.0, 1.0);       // p = Qx + K'Quu*d + K'Qu + Qux'd
-
   }
   return 0;
 }

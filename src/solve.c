@@ -1,26 +1,24 @@
 #include "solve.h"
 
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include <math.h>
 
 #include "binary_tree.h"
 #include "linalg.h"
 #include "linalg_utils.h"
 #include "nested_dissection.h"
-#include "utils.h"
 #include "omp.h"
+#include "utils.h"
 
 #define ENABLE_PROFILER
 #ifdef ENABLE_PROFILER
 #define OMP_TICK \
-   _Pragma("omp single") \
-   { t_start = omp_get_wtime(); } \
+  _Pragma("omp single") { t_start = omp_get_wtime(); }
 
 #define OMP_TOC(t_elapsed) \
-    _Pragma("omp single nowait") \
-    { t_elapsed += (omp_get_wtime() - t_start) * 1000.0; }
+  _Pragma("omp single nowait") { t_elapsed += (omp_get_wtime() - t_start) * 1000.0; }
 #else
 #define OMP_TICK
 #define OMP_TOC(t_elapsed)
@@ -28,7 +26,7 @@
 
 UnitRange get_work(int total_work, int num_threads, int threadid) {
   int tasks_per_thread = total_work / num_threads;
-  int start = tasks_per_thread * threadid; 
+  int start = tasks_per_thread * threadid;
   int stop = tasks_per_thread * (threadid + 1);
   if (threadid == num_threads - 1) {
     stop = total_work;
@@ -41,7 +39,7 @@ int ndlqr_Solve(NdLqrSolver* solver) {
   // clock_t t_start_total = clock();
   double t_start_total = omp_get_wtime();
   double t_start = 0;
-  (void) t_start;
+  (void)t_start;
   MatrixLinAlgTimeReset();
 
   int depth = solver->depth;
@@ -51,10 +49,8 @@ int ndlqr_Solve(NdLqrSolver* solver) {
 
 #pragma omp parallel
   {
-    #pragma omp single
-    {
-      solver->num_threads = omp_get_num_threads();
-    }
+#pragma omp single
+    { solver->num_threads = omp_get_num_threads(); }
     // implicit barrier
 
     // Solve for independent diagonal blocks
@@ -66,7 +62,7 @@ int ndlqr_Solve(NdLqrSolver* solver) {
       ndlqr_SolveLeaf(solver, k);
     }
     OMP_TOC(solver->profile.t_leaves_ms);
-    #pragma omp barrier
+#pragma omp barrier
 
     // Solve factorization
     for (int level = 0; level < depth; ++level) {
@@ -82,11 +78,10 @@ int ndlqr_Solve(NdLqrSolver* solver) {
         int leaf = i / cur_depth;
         int upper_level = level + (i % cur_depth);
         int index = ndlqr_GetIndexFromLeaf(&solver->tree, leaf, level);
-        ndlqr_FactorInnerProduct(solver->data, solver->fact, index, level,
-                                 upper_level);
+        ndlqr_FactorInnerProduct(solver->data, solver->fact, index, level, upper_level);
       }
       OMP_TOC(solver->profile.t_products_ms);
-      #pragma omp barrier
+#pragma omp barrier
 
       // Cholesky factorization
       rng = get_work(numleaves, num_threads, threadid);
@@ -102,7 +97,7 @@ int ndlqr_Solve(NdLqrSolver* solver) {
         MatrixCholeskyFactorizeWithInfo(&Sbar, cholinfo);
       }
       OMP_TOC(solver->profile.t_cholesky_ms);
-      #pragma omp barrier
+#pragma omp barrier
 
       // Solve with Cholesky factor for f
       int upper_levels = cur_depth - 1;
@@ -119,7 +114,7 @@ int ndlqr_Solve(NdLqrSolver* solver) {
         ndlqr_SolveCholeskyFactor(solver->fact, cholinfo, index, level, upper_level);
       }
       OMP_TOC(solver->profile.t_cholsolve_ms);
-      #pragma omp barrier
+#pragma omp barrier
 
       // Shur compliments
       int num_factors = nhorizon * upper_levels;
@@ -131,11 +126,11 @@ int ndlqr_Solve(NdLqrSolver* solver) {
 
         int index = ndlqr_GetIndexAtLevel(&solver->tree, k, level);
         bool calc_lambda = ndlqr_ShouldCalcLambda(&solver->tree, index, k);
-        ndlqr_UpdateShurFactor(solver->fact, solver->fact, index, k, level,
-                               upper_level, calc_lambda);
+        ndlqr_UpdateShurFactor(solver->fact, solver->fact, index, k, level, upper_level,
+                               calc_lambda);
       }
       OMP_TOC(solver->profile.t_shur_ms);
-      #pragma omp barrier
+#pragma omp barrier
     }
 
     // Solve for solution vector using the cached factorization
@@ -151,7 +146,7 @@ int ndlqr_Solve(NdLqrSolver* solver) {
         // Calculate z = d - F'b1 - F2'b2
         ndlqr_FactorInnerProduct(solver->data, solver->soln, index, level, 0);
       }
-      #pragma omp barrier
+#pragma omp barrier
 
       // Solve for separator variables with cached Cholesky decomposition
       rng = get_work(numleaves, num_threads, threadid);
@@ -173,7 +168,7 @@ int ndlqr_Solve(NdLqrSolver* solver) {
         ndlqr_GetSFactorization(solver->cholfacts, leaf, level, &cholinfo);
         MatrixCholeskySolveWithInfo(&Sbar, &zy, cholinfo);
       }
-      #pragma omp barrier
+#pragma omp barrier
 
       // Propagate information to solution vector
       //    y = y - F zbar
@@ -181,10 +176,9 @@ int ndlqr_Solve(NdLqrSolver* solver) {
       for (int k = rng.start; k < rng.stop; ++k) {
         int index = ndlqr_GetIndexAtLevel(&solver->tree, k, level);
         bool calc_lambda = ndlqr_ShouldCalcLambda(&solver->tree, index, k);
-        ndlqr_UpdateShurFactor(solver->fact, solver->soln, index, k, level, 0,
-                               calc_lambda);
+        ndlqr_UpdateShurFactor(solver->fact, solver->soln, index, k, level, 0, calc_lambda);
       }
-      #pragma omp barrier
+#pragma omp barrier
     }
   }
   double diff = omp_get_wtime() - t_start_total;

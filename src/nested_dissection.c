@@ -45,9 +45,8 @@ int ndlqr_SolveLeaf(NdLqrSolver* solver, int index) {
     // [   -I   ] [zy]   [zy]   [ -x0 ]    [ Qx0 + q ]   [-Q zy - zx ]
     // [-I  Q   ] [zx] = [zx] = [ -q  ] => [ x0      ] = [-zy        ]
     // [      R ] [zu]   [zu]   [ -r  ]    [-R \ r   ]   [ R \ zu    ]
-    Matrix zy_temp = {
-        nstates, 1,
-        C->lambda.data};  // grab an unused portion of the matrix data
+    Matrix zy_temp = {nstates, 1,
+                      C->lambda.data};  // grab an unused portion of the matrix data
     MatrixCopy(&zy_temp, &z->lambda);
     MatrixCopy(&z->lambda, &z->state);
     MatrixMultiply(Q, &zy_temp, &z->lambda, 0, 0, -1.0,
@@ -112,8 +111,8 @@ int ndlqr_SolveLeaves(NdLqrSolver* solver) {
   return 0;
 }
 
-int ndlqr_FactorInnerProduct(NdData* data, NdData* fact, int index,
-                             int data_level, int fact_level) {
+int ndlqr_FactorInnerProduct(NdData* data, NdData* fact, int index, int data_level,
+                             int fact_level) {
   NdFactor* C1;
   NdFactor* F1;
   NdFactor* C2;
@@ -134,8 +133,8 @@ int ndlqr_FactorInnerProduct(NdData* data, NdData* fact, int index,
   return 0;
 }
 
-int ndlqr_SolveCholeskyFactor(NdData* fact, CholeskyInfo* cholinfo,
-                              int index, int level, int upper_level) {
+int ndlqr_SolveCholeskyFactor(NdData* fact, CholeskyInfo* cholinfo, int index, int level,
+                              int upper_level) {
   if (!fact) return -1;
   if (upper_level <= level) {
     fprintf(stderr, "ERROR: `upper_level` must be greater than `level`.");
@@ -152,8 +151,8 @@ int ndlqr_SolveCholeskyFactor(NdData* fact, CholeskyInfo* cholinfo,
   return 0;
 }
 
-int ndlqr_UpdateShurFactor(NdData* fact, NdData* soln, int index, int i,
-                           int level, int upper_level, bool calc_lambda) {
+int ndlqr_UpdateShurFactor(NdData* fact, NdData* soln, int index, int i, int level,
+                           int upper_level, bool calc_lambda) {
   if (!fact || !soln) return -1;
 
   NdFactor* f_factor;
@@ -187,8 +186,7 @@ int ndlqr_ComputeShurCompliment(NdLqrSolver* solver, int index, int level,
 
   for (int i = left_start; i <= right_stop; ++i) {
     bool calc_lambda = ndlqr_ShouldCalcLambda(&solver->tree, index, i);
-    ndlqr_UpdateShurFactor(fact, soln, index, i, level, upper_level,
-                           calc_lambda);
+    ndlqr_UpdateShurFactor(fact, soln, index, i, level, upper_level, calc_lambda);
   }
   return 0;
 }

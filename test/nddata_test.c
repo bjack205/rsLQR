@@ -1,12 +1,14 @@
 #include "nddata.h"
-#include "test/minunit.h"
 
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+
+#include "test/minunit.h"
 
 mu_test_init
 
-int NewNdDataTest() {
+    int
+    NewNdDataTest() {
   int nstates = 6;
   int ninputs = 3;
   int nsegments = 7;
@@ -34,11 +36,11 @@ void SetNdDataBlock(NdData* nddata, int off, double valy, double valx, double va
   int ninputs = nddata->ninputs;
   int width = nddata->width;
   for (int i = 0; i < nstates * width; ++i) {
-    nddata->data[i + off] = valy; 
+    nddata->data[i + off] = valy;
     nddata->data[i + off + nstates * width] = valx;
   }
   for (int i = 0; i < width * ninputs; ++i) {
-    nddata->data[i + off + 2 * (nstates * width)] = valu; 
+    nddata->data[i + off + 2 * (nstates * width)] = valu;
   }
 }
 
@@ -85,7 +87,7 @@ int SetFactors() {
   mu_assert(CheckFactors(factor, 1.2, 2.3, 3.5) == 1);
 
   // Write to the last element in the memory block
-  nddata->data[totalsize -1] = 101.23;
+  nddata->data[totalsize - 1] = 101.23;
   ndlqr_GetNdFactor(nddata, nhorizon - 1, depth - 1, &factor);
   Matrix Cu = ndlqr_GetInputFactor(factor);
   double lastelement = *MatrixGetElement(&Cu, ninputs - 1, nstates - 1);

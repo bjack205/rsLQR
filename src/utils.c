@@ -4,9 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-bool IsPowerOfTwo(int x) {
-  return (x != 0) && ((x & (x - 1)) == 0);
-}
+bool IsPowerOfTwo(int x) { return (x != 0) && ((x & (x - 1)) == 0); }
 
 int LogOfTwo(int x) {
   int shift = 0;
@@ -27,7 +25,7 @@ int ReadFile(const char* filename, char** out, int* len) {
   int size = ftell(fp);
   rewind(fp);
 
-  char* buf = (char*) malloc(size + 1);
+  char* buf = (char*)malloc(size + 1);
   if (!buf) {
     fclose(fp);
     fprintf(stderr, "Couldn't allocate memory for the file contents.");

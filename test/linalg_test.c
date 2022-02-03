@@ -1,14 +1,15 @@
+#include "linalg.h"
+
 #include "matrix.h"
 #include "test/minunit.h"
-#include "linalg.h"
 
 int MatMul() {
   // Matrix-matrix
-  Matrix A = NewMatrix(3,4);
-  Matrix B = NewMatrix(4,5);
-  Matrix C = NewMatrix(3,5);
-  Matrix Cans = NewMatrix(3,5);
-  Matrix Bans = NewMatrix(4,5);
+  Matrix A = NewMatrix(3, 4);
+  Matrix B = NewMatrix(4, 5);
+  Matrix C = NewMatrix(3, 5);
+  Matrix Cans = NewMatrix(3, 5);
+  Matrix Bans = NewMatrix(4, 5);
   MatrixSetConst(&A, 4);
   MatrixSetConst(&B, 3);
   MatrixSetConst(&C, 2);
@@ -21,7 +22,7 @@ int MatMul() {
   mu_assert(MatrixNormedDifference(&B, &Bans) < 1e-6);
 
   // Matrix-vector
-  double xdata[4] = {1,2,3,4};
+  double xdata[4] = {1, 2, 3, 4};
   double bdata[3] = {40, 40, 40};
   Matrix x = {4, 1, xdata};
   Matrix bans = {3, 1, bdata};
@@ -43,9 +44,9 @@ int MatMul() {
 int SymMatMul() {
   // Matrix-Vector
   int n = 3;
-  double Adata[9] = {9,-3,-6,-3,17,-10,-6,-10,38};
-  double bdata[3] = {6,22,28};
-  double xdata[3] = {3,3,2};
+  double Adata[9] = {9, -3, -6, -3, 17, -10, -6, -10, 38};
+  double bdata[3] = {6, 22, 28};
+  double xdata[3] = {3, 3, 2};
   Matrix A = {n, n, Adata};
   Matrix bans = {n, 1, bdata};
   Matrix x = {n, 1, xdata};
@@ -54,8 +55,8 @@ int SymMatMul() {
   mu_assert(MatrixNormedDifference(&b, &bans) < 1e-6);
 
   // Matrix-matrix
-  double Xdata[6] = {3,3,2,1,1,1};
-  double Bdata[6] = {6,22,28, 0, 4, 22};
+  double Xdata[6] = {3, 3, 2, 1, 1, 1};
+  double Bdata[6] = {6, 22, 28, 0, 4, 22};
   Matrix X = {n, 2, Xdata};
   Matrix Bans = {n, 2, Bdata};
   Matrix B = NewMatrix(n, 2);
@@ -66,7 +67,7 @@ int SymMatMul() {
   FreeMatrix(&B);
   return 1;
 }
- 
+
 int DiagonalCholesky() {
   int n = 5;
   Matrix A = NewMatrix(n, n);
@@ -106,10 +107,10 @@ int DiagonalCholeskySolve() {
 }
 
 int CholeskySolve3x3() {
-  int n = 3;  
-  double Adata[9] = {9,-3,-6,-3,17,-10,-6,-10,38};
-  double bdata[3] = {6,22,28};
-  double xdata[3] = {3,3,2};
+  int n = 3;
+  double Adata[9] = {9, -3, -6, -3, 17, -10, -6, -10, 38};
+  double bdata[3] = {6, 22, 28};
+  double xdata[3] = {3, 3, 2};
   Matrix A = {n, n, Adata};
   Matrix b = {n, 1, bdata};
   Matrix x = {n, 1, xdata};

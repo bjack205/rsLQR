@@ -6,14 +6,14 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 Matrix NewMatrix(int rows, int cols) {
-  double* data = (double*) malloc(rows * cols * sizeof(double));
+  double* data = (double*)malloc(rows * cols * sizeof(double));
   Matrix mat = {rows, cols, data};
-  return mat; 
+  return mat;
 }
 
 int MatrixSetConst(Matrix* mat, double val) {
@@ -83,8 +83,9 @@ int MatrixCopy(Matrix* dest, Matrix* src) {
 int MatrixCopyTranspose(Matrix* dest, Matrix* src) {
   if (!dest || !src) return -1;
   if ((dest->rows != src->cols) || (dest->cols != src->rows)) {
-    fprintf(stderr, "Matrix sizes are not transposes of each other. Got (%d,%d) and (%d,%d).\n", 
-        dest->rows, dest->cols, src->rows, src->cols);
+    fprintf(stderr,
+            "Matrix sizes are not transposes of each other. Got (%d,%d) and (%d,%d).\n",
+            dest->rows, dest->cols, src->rows, src->cols);
     return -1;
   }
   for (int i = 0; i < dest->rows; ++i) {
@@ -109,7 +110,7 @@ double MatrixNormedDifference(Matrix* A, Matrix* B) {
   if (!A || !B) return INFINITY;
   if ((A->rows != B->rows) || (A->cols != B->cols)) {
     fprintf(stderr, "Can't compare matrices of different sizes. Got (%d,%d) and (%d,%d)\n",
-        A->rows, A->cols, B->rows, B->cols);
+            A->rows, A->cols, B->rows, B->cols);
     return INFINITY;
   }
 

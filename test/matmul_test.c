@@ -1,30 +1,30 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "matmul.h"
 
 #include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "test/minunit.h"
-#include "matrix.h"
 #include "linalg.h"
-#include "matmul.h"
+#include "matrix.h"
+#include "test/minunit.h"
 
 mu_test_init
 
-Matrix* A;
+    Matrix* A;
 Matrix* B;
 Matrix* C;
 
 void InitMatrices(int N, int n) {
-  A = (Matrix*) malloc(N * sizeof(Matrix));
-  B = (Matrix*) malloc(N * sizeof(Matrix));
-  C = (Matrix*) malloc(N * sizeof(Matrix));
+  A = (Matrix*)malloc(N * sizeof(Matrix));
+  B = (Matrix*)malloc(N * sizeof(Matrix));
+  C = (Matrix*)malloc(N * sizeof(Matrix));
   for (int i = 0; i < N; ++i) {
     A[i] = NewMatrix(n, n);
     B[i] = NewMatrix(n, n);
     C[i] = NewMatrix(n, n);
     for (int j = 0; j < n * n; ++j) {
       A[i].data[j] = cos(0.01 * j);
-      B[i].data[j] = 2.1 * j  - 3.2 * j * j;
+      B[i].data[j] = 2.1 * j - 3.2 * j * j;
     }
     MatrixSetConst(&C[i], 0.0);
   }
@@ -47,7 +47,6 @@ int Matrix4x4() {
   int n = 4;
   InitMatrices(N, n);
 
-  
   MatMul4x4_unrolled(A[0].data, B[0].data, C[0].data);
   MatMul4x4_SIMD(A[0].data, B[0].data, C[1].data);
   mu_assert(MatrixNormedDifference(C, C + 1) < 1e-10);
@@ -90,6 +89,7 @@ int Matrix4x4() {
 }
 
 int Matrix5x5() {
+  // clang-format off
   double Adata[25] = {
     -11, -11, -10, -9, -8, 
      -7,  -5,  -5, -4, -3, 
@@ -97,6 +97,7 @@ int Matrix5x5() {
       3,   4,   5,   7, 7, 
       8,   9,  10,  11, 13
   };
+  // clang-format on
   double Bdata[25];
   for (int i = 0; i < 25; ++i) {
     Bdata[i] = Adata[i] * 2;
@@ -171,9 +172,9 @@ int MatMul8x8() {
 
 void AllTests() {
   mu_run_test(Matrix4x4);
-  // mu_run_test(Matrix5x5);
-  // mu_run_test(SIMD_Mult);
-  // mu_run_test(MatMul8x8);
+  mu_run_test(Matrix5x5);
+  mu_run_test(SIMD_Mult);
+  mu_run_test(MatMul8x8);
 }
 
 mu_test_main

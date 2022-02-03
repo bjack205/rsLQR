@@ -1,4 +1,4 @@
-/** @addtogroup LinearAlgebra 
+/** @addtogroup LinearAlgebra
  * @{ */
 
 #ifdef MATRIX_LATIME_ENABLE

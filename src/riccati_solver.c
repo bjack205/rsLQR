@@ -1,8 +1,8 @@
 #include "riccati_solver.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 RiccatiSolver* ndlqr_NewRiccatiSolver(LQRProblem* lqrprob) {
   int nhorizon = lqrprob->nhorizon;
@@ -17,8 +17,8 @@ RiccatiSolver* ndlqr_NewRiccatiSolver(LQRProblem* lqrprob) {
   int dim_X = nstates;
   int dim_U = ninputs;
   int dim_Y = nstates;
-  int dim_Q = nstates * nstates + ninputs * ninputs + ninputs * nstates + nstates + ninputs; 
-  int len_Q = 2; 
+  int dim_Q = nstates * nstates + ninputs * ninputs + ninputs * nstates + nstates + ninputs;
+  int len_Q = 2;
 
   int num_K = dim_K * (nhorizon - 1);
   int num_d = dim_d * (nhorizon - 1);
@@ -29,22 +29,24 @@ RiccatiSolver* ndlqr_NewRiccatiSolver(LQRProblem* lqrprob) {
   int num_Y = dim_Y * nhorizon;
   int num_Q = dim_Q * len_Q;
   int total_size = num_K + num_d + num_P + num_p + num_X + num_U + num_Y + num_Q;
-  double* data = (double*) malloc(total_size * sizeof(double));
+  double* data = (double*)malloc(total_size * sizeof(double));
   if (!data) return NULL;
   memset(data, 0, total_size * sizeof(double));
 
-  RiccatiSolver* solver = (RiccatiSolver*) malloc(sizeof(RiccatiSolver));
+  RiccatiSolver* solver = (RiccatiSolver*)malloc(sizeof(RiccatiSolver));
   if (!solver) {
     free(data);
   }
 
-  Matrix* K = (Matrix*) malloc((nhorizon - 1) * sizeof(Matrix));
-  Matrix* d = (Matrix*) malloc((nhorizon - 1) * sizeof(Matrix));
-  Matrix* P = (Matrix*) malloc(nhorizon * sizeof(Matrix));
-  Matrix* p = (Matrix*) malloc(nhorizon * sizeof(Matrix));
-  Matrix* X = (Matrix*) malloc(nhorizon * sizeof(Matrix));
-  Matrix* U = (Matrix*) malloc((nhorizon - 1) * sizeof(Matrix));
-  Matrix* Y = (Matrix*) malloc(nhorizon * sizeof(Matrix));
+  Matrix* K = (Matrix*)malloc((nhorizon - 1) * sizeof(Matrix));
+  Matrix* d = (Matrix*)malloc((nhorizon - 1) * sizeof(Matrix));
+  Matrix* P = (Matrix*)malloc(nhorizon * sizeof(Matrix));
+  Matrix* p = (Matrix*)malloc(nhorizon * sizeof(Matrix));
+  Matrix* X = (Matrix*)malloc(nhorizon * sizeof(Matrix));
+  Matrix* U = (Matrix*)malloc((nhorizon - 1) * sizeof(Matrix));
+  Matrix* Y = (Matrix*)malloc(nhorizon * sizeof(Matrix));
+
+  // clang-format off
   int offset = 0;
   for (int k = 0; k < nhorizon; ++k) {
     P[k].rows = nstates;
@@ -80,10 +82,11 @@ RiccatiSolver* ndlqr_NewRiccatiSolver(LQRProblem* lqrprob) {
       U[k].data = data + offset; offset += ninputs; 
     }
   }
+  // clang-format off
 
   // Initialize the temporary Q matrices
   offset = total_size - num_Q;
-  Matrix* Q = (Matrix*) malloc(5 * len_Q * sizeof(Matrix));
+  Matrix* Q = (Matrix*)malloc(5 * len_Q * sizeof(Matrix));
   Matrix* Qx = Q + 0 * len_Q;
   Matrix* Qu = Q + 1 * len_Q;
   Matrix* Qxx = Q + 2 * len_Q;

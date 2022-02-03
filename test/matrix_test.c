@@ -1,10 +1,12 @@
 #include "matrix.h"
+
 #include "test/minunit.h"
 
 mu_test_init
 
-int TestNewMatrix() {
-  Matrix mat = NewMatrix(5,4);
+    int
+    TestNewMatrix() {
+  Matrix mat = NewMatrix(5, 4);
   mu_assert(mat.rows == 5);
   mu_assert(mat.cols == 4);
   mu_assert(MatrixNumElements(&mat) == 20);
@@ -13,7 +15,7 @@ int TestNewMatrix() {
 }
 
 int SetConst() {
-  Matrix mat = NewMatrix(3,4);
+  Matrix mat = NewMatrix(3, 4);
   MatrixSetConst(&mat, 5.0);
   for (int i = 0; i < 12; ++i) {
     mu_assert(mat.data[i] == 5);
@@ -27,7 +29,7 @@ int SetConst() {
 }
 
 int GetIndex() {
-  Matrix mat = NewMatrix(3,4);
+  Matrix mat = NewMatrix(3, 4);
   for (int i = 0; i < 12; ++i) {
     mat.data[i] = i;
   }
@@ -40,7 +42,7 @@ int GetIndex() {
 }
 
 int TestPrintMatrix() {
-  Matrix mat = NewMatrix(3,4);
+  Matrix mat = NewMatrix(3, 4);
   for (int i = 0; i < 12; ++i) {
     mat.data[i] = i;
   }

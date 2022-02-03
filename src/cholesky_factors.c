@@ -1,7 +1,7 @@
 #include "cholesky_factors.h"
 
-#include "utils.h"
 #include "stdlib.h"
+#include "utils.h"
 
 NdLqrCholeskyFactors* ndlqr_NewCholeskyFactors(int depth, int nhorizon) {
   if (depth <= 0) return NULL;
@@ -16,8 +16,7 @@ NdLqrCholeskyFactors* ndlqr_NewCholeskyFactors(int depth, int nhorizon) {
     num_S_factors += numleaves;
   }
   int numfacts = num_leaf_factors + num_S_factors;
-  CholeskyInfo* cholinfo =
-      (CholeskyInfo*)malloc(numfacts * sizeof(CholeskyInfo));
+  CholeskyInfo* cholinfo = (CholeskyInfo*)malloc(numfacts * sizeof(CholeskyInfo));
   if (!cholinfo) {
     free(cholfacts);
     return NULL;
@@ -63,8 +62,8 @@ int ndlqr_GetRFactorizon(NdLqrCholeskyFactors* cholfacts, int index,
   return 0;
 }
 
-int ndlqr_GetSFactorization(NdLqrCholeskyFactors* cholfacts, int leaf,
-                            int level, CholeskyInfo** cholfact) {
+int ndlqr_GetSFactorization(NdLqrCholeskyFactors* cholfacts, int leaf, int level,
+                            CholeskyInfo** cholfact) {
   int numleaves = PowerOfTwo(cholfacts->depth - level - 1);
   int num_leaf_factors = 2 * cholfacts->nhorizon;
 

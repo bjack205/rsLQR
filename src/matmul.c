@@ -1,13 +1,13 @@
 #include "matmul.h"
 
+#include <cblas.h>
 #include <immintrin.h>
 #include <math.h>
 #include <omp.h>
-#include <cblas.h>
 
 int MatMulBlas(int n, double* A, double* B, double* C) {
-  cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, n, n, n, 1.0,
-    A, n, B, n, 0.0, C, n);
+  cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, n, n, n, 1.0, A, n, B, n, 0.0, C,
+              n);
   return 0;
 }
 
@@ -174,8 +174,7 @@ int MatMul5x5_unrolled(double* A, double* B, double* C) {
   static const int n = 5;
 
   // Handle last element
-  __m256d a =
-      _mm256_setr_pd(A[4 + 0 * n], A[4 + 1 * n], A[4 + 2 * n], A[4 + 3 * n]);
+  __m256d a = _mm256_setr_pd(A[4 + 0 * n], A[4 + 1 * n], A[4 + 2 * n], A[4 + 3 * n]);
   __m256d b = _mm256_load_pd(B + 4 * n);
   __m256d c = _mm256_mul_pd(a, b);
   __m128d c0 = _mm256_extractf128_pd(c, 0);
