@@ -135,7 +135,7 @@ int InitializeWithLQRProblem() {
 
   int k = solver->nhorizon - 1;
   for (int i = 0; i < nstates; ++i) {
-    mu_assert(NearlyEqual(*MatrixGetElement(&solver->diagonals[2 * k], i, i), lqrprob->lqrdata[k]->Q[i]));
+    mu_assert(fabs(*MatrixGetElement(&solver->diagonals[2 * k], i, i) - lqrprob->lqrdata[k]->Q[i]) < 1e-6);
   }
 
   FreeMatrix(&minus_identity);

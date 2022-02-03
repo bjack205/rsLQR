@@ -33,8 +33,8 @@ int CheckLQRData(LQRData* lqrdata) {
     mu_assert(*MatrixGetElement(&A, i, i) == 1.0);
   }
   for (int i = 0; i < 3; ++i) {
-    mu_assert(NearlyEqual(*MatrixGetElement(&A, i, i + 3), h));
-    mu_assert(NearlyEqual(*MatrixGetElement(&B, i + 3, i), h));
+    mu_assert(fabs(*MatrixGetElement(&A, i, i + 3) - h) < 1e-8);
+    mu_assert(fabs(*MatrixGetElement(&B, i + 3, i) - h) < 1e-8);
   }
   return 1;
 }
@@ -90,7 +90,7 @@ int ReadProblemFile() {
 
   Matrix d = ndlqr_Getd(lqrdata);
   for (int i = 0; i < 6; ++i) {
-    mu_assert(NearlyEqual(*MatrixGetElement(&d, i, 0), 0.0));
+    mu_assert(fabs(*MatrixGetElement(&d, i, 0)) < 1e-8);
   }
 
   ndlqr_FreeLQRProblem(lqrprob);
@@ -165,7 +165,7 @@ int InitializeLQRProblem() {
     mu_assert(MatrixNormedDifference(&R, &R2) < 1e-6);
     mu_assert(MatrixNormedDifference(&q, &q2) < 1e-6);
     mu_assert(MatrixNormedDifference(&r, &r2) < 1e-6);
-    mu_assert(NearlyEqual(c, c2));
+    mu_assert(fabs(c - c2) < 1e-8);
   }
 
   for (int k = 0; k < nhorizon; ++k) {

@@ -1,22 +1,15 @@
 #include "test/minunit.h"
 
-extern int tests_run;
-extern int tests_passed;
+// extern int tests_run;
+// extern int tests_passed;
 
-bool NearlyEqual(double a, double b) {
-  if (a == b) {
-    return true;
-  }
-  if (a > b) {
-    int c = a;
-    a = b;
-    b = c;
-  }
-  if (b <= nextafter(a, b)) {
-    return true;
-  } else {
-    return false;
-  }
+int tests_run = 0;
+int tests_passed = 0;
+
+void TestFail() { ++tests_passed; }
+void TestPass() {
+  ++tests_passed;
+  ++tests_run;
 }
 
 void ResetTests() {
@@ -31,6 +24,4 @@ void PrintTestResult() {
   }
 }
 
-int TestResult() {
-  return !(tests_run == tests_passed);
-}
+int TestResult() { return !(tests_run == tests_passed); }
