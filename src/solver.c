@@ -13,7 +13,7 @@ NdLqrProfile ndlqr_NewNdLqrProfile() {
   return prof;
 }
 
-void ndlqr_ResetProfile(NdLqrProfile *prof) {
+void ndlqr_ResetProfile(NdLqrProfile* prof) {
   prof->t_total_ms = 0.0;
   prof->t_leaves_ms = 0.0;
   prof->t_products_ms = 0.0;
@@ -22,7 +22,7 @@ void ndlqr_ResetProfile(NdLqrProfile *prof) {
   prof->t_shur_ms = 0.0;
 }
 
-void ndlqr_CopyProfile(NdLqrProfile *dest, NdLqrProfile *src) {
+void ndlqr_CopyProfile(NdLqrProfile* dest, NdLqrProfile* src) {
   dest->num_threads = src->num_threads;
   dest->t_total_ms = src->t_total_ms;
   dest->t_leaves_ms = src->t_leaves_ms;
@@ -46,7 +46,7 @@ void PrintComp(double base, double new) {
   printf("%.3f / %.3f (%.2f speedup)\n", base, new, base / new);
 }
 
-void ndlqr_CompareProfile(NdLqrProfile *base, NdLqrProfile *prof) {
+void ndlqr_CompareProfile(NdLqrProfile* base, NdLqrProfile* prof) {
   // clang-format off
   printf("Num Threads:     %d / %d\n", base->num_threads, prof->num_threads);
   printf("Solve Total:     "); PrintComp(base->t_total_ms, prof->t_total_ms);
@@ -58,14 +58,14 @@ void ndlqr_CompareProfile(NdLqrProfile *base, NdLqrProfile *prof) {
   // clang-format on
 }
 
-NdLqrSolver *ndlqr_NewNdLqrSolver(int nstates, int ninputs, int nhorizon) {
+NdLqrSolver* ndlqr_NewNdLqrSolver(int nstates, int ninputs, int nhorizon) {
   OrderedBinaryTree tree = ndlqr_BuildTree(nhorizon);
-  NdLqrSolver *solver = (NdLqrSolver *)malloc(sizeof(NdLqrSolver));
+  NdLqrSolver* solver = (NdLqrSolver*)malloc(sizeof(NdLqrSolver));
   int nvars = (2 * nstates + ninputs) * nhorizon - ninputs;
 
   int diag_size = (nstates * nstates + ninputs * ninputs) * nhorizon;
-  double *diag_data = (double *)malloc(diag_size * sizeof(double));
-  Matrix *diagonals = (Matrix *)malloc(2 * nhorizon * sizeof(Matrix));
+  double* diag_data = (double*)malloc(diag_size * sizeof(double));
+  Matrix* diagonals = (Matrix*)malloc(2 * nhorizon * sizeof(Matrix));
   for (int k = 0; k < nhorizon; ++k) {
     int blocksize = nstates * nstates + ninputs * ninputs;
     diagonals[2 * k].rows = nstates;
@@ -75,7 +75,7 @@ NdLqrSolver *ndlqr_NewNdLqrSolver(int nstates, int ninputs, int nhorizon) {
     diagonals[2 * k + 1].cols = ninputs;
     diagonals[2 * k + 1].data = diag_data + k * blocksize + nstates * nstates;
   }
-  NdLqrCholeskyFactors *cholfacts = ndlqr_NewCholeskyFactors(tree.depth, nhorizon);
+  NdLqrCholeskyFactors* cholfacts = ndlqr_NewCholeskyFactors(tree.depth, nhorizon);
 
   solver->nstates = nstates;
   solver->ninputs = ninputs;
@@ -95,7 +95,7 @@ NdLqrSolver *ndlqr_NewNdLqrSolver(int nstates, int ninputs, int nhorizon) {
   return solver;
 }
 
-void ndlqr_ResetSolver(NdLqrSolver *solver) {
+void ndlqr_ResetSolver(NdLqrSolver* solver) {
   ndlqr_ResetNdData(solver->data);
   ndlqr_ResetNdData(solver->fact);
   ndlqr_ResetNdData(solver->soln);
@@ -105,7 +105,7 @@ void ndlqr_ResetSolver(NdLqrSolver *solver) {
   }
 }
 
-int ndlqr_FreeNdLqrSolver(NdLqrSolver *solver) {
+int ndlqr_FreeNdLqrSolver(NdLqrSolver* solver) {
   if (!solver) return -1;
   ndlqr_FreeTree(&(solver->tree));
   ndlqr_FreeNdData(solver->data);
@@ -119,7 +119,7 @@ int ndlqr_FreeNdLqrSolver(NdLqrSolver *solver) {
   return 0;
 }
 
-int ndlqr_InitializeWithLQRProblem(const LQRProblem *lqrprob, NdLqrSolver *solver) {
+int ndlqr_InitializeWithLQRProblem(const LQRProblem* lqrprob, NdLqrSolver* solver) {
   int nstates = solver->nstates;
   int ninputs = solver->ninputs;
   if (lqrprob->nhorizon != solver->nhorizon) return -1;
@@ -133,8 +133,8 @@ int ndlqr_InitializeWithLQRProblem(const LQRProblem *lqrprob, NdLqrSolver *solve
 
   // Loop over the knot points, copying the LQR data into the matrix data
   // and populating the right-hand-side vector
-  NdFactor *Cfactor;
-  NdFactor *zfactor;
+  NdFactor* Cfactor;
+  NdFactor* zfactor;
   ndlqr_GetNdFactor(solver->soln, 0, 0, &zfactor);
   memcpy(zfactor->lambda.data, lqrprob->x0, nstates * sizeof(double));
   int k;
@@ -193,7 +193,7 @@ int ndlqr_InitializeWithLQRProblem(const LQRProblem *lqrprob, NdLqrSolver *solve
   return 0;
 }
 
-void ndlqr_PrintSolveSummary(NdLqrSolver *solver) {
+void ndlqr_PrintSolveSummary(NdLqrSolver* solver) {
   printf("rsLQR Solve Summary\n");
   printf("-------------------\n");
   printf("  The rsLQR solver is a parallel solver for LQR problems\n");
@@ -208,20 +208,20 @@ void ndlqr_PrintSolveSummary(NdLqrSolver *solver) {
   MatrixPrintLinearAlgebraLibrary();
 }
 
-int ndlqr_GetNumVars(NdLqrSolver *solver) { return solver->nvars; }
+int ndlqr_GetNumVars(NdLqrSolver* solver) { return solver->nvars; }
 
-int ndlqr_SetNumThreads(NdLqrSolver *solver, int num_threads) {
+int ndlqr_SetNumThreads(NdLqrSolver* solver, int num_threads) {
   if (!solver) return -1;
   solver->num_threads = num_threads;
   return 0;
 }
 
-int ndlqr_GetNumThreads(NdLqrSolver *solver) {
+int ndlqr_GetNumThreads(NdLqrSolver* solver) {
   if (!solver) return -1;
   return solver->num_threads;
 }
 
-int ndlqr_PrintSolveProfile(NdLqrSolver *solver) {
+int ndlqr_PrintSolveProfile(NdLqrSolver* solver) {
   if (!solver) return -1;
   ndlqr_PrintProfile(&solver->profile);
   return 0;

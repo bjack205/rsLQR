@@ -1,25 +1,24 @@
-#include <time.h>
-#include <stdio.h>
 #include <assert.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "ndlqr.h"
-#include "test/test_problem.h"
 #include "riccati_solve.h"
-
+#include "test/test_problem.h"
 
 #ifdef FULLTEST
-  int kRunFullTest = FULLTEST;
-  #if FULLTEST
-    #define kNruns 100
-  #else
-    #define kNruns 10
-  #endif
+int kRunFullTest = FULLTEST;
+#if FULLTEST
+#define kNruns 100
 #else
-  int kRunFullTest = 0;
-  #define kNruns 10
+#define kNruns 10
+#endif
+#else
+int kRunFullTest = 0;
+#define kNruns 10
 #endif
 
 int compare_doubles(const void* a, const void* b) {
@@ -62,7 +61,7 @@ TimeStats CalcStats(double* times, int len) {
   }
   time_std = sqrt(time_std / (double)len);
   qsort(times, len, sizeof(double), compare_doubles);
-  double time_median = times[len/ 2];
+  double time_median = times[len / 2];
   TimeStats stats = {time_mean, time_std, time_min, time_median, time_max};
   return stats;
 }
@@ -80,10 +79,11 @@ int main(int argc, char* argv[]) {
           len = tmp;
           is_input_valid = true;
           break;
-        } 
+        }
       }
       if (!is_input_valid) {
-        printf("Argument Error: %d is not a valid trajectory length. Please choose from (", tmp);
+        printf("Argument Error: %d is not a valid trajectory length. Please choose from (",
+               tmp);
         int i;
         for (i = 0; i < num_lengths - 1; ++i) {
           printf("%d, ", valid_lengths[i]);
@@ -97,21 +97,20 @@ int main(int argc, char* argv[]) {
 
   LQRProblem* lqrprob = NULL;
   Matrix x_ans;
-  switch (len)
-  {
-  case 8:
-    lqrprob = ndlqr_ReadTestLQRProblem();
-    x_ans = ReadMatrixJSONFile(LQRPROBFILE, "soln");
-    break;
+  switch (len) {
+    case 8:
+      lqrprob = ndlqr_ReadTestLQRProblem();
+      x_ans = ReadMatrixJSONFile(LQRPROBFILE, "soln");
+      break;
 
-  case 256:
-    lqrprob = ndlqr_ReadLongTestLQRProblem();
-    x_ans = ReadMatrixJSONFile(LQRPROB256FILE, "soln");
-    break;
-  
-  default:
-    fprintf(stderr, "%d is not a known trajectory length.\n", len);
-    break;
+    case 256:
+      lqrprob = ndlqr_ReadLongTestLQRProblem();
+      x_ans = ReadMatrixJSONFile(LQRPROB256FILE, "soln");
+      break;
+
+    default:
+      fprintf(stderr, "%d is not a known trajectory length.\n", len);
+      break;
   }
 
   int nstates = lqrprob->lqrdata[0]->nstates;
@@ -127,7 +126,7 @@ int main(int argc, char* argv[]) {
 
   double times[kNruns];
   double times_ric[kNruns];
-  (void) times;
+  (void)times;
 
   Matrix x = ndlqr_GetSolution(solver);
 

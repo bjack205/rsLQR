@@ -45,6 +45,8 @@ RiccatiSolver* ndlqr_NewRiccatiSolver(LQRProblem* lqrprob) {
   Matrix* X = (Matrix*)malloc(nhorizon * sizeof(Matrix));
   Matrix* U = (Matrix*)malloc((nhorizon - 1) * sizeof(Matrix));
   Matrix* Y = (Matrix*)malloc(nhorizon * sizeof(Matrix));
+
+  // clang-format off
   int offset = 0;
   for (int k = 0; k < nhorizon; ++k) {
     P[k].rows = nstates;
@@ -56,7 +58,6 @@ RiccatiSolver* ndlqr_NewRiccatiSolver(LQRProblem* lqrprob) {
     Y[k].rows = nstates;
     Y[k].cols = 1;
 
-    // clang-format off
     P[k].data = data + offset; offset += nstates * nstates;
     p[k].data = data + offset; offset += nstates;
 
