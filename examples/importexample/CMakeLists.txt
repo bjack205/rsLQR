@@ -11,7 +11,7 @@ include(FetchContent)
 FetchContent_Declare(librslqr
     GIT_REPOSITORY https://github.com/bjack205/rsLQR.git
     # NOTE: Replace this with whichever commit you want to use 
-    GIT_TAG cda47a585079f8fed5311738aac9db766d21e135 
+    GIT_TAG d164dd624eee2ba9c33d4ba4a6e5b236eebdec63 
 )
 # Includes the root CMakeLists.txt of the library, importing all of it's targets
 # to your build system

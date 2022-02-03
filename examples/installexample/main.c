@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "rslqr/rslqr.h"
+#include "rslqr.h"
 
 int main() {
     printf("This is the example using an installed rsLQR package!.\n\n");

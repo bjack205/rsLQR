@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "ndlqr.h"
+#include "rslqr.h"
 #include "rslqr/nested_dissection.h"
 #include "matrix/linalg.h"
 #include "minunit.h"

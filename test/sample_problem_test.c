@@ -5,7 +5,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "ndlqr.h"
+#include "rslqr.h"
 #include "riccati/riccati_solve.h"
 #include "test/test_problem.h"
 

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ndlqr.h"
+#include "rslqr.h"
 #include "riccati/riccati_solve.h"
 #include "test/minunit.h"
 #include "test/test_problem.h"
